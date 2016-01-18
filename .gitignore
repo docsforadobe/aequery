@@ -1,0 +1,7 @@
+*.pyc
+
+*.class
+.metadata
+.recommenders
+
+.DS_Store
