@@ -3,7 +3,8 @@
 var gulp = require('gulp'),
 	os = require('os'),
 	del = require('del'),
-	concat = require('gulp-concat');
+	concat = require('gulp-concat'),
+	uglify = require('gulp-uglify');
 
 var name = 'aequery',
 	dest;
@@ -11,7 +12,7 @@ var name = 'aequery',
 // Expects you have After Effects CC 2015 installed in the default location
 if (os.platform() == 'darwin') {
 	console.log('OS: Mac OS X (darwin)');
-	dest = '/Volumes/Macintosh HD/Applications/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/' + name;
+	dest = '/Applications/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/' + name;
 } else {
 	console.log('OS: Windows (win32)');
 	dest = 'C:/Program Files/Adobe/Adobe After Effects CC 2015/Support Files/Scripts/ScriptUI Panels/' + name;
@@ -35,6 +36,7 @@ gulp.task('clean:build', function () {
 gulp.task('concat', ['clean'], function () {
 	var stream = gulp.src('lib/*.js')
 		.pipe(concat(name + '.js'))
+		// .pipe(uglify())
 		.pipe(gulp.dest(dest));
 	console.log('Wrote ' + name + '.js to: \r\n' + dest);
 	return stream;
