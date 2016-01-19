@@ -1,0 +1,17 @@
+{
+  "name": "aequery",
+  "version": "1.0.0",
+  "description": "General purpose after effects scripting library",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:motiondesign/aequery.git"
+  },
+  "author": "rafikhan",
+  "license": "ISC",
+  "devDependencies": {
+  }
+}

@@ -1,7 +1,2 @@
-*.pyc
-
-*.class
-.metadata
-.recommenders
-
 .DS_Store
+node_modules
