@@ -1,6 +1,6 @@
 {
   "name": "aequery",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "General purpose after effects scripting library",
   "main": "main.js",
   "scripts": {
@@ -16,6 +16,9 @@
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
-    "gulp-uglify": "^1.5.1"
+    "gulp-markdown-pdf": "^3.0.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-zip": "^3.1.0",
+    "streamqueue": "^1.1.1"
   }
 }
