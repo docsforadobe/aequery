@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify');
 
 var name = 'aequery',
+	lib = ['lib/main.js', 'lib/*.js', '!lib/(main)*.js'],
 	dest;
 
 // Expects you have After Effects CC 2015 installed in the default location
@@ -38,7 +39,7 @@ gulp.task('clean:build', function () {
 });
 
 gulp.task('concat', ['clean'], function () {
-	var stream = gulp.src('lib/*.js')
+	var stream = gulp.src(lib)
 		.pipe(concat(name + '.js'))
 		// .pipe(uglify())
 		.pipe(gulp.dest(dest));
@@ -47,7 +48,7 @@ gulp.task('concat', ['clean'], function () {
 });
 
 gulp.task('concat:build', ['clean'], function () {
-	var stream = gulp.src('lib/*.js')
+	var stream = gulp.src(lib)
 		.pipe(concat(name + '.js'))
 		.pipe(gulp.dest('build'));
 	console.log('Wrote ' + name + '.js to: \r\n/build');
