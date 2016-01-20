@@ -21,6 +21,10 @@ if (os.platform() == 'darwin') {
 //	Or define your own path:
 //	dest = '/Your/Path/To/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/' + name;
 
+gulp.task('watch', function () {
+	gulp.watch('lib/*.js', ['concat']);
+});
+
 gulp.task('clean', function () {
 	return del([dest], {
 		force: true
@@ -54,4 +58,4 @@ gulp.task('deploy', ['concat']);
 
 gulp.task('build', ['concat:build']);
 
-gulp.task('default', ['deploy']);
+gulp.task('default', ['deploy', 'watch']);
