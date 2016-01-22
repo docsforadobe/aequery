@@ -20,6 +20,6 @@ function buildUI(win)
 	});
 
 	var btn2 = win.addButton('Button 2', function(e) { 
-		alert(win.toString());
+		alert("Hello world");
 	});
 }
