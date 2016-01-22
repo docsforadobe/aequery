@@ -45,7 +45,7 @@ gulp.task('watch', function () {
 
 // CLEAN
 gulp.task('clean', function () {
-	return del([dest], {
+	return del(['build', 'dist', dest], {
 		force: true
 	});
 });
