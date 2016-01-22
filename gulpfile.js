@@ -227,7 +227,7 @@ function getVersions(appdir, system) {
 				aeVersions[version] = {
 					esdir: appdir + appname + '/Scripts/ScriptUI Panels/',
 					cepdir: cepdir
-				}
+				};
 			} else {
 				if (version == 'CC2015' || version == 'CC2014') {
 					if (arch == 'x64') {
@@ -242,7 +242,7 @@ function getVersions(appdir, system) {
 				aeVersions[version] = {
 					esdir: appdir + '/Adobe/' + appname + '/Support Files/Scripts/ScriptUI Panels/',
 					cepdir: cepdir
-				}
+				};
 			}
 		}
 	});
