@@ -1,7 +1,7 @@
 /*
  * CSS like attribute parsing.
  *
- * Parses strings like `comp[index=165468 selected]:not(name="myComp") layer[color=0xFFFFFF]:first():not(selected)` to an AST.
+ * Parses strings like `comp[name="myComp"] layer[name="myLayer" light=true selected]` to objects.
  */
 
 {
@@ -22,8 +22,11 @@
 Start
   = Selectors
 
-Properties
-  = props:Property+ { return mergeProps(props) }
+PropertiesBrackets
+  = '[' props:Property* ']' { return mergeProps(props) }
+
+PropertiesParentheses
+  = '(' props:Property* ')' { return mergeProps(props) }
 
 Property
   = ValuePair
@@ -36,7 +39,7 @@ ValuePair
   = name:[a-zA-Z]+ "=" value:Value _? { var o = {}; var key = name.join(''); o[key] = value; return o; }
 
 Selector
-  = type:[a-zA-Z]+ '[' props:Properties? ']' pseudo:Pseudo+ _? {
+  = type:[a-zA-Z]+ props:PropertiesBrackets? pseudo:Pseudo+ _? {
     return { type: type.join(''), props: props, pseudo: pseudo }
   }
 
@@ -44,7 +47,7 @@ Selectors
   = Selector+
 
 Pseudo
-  = ":" type:[a-z]* "(" props:Properties? ")" { return { type: type.join(''), props: props } }
+  = ":" type:[a-z]* props:PropertiesParentheses? { return { type: type.join(''), props: props } }
 
 Value
   = BooleanLiteral
