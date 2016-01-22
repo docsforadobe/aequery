@@ -64,7 +64,7 @@ gulp.task('default', ['debug']);
 
 
 gulp.task('watch', function () {
-	gulp.watch('lib/*.js', ['default']);
+	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['default']);
 });
 
 
@@ -107,7 +107,7 @@ gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 gulp.task('build:aeq-core', function () {
 	return gulp.src([
 			'lib/main.js', 
-			'lib/*.js', 
+			'lib/**/*.js', 
 		])
 		.pipe(concat('core.js'))
 		.pipe(gulp.dest('./build'));
