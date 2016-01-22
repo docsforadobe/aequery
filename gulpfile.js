@@ -81,7 +81,7 @@ gulp.task('debug', function (cb) {
 
 	uglify = require('gulp-empty');
 
-	return rseq('clean', 'build:all', 'deploy:all', cb);
+	return rseq('clean', 'build:aeq', 'deploy:all', cb);
 });
 
 
@@ -121,11 +121,7 @@ gulp.task('build:aeq-parser', function () {
 		.pipe(gulp.dest('./build'))
 })
 
-gulp.task('deploy:all', ['deploy:aeq', 'deploy:extendscript', 'deploy:cep']);
-
-gulp.task('deploy:aeq', function () {
-	return gulp.src('./build/')
-});
+gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
 
 gulp.task('deploy:extendscript', [], function () {
 	var stream = gulp.src([
