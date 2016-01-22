@@ -32,13 +32,13 @@ var build = {
 	configuration : null,
 	deployment : null,
 	deploy : null
-}
+};
 
-/* 
- * Expects you have After Effects CC 2015 installed 
- * in the default location 
+/*
+ * Expects you have After Effects CC 2015 installed
+ * in the default location
  */
-if (os.platform() == 'darwin') 
+if (os.platform() == 'darwin')
 {
 	console.log('OS: Mac OS X (darwin)');
 	build.deploy = {
@@ -46,9 +46,9 @@ if (os.platform() == 'darwin')
 			"esdir" : '/Applications/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/',
 			"cepdir" : "/Library/Application Support/Adobe/CEP/extensions/"
 		}
-	}
-} 
-else 
+	};
+}
+else
 {
 	console.log('OS: Windows (win32)');
 	build.deploy = {
@@ -56,7 +56,7 @@ else
 			"esdir" : 'C:/Program Files/Adobe/Adobe After Effects CC 2015/Support Files/Scripts/ScriptUI Panels/',
 			"cepdir" : ""
 		}
-	}
+	};
 }
 
 
@@ -105,9 +105,9 @@ gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 
 gulp.task('build:aeq-core', function () {
 	return gulp.src([
-			'lib/main.js', 
-			'!lib/ui/**/*.js', 
-			'lib/**/*.js', 
+			'lib/main.js',
+			'!lib/ui/**/*.js',
+			'lib/**/*.js',
 		])
 		.pipe(concat('core.js'))
 		.pipe(gulp.dest('./build'));
@@ -117,12 +117,12 @@ gulp.task('build:aeq-parser', function () {
 	gulp.src('grammar/aeq.peg')
 		.pipe(compilePeg())
 		.pipe(rename({ basename : 'parser', extname : '.js' }))
-		.pipe(gulp.dest('./build'))
-})
+		.pipe(gulp.dest('./build'));
+});
 
 gulp.task('build:aeq-ui', function () {
 	return gulp.src([
-			'lib/ui/**/*.js', 
+			'lib/ui/**/*.js',
 		])
 		.pipe(concat('aeq-ui.js'))
 		.pipe(uglify())
@@ -142,7 +142,7 @@ gulp.task('deploy:extendscript', [], function () {
 	{
 		var aeconfig = build.deploy[aever];
 
-		stream = stream.pipe(gulp.dest(aeconfig.esdir))
+		stream = stream.pipe(gulp.dest(aeconfig.esdir));
 	}
 
 	return stream;
@@ -198,10 +198,9 @@ function now() {
 
 function compilePeg() {
 	return change(function (content) {
-		var parser = PEG.buildParser(content, {output: 'source'})
-		var exportVar = 'var cssselector='
+		var parser = PEG.buildParser(content, {output: 'source'});
+		var exportVar = 'var cssselector=';
 
-		return exportVar + parser
-  })
+		return exportVar + parser;
+  });
 }
-
