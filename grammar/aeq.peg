@@ -87,17 +87,11 @@ StringLiteral
   = QuoteToken text:[0-9a-zA-Z]+ QuoteToken { return { type: 'String', value: text.join('') } }
 
 QuoteToken
-  = DoubleQuoteToken
-  / SingleQuoteToken
-
-DoubleQuoteToken
   = '"'
+  / "'"
 
-SingleQuoteToken
-  = "'"
-
-TrueToken       = "true"           _?
-FalseToken      = "false"          _?
+TrueToken = "true" _?
+FalseToken = "false" _?
 
 _ "whitespace"
   = [ \t\n\r]*
