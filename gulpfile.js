@@ -10,80 +10,174 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	change = require('gulp-change'),
 	rename = require('gulp-rename'),
+	rseq = require('run-sequence'),
 	PEG = require('pegjs');
 
 var pkg = require('./package.json'),
 	name = pkg.name,
-	lib = ['lib/main.js', 'lib/*.js', '!lib/(main)*.js', 'build/*.js'],
 	dest;
 
-/* Expects you have After Effects CC 2015 installed 
+var configuration = {
+	debug : 'debug',
+	release : 'release',
+};
+
+var deployment = {
+	local : 'local',
+	dev : 'dev',
+	stage : 'stage',
+	prod : 'prod',
+};
+
+var build = {
+	configuration : null,
+	deployment : null,
+	deploy : null
+}
+
+/* 
+ * Expects you have After Effects CC 2015 installed 
  * in the default location 
  */
-if (os.platform() == 'darwin') {
+if (os.platform() == 'darwin') 
+{
 	console.log('OS: Mac OS X (darwin)');
-	dest = '/Applications/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/' + name;
-} else {
+	build.deploy = {
+		"AE2015" : {
+			"esdir" : '/Applications/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/',
+			"cepdir" : "/Library/Application Support/Adobe/CEP/extensions/"
+		}
+	}
+} 
+else 
+{
 	console.log('OS: Windows (win32)');
-	dest = 'C:/Program Files/Adobe/Adobe After Effects CC 2015/Support Files/Scripts/ScriptUI Panels/' + name;
+	build.deploy = {
+		"AE2015" : {
+			"esdir" : 'C:/Program Files/Adobe/Adobe After Effects CC 2015/Support Files/Scripts/ScriptUI Panels/',
+			"cepdir" : ""
+		}
+	}
 }
 
 
-/* Or define you own path by uncommenting
- * and changing the path below: 
- */
-//	dest = '/Your/Path/To/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/' + name;
+gulp.task('default', ['debug']);
 
 
-// DEFAULT TASK
-gulp.task('default', ['debug', 'watch']);
-
-// WATCH
 gulp.task('watch', function () {
-	gulp.watch('lib/*.js', ['debug']);
+	gulp.watch('lib/*.js', ['default']);
 });
 
-// CLEAN
-gulp.task('clean', function () {
-	return del(['build', 'dist', dest], {
+
+gulp.task('clean', ['clean:extendscript', 'clean:cep'], function () {
+	return del(['build', 'dist'], {
 		force: true
 	});
 });
 
-// DEBUG
-gulp.task('debug', ['clean', 'compile:peg'], function () {
-	var stream = gulp.src(lib)
-		.pipe(concat(name + '.js'))
-		.pipe(gulp.dest(dest));
-	console.log('Wrote ' + name + '.js to: \r\n' + dest);
+
+gulp.task('debug', function (cb) {
+	build.configuration = configuration.debug;
+	build.deployment = deployment.local;
+
+	uglify = require('gulp-empty');
+
+	return rseq('clean', 'build:all', 'deploy:all', cb);
+});
+
+
+gulp.task('release', function (cb) {
+	build.configuration = configuration.release;
+	build.deployment = deployment.local;
+
+	// TODO: configure uglify...
+
+	return rseq('clean', 'build:all', 'deploy:all', 'build:zip', cb);
+});
+
+gulp.task('build:all', ['build:aeq', 'build:docs']);
+
+gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
+	return gulp.src('./build/*.js')
+		.pipe(concat('aeq.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./build'));
+});
+
+
+gulp.task('build:aeq-core', function () {
+	return gulp.src([
+			'lib/main.js', 
+			'lib/*.js', 
+		])
+		.pipe(concat('core.js'))
+		.pipe(gulp.dest('./build'));
+});
+
+
+gulp.task('build:aeq-parser', function () {
+	gulp.src('grammar/aeq.peg')
+		.pipe(compilePeg())
+		.pipe(rename({ basename : 'parser', extname : '.js' }))
+		.pipe(gulp.dest('./build'))
+})
+
+gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
+
+gulp.task('deploy:extendscript', [], function () {
+	var stream = gulp.src('./testproject/extendscript/aeq_test.jsx')
+
+	for (var aever in build.deploy)
+	{
+		var aeconfig = build.deploy[aever];
+		var path = aeconfig.esdir;
+
+		console.log('Deploying aeq_test.jsx to ' + path);
+
+		stream = stream.pipe(gulp.dest(path))
+	}
+
 	return stream;
 });
 
-// RELEASE
-var div = '-',
-	ugliness = {};
+gulp.task('clean:extendscript', function () {
+	var dirs = [];
 
-gulp.task('release', ['clean', 'compile:peg'], function () {
-	var stream = queue({ objectMode: true });
-		
-	stream.queue(
-		gulp.src(lib)
-			.pipe(concat(name + '.js'))
-			.pipe(uglify())
-			.pipe(gulp.dest(dest))
-	);
-	
-	stream.queue(
-		gulp.src('README.md')
-			.pipe(pdf())
-	);
-		
-	console.log('Wrote ' + name + '.js to: \r\n' + dest);
-		
-	return stream.done()
-		.pipe(zip(pkg.name + div + pkg.version + div + now() + '.zip'))
-		.pipe(gulp.dest('dist'));
+	for (var aever in build.deploy)
+	{
+		var aeconfig = build.deploy[aever];
+		var path = aeconfig.esdir + 'aeq_test.jsx';
+
+		dirs = dirs.concat(path);
+	}
+
+	return del(dirs, {
+		force: true
+	});
 });
+
+gulp.task('deploy:cep', function() {
+	// TODO
+	return;
+});
+
+gulp.task('clean:cep', function() {
+	// TODO
+	return;
+});
+
+gulp.task('build:docs', function () {
+	return gulp.src('README.md')
+		.pipe(pdf())
+		.pipe(gulp.dest('./build'));
+});
+
+gulp.task('build:zip', function () {
+	return gulp.src(['./build/aeq.js', './build/README.pdf'])
+		.pipe(zip(pkg.name + '-' + pkg.version + '-' + now() + '.zip'))
+		.pipe(gulp.dest('./dist'));
+});
+
 
 function now() {
 	var div = "";
@@ -104,25 +198,3 @@ function compilePeg() {
   })
 }
 
-gulp.task('compile:peg', function () {
-	gulp.src('lib/parser.pegjs')
-		.pipe(compilePeg())
-		.pipe(rename({extname: '.js'}))
-		.pipe(gulp.dest('build'))
-})
-
-// BUILD - when you want a concat version in the root
-gulp.task('build', ['clean:build', 'compile:peg'], function () {
-	var stream = gulp.src(lib)
-		.pipe(concat(name + '.js'))
-		.pipe(gulp.dest('build'));
-	console.log('Wrote ' + name + '.js to: \r\n/build');
-	return stream;
-});
-
-// CLEAN BUILD
-gulp.task('clean:build', function () {
-	return del(['build'], {
-		force: true
-	});
-});
