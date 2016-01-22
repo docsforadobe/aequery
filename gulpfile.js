@@ -100,7 +100,7 @@ gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 	return gulp.src('./build/*.js')
 		.pipe(concat('aeq.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest('./dist'));
 });
 
 
@@ -121,19 +121,23 @@ gulp.task('build:aeq-parser', function () {
 		.pipe(gulp.dest('./build'))
 })
 
-gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
+gulp.task('deploy:all', ['deploy:aeq', 'deploy:extendscript', 'deploy:cep']);
+
+gulp.task('deploy:aeq', function () {
+	return gulp.src('./build/')
+});
 
 gulp.task('deploy:extendscript', [], function () {
-	var stream = gulp.src('./testproject/extendscript/aeq_test.jsx')
+	var stream = gulp.src([
+		'./dist/aeq.js',
+		'./testproject/extendscript/aeq_test.jsx'
+	]);
 
 	for (var aever in build.deploy)
 	{
 		var aeconfig = build.deploy[aever];
-		var path = aeconfig.esdir;
 
-		console.log('Deploying aeq_test.jsx to ' + path);
-
-		stream = stream.pipe(gulp.dest(path))
+		stream = stream.pipe(gulp.dest(aeconfig.esdir))
 	}
 
 	return stream;
@@ -145,9 +149,8 @@ gulp.task('clean:extendscript', function () {
 	for (var aever in build.deploy)
 	{
 		var aeconfig = build.deploy[aever];
-		var path = aeconfig.esdir + 'aeq_test.jsx';
 
-		dirs = dirs.concat(path);
+		dirs = dirs.concat(aeconfig.esdir + 'aeq*');
 	}
 
 	return del(dirs, {
