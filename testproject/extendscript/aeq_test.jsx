@@ -1,4 +1,5 @@
 #include "aeq.js"
+#include "aeq-ui.js"
 
 var win;
 

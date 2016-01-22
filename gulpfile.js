@@ -81,7 +81,7 @@ gulp.task('debug', function (cb) {
 
 	uglify = require('gulp-empty');
 
-	return rseq('clean', 'build:aeq', 'deploy:all', cb);
+	return rseq('clean', 'build:aeq', 'build:aeq-ui', 'deploy:all', cb);
 });
 
 
@@ -91,10 +91,10 @@ gulp.task('release', function (cb) {
 
 	// TODO: configure uglify...
 
-	return rseq('clean', 'build:all', 'deploy:all', 'build:zip', cb);
+	return rseq('clean', 'build:all', 'deploy:all', 'package:zip', cb);
 });
 
-gulp.task('build:all', ['build:aeq', 'build:docs']);
+gulp.task('build:all', ['build:aeq', 'build:aeq-ui', 'build:docs']);
 
 gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 	return gulp.src('./build/*.js')
@@ -103,16 +103,15 @@ gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 		.pipe(gulp.dest('./dist'));
 });
 
-
 gulp.task('build:aeq-core', function () {
 	return gulp.src([
 			'lib/main.js', 
+			'!lib/ui/**/*.js', 
 			'lib/**/*.js', 
 		])
 		.pipe(concat('core.js'))
 		.pipe(gulp.dest('./build'));
 });
-
 
 gulp.task('build:aeq-parser', function () {
 	gulp.src('grammar/aeq.peg')
@@ -121,11 +120,21 @@ gulp.task('build:aeq-parser', function () {
 		.pipe(gulp.dest('./build'))
 })
 
+gulp.task('build:aeq-ui', function () {
+	return gulp.src([
+			'lib/ui/**/*.js', 
+		])
+		.pipe(concat('aeq-ui.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist'));
+});
+
 gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
 
 gulp.task('deploy:extendscript', [], function () {
 	var stream = gulp.src([
 		'./dist/aeq.js',
+		'./dist/aeq-ui.js',
 		'./testproject/extendscript/aeq_test.jsx'
 	]);
 
@@ -170,8 +179,8 @@ gulp.task('build:docs', function () {
 		.pipe(gulp.dest('./build'));
 });
 
-gulp.task('build:zip', function () {
-	return gulp.src(['./build/aeq.js', './build/README.pdf'])
+gulp.task('package:zip', function () {
+	return gulp.src(['./build/aeq.js', './build/aeq.js', './build/README.pdf'])
 		.pipe(zip(pkg.name + '-' + pkg.version + '-' + now() + '.zip'))
 		.pipe(gulp.dest('./dist'));
 });
