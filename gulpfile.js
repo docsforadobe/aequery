@@ -7,11 +7,14 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	zip = require('gulp-zip'),
 	pdf = require('gulp-markdown-pdf'),
-	uglify = require('gulp-uglify');
+	uglify = require('gulp-uglify'),
+	change = require('gulp-change'),
+	rename = require('gulp-rename'),
+	PEG = require('pegjs');
 
 var pkg = require('./package.json'),
 	name = pkg.name,
-	lib = ['lib/main.js', 'lib/*.js', '!lib/(main)*.js'],
+	lib = ['lib/main.js', 'lib/*.js', '!lib/(main)*.js', 'build/*.js'],
 	dest;
 
 /* Expects you have After Effects CC 2015 installed 
@@ -48,7 +51,7 @@ gulp.task('clean', function () {
 });
 
 // DEBUG
-gulp.task('debug', ['clean'], function () {
+gulp.task('debug', ['clean', 'compile:peg'], function () {
 	var stream = gulp.src(lib)
 		.pipe(concat(name + '.js'))
 		.pipe(gulp.dest(dest));
@@ -60,7 +63,7 @@ gulp.task('debug', ['clean'], function () {
 var div = '-',
 	ugliness = {};
 
-gulp.task('release', ['clean'], function () {
+gulp.task('release', ['clean', 'compile:peg'], function () {
 	var stream = queue({ objectMode: true });
 		
 	stream.queue(
@@ -92,8 +95,24 @@ function now() {
 	return month + div + day + div + hrs + div + min;
 }
 
+function compilePeg() {
+	return change(function (content) {
+		var parser = PEG.buildParser(content, {output: 'source'})
+		var exportVar = 'var cssselector='
+
+		return exportVar + parser
+  })
+}
+
+gulp.task('compile:peg', function () {
+	gulp.src('lib/parser.pegjs')
+		.pipe(compilePeg())
+		.pipe(rename({extname: '.js'}))
+		.pipe(gulp.dest('build'))
+})
+
 // BUILD - when you want a concat version in the root
-gulp.task('build', ['clean:build'], function () {
+gulp.task('build', ['clean:build', 'compile:peg'], function () {
 	var stream = gulp.src(lib)
 		.pipe(concat(name + '.js'))
 		.pipe(gulp.dest('build'));
