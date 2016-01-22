@@ -91,7 +91,7 @@ gulp.task('release', function (cb) {
 
 	// TODO: configure uglify...
 
-	return rseq('clean', 'build:all', 'deploy:all', 'package:zip', cb);
+	return rseq('clean', 'build:all', 'deploy:all', 'package:all', cb);
 });
 
 gulp.task('build:all', ['build:aeq', 'build:aeq-ui', 'build:docs']);
@@ -179,8 +179,8 @@ gulp.task('build:docs', function () {
 		.pipe(gulp.dest('./build'));
 });
 
-gulp.task('package:zip', function () {
-	return gulp.src(['./build/aeq.js', './build/aeq.js', './build/README.pdf'])
+gulp.task('package:all', function () {
+	return gulp.src(['./build/aeq.js', './build/aeq-ui.js', './build/README.pdf'])
 		.pipe(zip(pkg.name + '-' + pkg.version + '-' + now() + '.zip'))
 		.pipe(gulp.dest('./dist'));
 });

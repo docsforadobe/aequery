@@ -1,17 +1,6 @@
 #include "aeq.js"
 #include "aeq-ui.js"
 
-var win;
-
-aeq.ui.ready(function() 
-{
-	win = aeq.ui.createMainWindow("Hello world!");
-
-	buildUI(win);
-
-	win.show();
-});
-
 function buildUI(win)
 {
 	var txtInput = win.addEditText('Enter a value');
@@ -24,3 +13,12 @@ function buildUI(win)
 		alert("Hello world");
 	});
 }
+
+aeq.ui.ready(function() 
+{
+	var win = aeq.ui.createMainWindow("Hello world!");
+
+	buildUI(win);
+
+	win.show();
+});
