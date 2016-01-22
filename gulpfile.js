@@ -14,8 +14,7 @@ var gulp = require('gulp'),
 	PEG = require('pegjs');
 
 var pkg = require('./package.json'),
-	name = pkg.name,
-	dest;
+	name = pkg.name;
 
 var configuration = {
 	debug : 'debug',
