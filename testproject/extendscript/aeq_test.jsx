@@ -1,5 +1,5 @@
-#include "aeq.js"
-#include "aeq-ui.js"
+#include "aeq.js";
+#include "aeq-ui.js";
 
 function buildUI(win)
 {
@@ -17,8 +17,7 @@ function buildUI(win)
 	});
 
 	var btn2 = win.addButton('Redefine AEQ', function(e) {
-		$.evalFile(aeqFile);
-		$.evalFile(aeqUiFile);
+		aeq = redefineAeq(aeqFile, aeqUiFile);
 	});
 }
 
@@ -30,3 +29,8 @@ aeq.ui.ready(function()
 
 	win.show();
 });
+function redefineAeq(aeqFile, aeqUiFile) {
+	$.evalFile(aeqFile);
+	$.evalFile(aeqUiFile);
+	return aeq;
+}
