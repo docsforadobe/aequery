@@ -3,7 +3,11 @@
 
 function buildUI(win)
 {
+	var aeqFile = File("aeq.js");
+	var aeqUiFile = File("aeq-ui.js");
+
 	var winObj = win.get();
+
 	winObj.alignment = ['fill', 'fill'];
 	winObj.alignChildren = ['fill', 'fill'];
 	var txtInput = win.addEditText('Enter a value');
@@ -12,8 +16,9 @@ function buildUI(win)
 		alert(aeq(txtInput.text));
 	});
 
-	var btn2 = win.addButton('Button 2', function(e) {
-		alert("Hello world");
+	var btn2 = win.addButton('Redefine AEQ', function(e) {
+		$.evalFile(aeqFile);
+		$.evalFile(aeqUiFile);
 	});
 }
 
