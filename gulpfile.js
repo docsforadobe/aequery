@@ -2,14 +2,15 @@
 
 var gulp = require('gulp'),
 	os = require('os'),
+	fs = require('fs'),
 	del = require('del'),
-	queue = require('streamqueue'),
 	concat = require('gulp-concat'),
 	zip = require('gulp-zip'),
 	pdf = require('gulp-markdown-pdf'),
 	uglify = require('gulp-uglify'),
 	change = require('gulp-change'),
 	rename = require('gulp-rename'),
+	util = require('gulp-util'),
 	rseq = require('run-sequence'),
 	PEG = require('pegjs');
 
@@ -32,31 +33,24 @@ var build = {
 	configuration : null,
 	deployment : null,
 	deploy : null
-}
+};
 
-/* 
- * Expects you have After Effects CC 2015 installed 
- * in the default location 
+/*
+ * Expects you have After Effects CC 2015 installed
+ * in the default location
  */
-if (os.platform() == 'darwin') 
+if (os.platform() == 'darwin')
 {
-	console.log('OS: Mac OS X (darwin)');
-	build.deploy = {
-		"AE2015" : {
-			"esdir" : '/Applications/Adobe After Effects CC 2015/Scripts/ScriptUI Panels/',
-			"cepdir" : "/Library/Application Support/Adobe/CEP/extensions/"
-		}
-	}
-} 
-else 
+//	console.log(getVersions('/Applications/', 'darwin'));
+	build.deploy = getVersions('/Applications/', 'darwin');
+	util.log('OS: Mac OS X (darwin)');
+	logVersions(build.deploy);
+}
+else
 {
-	console.log('OS: Windows (win32)');
-	build.deploy = {
-		"AE2015" : {
-			"esdir" : 'C:/Program Files/Adobe/Adobe After Effects CC 2015/Support Files/Scripts/ScriptUI Panels/',
-			"cepdir" : ""
-		}
-	}
+	build.deploy = getVersions('C:/Program Files/', 'win32');
+	util.log('OS: Windows (win32)');
+	logVersions(build.deploy);
 }
 
 
@@ -105,9 +99,9 @@ gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 
 gulp.task('build:aeq-core', function () {
 	return gulp.src([
-			'lib/main.js', 
-			'!lib/ui/**/*.js', 
-			'lib/**/*.js', 
+			'lib/main.js',
+			'!lib/ui/**/*.js',
+			'lib/**/*.js',
 		])
 		.pipe(concat('core.js'))
 		.pipe(gulp.dest('./build'));
@@ -117,12 +111,12 @@ gulp.task('build:aeq-parser', function () {
 	gulp.src('grammar/aeq.peg')
 		.pipe(compilePeg())
 		.pipe(rename({ basename : 'parser', extname : '.js' }))
-		.pipe(gulp.dest('./build'))
-})
+		.pipe(gulp.dest('./build'));
+});
 
 gulp.task('build:aeq-ui', function () {
 	return gulp.src([
-			'lib/ui/**/*.js', 
+			'lib/ui/**/*.js',
 		])
 		.pipe(concat('aeq-ui.js'))
 		.pipe(uglify())
@@ -142,7 +136,7 @@ gulp.task('deploy:extendscript', [], function () {
 	{
 		var aeconfig = build.deploy[aever];
 
-		stream = stream.pipe(gulp.dest(aeconfig.esdir))
+		stream = stream.pipe(gulp.dest(aeconfig.esdir));
 	}
 
 	return stream;
@@ -176,11 +170,11 @@ gulp.task('clean:cep', function() {
 gulp.task('build:docs', function () {
 	return gulp.src('README.md')
 		.pipe(pdf())
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('package:all', function () {
-	return gulp.src(['./build/aeq.js', './build/aeq-ui.js', './build/README.pdf'])
+	return gulp.src(['./dist/aeq.js', './dist/aeq-ui.js', './dist/README.pdf'])
 		.pipe(zip(pkg.name + '-' + pkg.version + '-' + now() + '.zip'))
 		.pipe(gulp.dest('./dist'));
 });
@@ -198,10 +192,60 @@ function now() {
 
 function compilePeg() {
 	return change(function (content) {
-		var parser = PEG.buildParser(content, {output: 'source'})
-		var exportVar = 'var cssselector='
+		var parser = PEG.buildParser(content, {output: 'source'});
+		var exportVar = 'var cssselector=';
 
-		return exportVar + parser
-  })
+		return exportVar + parser;
+  });
 }
 
+function logVersions(buildObj) {
+	for (var obj in buildObj) {
+		util.log('Will deploy to AE ' + util.colors.magenta(obj));
+	}
+}
+
+function getVersions(appdir, system) {
+	var aeVersions = {};
+	var arch = os.arch();
+	var apps = fs.readdirSync(appdir);
+
+	apps.forEach(function (appname) {
+		if (appname.indexOf('After Effects') != -1) {
+			var split = appname.split(' ');
+			var slice = split.slice(3);
+			var version = slice.join('');
+			var cepdir;
+
+			if (system == 'darwin') {
+				if (version == 'CC2015' || version == 'CC2014') {
+					cepdir = '/Library/Application Support/Adobe/CEP/extensions/';
+				} else {
+					cepdir = undefined;
+				}
+
+				aeVersions[version] = {
+					esdir: appdir + appname + '/Scripts/ScriptUI Panels/',
+					cepdir: cepdir
+				};
+			} else {
+				if (version == 'CC2015' || version == 'CC2014') {
+					if (arch == 'x64') {
+						cepdir = 'C:/Program Files (x86)/Common Files/Adobe/CEP/extensions';
+					} else {
+						cepdir = 'C:/Program Files/Common Files/Adobe/CEP/extensions';
+					}
+				} else {
+					cepdir = undefined;
+				}
+
+				aeVersions[version] = {
+					esdir: appdir + '/Adobe/' + appname + '/Support Files/Scripts/ScriptUI Panels/',
+					cepdir: cepdir
+				};
+			}
+		}
+	});
+
+	return aeVersions;
+}

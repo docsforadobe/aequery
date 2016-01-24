@@ -1,8 +1,15 @@
-#include "aeq.js"
-#include "aeq-ui.js"
+#include "aeq.js";
+#include "aeq-ui.js";
 
 function buildUI(win)
 {
+	var aeqFile = File("aeq.js");
+	var aeqUiFile = File("aeq-ui.js");
+
+	var winObj = win.get();
+
+	winObj.alignment = ['fill', 'fill'];
+	winObj.alignChildren = ['fill', 'fill'];
 	var txtInput = win.addEditText('Enter a value');
 
 	var btn1 = win.addButton('Button 1', function(e) 
@@ -15,14 +22,15 @@ function buildUI(win)
 		// 	});
 		// });
 
+		alert(aeq(txtInput.text));
 	});
 
-	var btn2 = win.addButton('Button 2', function(e) { 
-		alert(aeq.reflect({ hello : 'world' }));
+	var btn2 = win.addButton('Redefine AEQ', function(e) {
+		aeq = redefineAeq(aeqFile, aeqUiFile);
 	});
 }
 
-aeq.ui.ready(function() 
+aeq.ui.ready(function()
 {
 	var win = aeq.ui.createMainWindow("Hello world!");
 
@@ -30,3 +38,9 @@ aeq.ui.ready(function()
 
 	win.show();
 });
+
+function redefineAeq(aeqFile, aeqUiFile) {
+	$.evalFile(aeqFile);
+	$.evalFile(aeqUiFile);
+	return aeq;
+}
