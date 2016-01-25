@@ -4,11 +4,11 @@
 /*jshint ignore:end*/
 
 function buildUI(win) {
-	// TODO statictext
 	win.set({
 		alignment: ['fill', 'top'],
 		alignChildren: ['fill', 'top']
 	});
+	win.addStatictext('Statictext text');
 	win.addEditText('EditText text');
 	win.addButton('Button Name', function() {
 		alert('Button clicked');
@@ -16,7 +16,9 @@ function buildUI(win) {
 	win.addCheckbox('Checkbox Name', function() {
 		alert(this.value);
 	});
-	// TODO radiobutton
+	win.addRadioButton('Radiobutton text', function() {
+		alert(this.value);
+	});
 	win.addDropdownList(['Item 1', 'Item 2', 'Item 3', 'Item 4'], function() {
 		alert(this.selection);
 	});
@@ -39,9 +41,19 @@ function buildUI(win) {
 	buttonPanel.addButton('Button 2');
 	buttonPanel.addButton('Button 3');
 
-	// TODO tabbedPanel
+	var tabbedpanel = win.addTabbedPanel();
+	var tab1 = tabbedpanel.addTab('Tab 1');
+	tab1.addButton('Tab 1 Button');
+	var tab2 = tabbedpanel.addTab('Tab 2');
+	tab2.addButton('Tab 2 Button');
 
-	// TODO progressbar
+	win.addProgressbar(50);
+
+	win.addTreeview(['Item 1', 'Item 2', 'Item 3', 'Item 4'], function() {
+		alert(this.selection);
+	});
+	win.addSlider(0, 100, 200);
+	win.addScrollbar();
 
 }
 
