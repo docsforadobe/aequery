@@ -49,9 +49,12 @@ function buildUI(win) {
 
 	win.addProgressbar(50);
 
-	win.addTreeview(['Item 1', 'Item 2', 'Item 3', 'Item 4'], function() {
+	var treeview = win.addTreeview(['Item 1', 'Item 2'], function() {
 		alert(this.selection);
 	});
+	var treeviewNode = treeview.add('node', 'item 3');
+	treeviewNode.add('item', 'item 3.1');
+
 	win.addSlider(0, 100, 200);
 	win.addScrollbar();
 
