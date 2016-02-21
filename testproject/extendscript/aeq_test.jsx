@@ -12,7 +12,16 @@ function buildUI(win)
 	winObj.alignChildren = ['fill', 'fill'];
 	var txtInput = win.addEditText('Enter a value');
 
-	var btn1 = win.addButton('Button 1', function(e) {
+	var btn1 = win.addButton('Button 1', function(e) 
+	{ 
+		// aeq.getActiveComposition().getSelectedProperties().forEach(function(prop) 
+		// {
+		// 	aeq(prop).getSelectedKeys(function(aeqKey)
+		// 	{
+				
+		// 	});
+		// });
+
 		alert(aeq(txtInput.text));
 	});
 
@@ -29,6 +38,7 @@ aeq.ui.ready(function()
 
 	win.show();
 });
+
 function redefineAeq(aeqFile, aeqUiFile) {
 	$.evalFile(aeqFile);
 	$.evalFile(aeqUiFile);

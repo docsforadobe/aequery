@@ -62,7 +62,7 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('clean', ['clean:extendscript', 'clean:cep'], function () {
+gulp.task('clean:all', ['clean:extendscript', 'clean:cep'], function () {
 	return del(['build', 'dist'], {
 		force: true
 	});
@@ -75,7 +75,7 @@ gulp.task('debug', function (cb) {
 
 	uglify = require('gulp-empty');
 
-	return rseq('clean', 'build:aeq', 'build:aeq-ui', 'deploy:all', cb);
+	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', 'deploy:all', cb);
 });
 
 
@@ -85,7 +85,7 @@ gulp.task('release', function (cb) {
 
 	// TODO: configure uglify...
 
-	return rseq('clean', 'build:all', 'deploy:all', 'package:all', cb);
+	return rseq('clean:all', 'build:all', 'deploy:all', 'package:all', cb);
 });
 
 gulp.task('build:all', ['build:aeq', 'build:aeq-ui', 'build:docs']);
