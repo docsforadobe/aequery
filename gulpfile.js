@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 	fs = require('fs'),
 	del = require('del'),
 	concat = require('gulp-concat'),
+	replace = require('gulp-replace'),
 	zip = require('gulp-zip'),
 	pdf = require('gulp-markdown-pdf'),
 	uglify = require('gulp-uglify'),
@@ -12,7 +13,8 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	util = require('gulp-util'),
 	rseq = require('run-sequence'),
-	PEG = require('pegjs');
+	PEG = require('pegjs'),
+	addsrc = require('gulp-add-src');
 
 var pkg = require('./package.json'),
 	name = pkg.name;
@@ -99,10 +101,16 @@ gulp.task('build:aeq', ['build:aeq-core', 'build:aeq-parser'], function() {
 
 gulp.task('build:aeq-core', function () {
 	return gulp.src([
+			'lib/intro.js',
 			'lib/main.js',
 			'!lib/ui/**/*.js',
+			'!lib/outro.js',
 			'lib/**/*.js',
 		])
+		.pipe(replace(/(\/\*.*?\*\/\n+)?(var )?aeq = \(function ?\(aeq\) \{/g, ''))
+		.pipe(replace(/'use strict';/g, ''))
+		.pipe(replace(/return aeq;\n+\}\(aeq \|\| \{\}\)\)\;/g, ''))
+		.pipe(addsrc.append('lib/outro.js'))
 		.pipe(concat('core.js'))
 		.pipe(gulp.dest('./build'));
 });
