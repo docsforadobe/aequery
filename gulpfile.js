@@ -137,7 +137,8 @@ gulp.task('deploy:extendscript', [], function () {
 	var stream = gulp.src([
 		'./dist/aeq.js',
 		'./dist/aeq-ui.js',
-		'./testproject/extendscript/aeq_test.jsx'
+		'./testproject/extendscript/aeq_test.jsx',
+		'./testproject/extendscript/aeq-ui_Demo.jsx'
 	]);
 
 	for (var aever in build.deploy)
