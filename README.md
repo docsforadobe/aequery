@@ -45,7 +45,7 @@ Import into your script
 [For documentation, see the wiki section of this repository](https://bitbucket.org/motiondesign/aequery/wiki/Home)
 
 # Contributing
-What to include add something in AEQuery?
+What to add something in AEQuery?
 
 Look in the file tree to see if there is a place where it may fit.
 
