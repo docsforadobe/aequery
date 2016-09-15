@@ -53,6 +53,7 @@ Value
   = BooleanLiteral
   / NumericLiteral
   / StringLiteral
+  / ArrayLiteral
 
 NumericLiteral
   = literal:HexIntegerLiteral !(DecimalDigit) { return literal; }
@@ -153,6 +154,14 @@ LineTerminatorSequence "end of line"
   / "\r"
   / "\u2028"
   / "\u2029"
+
+ArrayLiteral
+  = "[" _ head:ArrayValue* _ tail:Value _ "]" {
+    head.push(tail); return { type: "Array", value: head };
+  }
+
+ArrayValue
+  = value:Value _ "," _ { return value }
 
 TrueToken = "true" _?
 FalseToken = "false" _?
