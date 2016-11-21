@@ -1,0 +1,11 @@
+
+image: node:6.9.1
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - npm install
+          - npm run-script deploy-bitbucket
+          - curl -X POST "https://${RUNEGAN_AUTH_STRINGapi.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aeq.js"
+          - curl -X POST "https://${RUNEGAN_AUTH_STRING}@api.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aeq-ui.js"

@@ -41,11 +41,29 @@ var build = {
  * Expects you have After Effects CC 2015 installed
  * in the default location
  */
-if (os.platform() == 'darwin')
+var platform = os.platform();
+
+if (platform == 'darwin')
 {
 //	console.log(getVersions('/Applications/', 'darwin'));
 	build.deploy = getVersions('/Applications/', 'darwin');
 	util.log('OS: Mac OS X (darwin)');
+	logVersions(build.deploy);
+}
+else if (platform === 'linux') // bitbucket uses linux
+{
+	var appdir = "./build/dummy";
+	try{
+		fs.mkdirSync(appdir);
+	}catch(e){}
+	var aeVersions = {};
+	aeVersions.dummy_install = {
+		esdir: appdir + '/dummy_scriptui/ScriptUI Panels/',
+		cepdir: appdir + "/dummy_cep"
+	};
+
+	build.deploy = aeVersions;
+	util.log('OS: Linux');
 	logVersions(build.deploy);
 }
 else
@@ -70,6 +88,7 @@ gulp.task('clean:all', ['clean:extendscript', 'clean:cep'], function () {
 	});
 });
 
+gulp.task('deploy:bitbucket', ['clean:all', 'build:aeq', 'build:aeq-ui']);
 
 gulp.task('debug', function (cb) {
 	build.configuration = configuration.debug;

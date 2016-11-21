@@ -9,6 +9,15 @@ Requirements
 Adobe After Effects
 ExtendScript Toolkit or other text editor
 
+Download
+--------
+[The latest version of AEQuery can be found in the downloads section of this repository](https://bitbucket.org/motiondesign/aequery/downloads)
+
+Documentation
+-------------
+[For documentation, see the wiki section of this repository](https://bitbucket.org/motiondesign/aequery/wiki/Home)
+
+
 How to build it yourself
 ------------------------
 
@@ -41,26 +50,23 @@ Import into your script
 #include "path/to/aeq.js"
 ```
 
-# Documentation
-[For documentation, see the wiki section of this repository](https://bitbucket.org/motiondesign/aequery/wiki/Home)
-
 # Contributing
-What to add something in AEQuery?
+Want to add something in AEQuery?
 
 Look in the file tree to see if there is a place where it may fit.
 
-If necessary, create a new file. The basic structure is:
+If necessary, create a new file. The basic file structure is:
 ```javascript
 var aeq = (function (aeq) {
 aeq.extend({
 	yourCodeHere: function() {
-	
+
 	}
 });
 return aeq;
 }(aeq || {}));
 ```
-If you want to add a submodule, the structure is:
+If you want to create a submodule, the structure is:
 ```javascript
 var aeq = (function (aeq) {
 aeq.yourModule = {
@@ -72,11 +78,9 @@ aeq.yourModule = {
 	extend: aeq.extend,
 
 	code: function() {
-	
+
 	}
 }
 return aeq;
 }(aeq || {}));
 ```
-
-The `aeq.extend` function is for easier extension of objects and better looking code. If you pass in one object (`aeq.extend( { something: function() {} } )`) it will add the properties and functions you add to the object to the `aeq` object (e.g you can then call `aeq.something()`). If you pass in two objects (`aeq.extend( someObject, { example: "example" } )`) it will add the properties of the second object to the first object (e.g you then have `someObject.example` ). The extend function in aequery is basicly a copy of jQuerys extend function, so for more information see the [jQuery documentation](https://api.jquery.com/jquery.extend/)
