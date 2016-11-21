@@ -88,8 +88,6 @@ gulp.task('clean:all', ['clean:extendscript', 'clean:cep'], function () {
 	});
 });
 
-gulp.task('deploy:bitbucket', ['clean:all', 'build:aeq', 'build:aeq-ui']);
-
 gulp.task('debug', function (cb) {
 	build.configuration = configuration.debug;
 	build.deployment = deployment.local;
@@ -151,6 +149,11 @@ gulp.task('build:aeq-ui', function () {
 });
 
 gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
+
+gulp.task('deploy:bitbucket', function (cb) {
+	uglify = require('gulp-empty');
+	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', cb);
+});
 
 gulp.task('deploy:extendscript', [], function () {
 	var stream = gulp.src([
