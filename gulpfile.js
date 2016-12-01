@@ -37,6 +37,14 @@ var build = {
 	deploy : null
 };
 
+var config = {
+	"build-locations": []
+};
+if (fs.existsSync('./config.json')) {
+	config = require('./config.json');
+	util.log( "config: " + config );
+}
+
 /*
  * Expects you have After Effects CC 2015 installed
  * in the default location
@@ -148,7 +156,7 @@ gulp.task('build:aeq-ui', function () {
 		.pipe(gulp.dest('./dist'));
 });
 
-gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
+gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep', 'deploy:custom']);
 
 gulp.task('deploy:bitbucket', function (cb) {
 	uglify = require('gulp-empty');
@@ -197,6 +205,34 @@ gulp.task('clean:cep', function() {
 	// TODO
 	return;
 });
+
+gulp.task( 'deploy:custom', function() {
+	var locations = config['build-locations'];
+	if ( !locations) {
+		return;
+	}
+	locations.forEach(function(location) {
+		var stream = gulp.src([
+			'./dist/aeq.js',
+			'./dist/aeq-ui.js'
+		]);
+		var useJsx = false;
+		if ( Array.isArray(location)) {
+			useJsx = location[1];
+			location = location[0];
+		}
+		if (useJsx) {
+			stream.pipe(rename(function(path) {
+				path.extname = ".jsx";
+			}));
+		} else {
+			stream.pipe(rename(function(path) {
+				path.extname = ".js";
+			}));
+		}
+		stream.pipe(gulp.dest(location));
+	});
+} );
 
 gulp.task('build:docs', function () {
 	return gulp.src('README.md')
