@@ -40,14 +40,14 @@ ValuePair
 
 Selector
   = type:[a-zA-Z]+ props:PropertiesBrackets? pseudo:Pseudo* _? {
-    return { type: type.join(''), props: props, pseudo: pseudo }
+    return { type: type.join('').toLowerCase(), props: props, pseudo: pseudo }
   }
 
 Selectors
   = Selector+
 
 Pseudo
-  = ":" type:[a-z]* props:PropertiesParentheses? { return { type: type.join(''), props: props } }
+  = ":" type:[a-zA-Z]* props:PropertiesParentheses? { return { type: type.join('').toLowerCase(), props: props } }
 
 Value
   = BooleanLiteral
