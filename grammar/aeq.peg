@@ -54,6 +54,7 @@ Value
   / NumericLiteral
   / StringLiteral
   / ArrayLiteral
+  / RegularExpressionLiteral
 
 NumericLiteral
   = literal:HexIntegerLiteral !(DecimalDigit) { return literal; }
@@ -168,3 +169,59 @@ FalseToken = "false" _?
 
 _ "whitespace"
   = [ \t\n\r]*
+
+/* RegularExpressionLiteral */
+
+RegularExpressionLiteral "regular expression"
+= "/" body:RegularExpressionBody "/" flags:RegularExpressionFlags {
+    return {
+      type:  "RegExp",
+      body:  body,
+      flags: flags,
+      value: new RegExp(body, flags)
+    };
+  }
+
+RegularExpressionBody
+= char_:RegularExpressionFirstChar chars:RegularExpressionChars {
+    return char_ + chars;
+  }
+
+RegularExpressionChars
+= chars:RegularExpressionChar* { return chars.join(""); }
+
+RegularExpressionFirstChar
+= ![*\\/[] char_:RegularExpressionNonTerminator { return char_; }
+/ RegularExpressionBackslashSequence
+/ RegularExpressionClass
+
+RegularExpressionChar
+= ![\\/[] char_:RegularExpressionNonTerminator { return char_; }
+/ RegularExpressionBackslashSequence
+/ RegularExpressionClass
+
+/*
+* This rule contains an error in the specification: "NonTerminator" instead of
+* "RegularExpressionNonTerminator".
+*/
+RegularExpressionBackslashSequence
+= "\\" char_:RegularExpressionNonTerminator { return "\\" + char_; }
+
+RegularExpressionNonTerminator
+= !LineTerminator char_:SourceCharacter { return char_; }
+
+RegularExpressionClass
+= "[" chars:RegularExpressionClassChars "]" { return "[" + chars + "]"; }
+
+RegularExpressionClassChars
+= chars:RegularExpressionClassChar* { return chars.join(""); }
+
+RegularExpressionClassChar
+= ![\]\\] char_:RegularExpressionNonTerminator { return char_; }
+/ RegularExpressionBackslashSequence
+
+RegularExpressionFlags
+= parts:[gimuy]* { return parts.join(""); }
+
+SourceCharacter
+= .
