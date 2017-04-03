@@ -19,6 +19,11 @@ if ( select1.length !== 1 ) {
 	alert( "select1 did not select 1" );
 }
 
+var select1 = aeq( "layer:has(name=/^Shape/)");
+if ( select1.length !== 1 ) {
+	alert( "select1 did not select 1" );
+}
+
 var select2 = aeq( "layer[name=['layerName 0', 'layerName 2']]");
 if ( select2.length !== 2 ) {
 	alert( "select2 did not select 2" );
