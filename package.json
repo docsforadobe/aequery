@@ -4,7 +4,8 @@
   "description": "General purpose after effects scripting library",
   "main": "dist/aequery.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "eslint lib/ test/",
+    "lint-fix": "eslint --fix lib test",
     "deploy-bitbucket": "gulp deploy:bitbucket",
     "prepublish": "gulp build-aequery"
   },
@@ -16,11 +17,13 @@
   "license": "MIT",
   "devDependencies": {
     "del": "^2.2.0",
+    "eslint": "^3.19.0",
     "gulp": "^3.9.0",
     "gulp-add-src": "^0.2.0",
     "gulp-change": "^1.0.0",
     "gulp-concat": "^2.6.0",
     "gulp-empty": "^0.1.1",
+    "gulp-eslint": "^3.0.1",
     "gulp-markdown-pdf": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
@@ -29,5 +32,8 @@
     "gulp-zip": "^3.1.0",
     "pegjs": "^0.9.0",
     "run-sequence": "^1.1.5"
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }

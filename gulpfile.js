@@ -14,7 +14,8 @@ var gulp = require('gulp'),
 	util = require('gulp-util'),
 	rseq = require('run-sequence'),
 	PEG = require('pegjs'),
-	addsrc = require('gulp-add-src');
+	addsrc = require('gulp-add-src'),
+	eslint = require('gulp-eslint');
 
 var pkg = require('./package.json'),
 	name = pkg.name;
@@ -257,6 +258,17 @@ gulp.task('package:all', function () {
 		.pipe(zip(pkg.name + '-' + pkg.version + '-' + now() + '.zip'))
 		.pipe(gulp.dest('./dist'));
 });
+
+gulp.task('lint', function() {
+	return gulp.src([
+		"!lib/intro.js",
+		"lib/main.js",
+		"!lib/outro.js",
+		"lib/**/*.js",
+	] )
+	.pipe(eslint())
+	.pipe(eslint.format());
+} );
 
 
 function now() {
