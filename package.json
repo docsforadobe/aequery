@@ -2,10 +2,11 @@
   "name": "aequery",
   "version": "0.0.1",
   "description": "General purpose after effects scripting library",
-  "main": "main.js",
+  "main": "dist/aeq.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"deploy-bitbucket": "gulp deploy:bitbucket"
+    "deploy-bitbucket": "gulp deploy:bitbucket",
+    "prepublish": "gulp default"
   },
   "repository": {
     "type": "git",
