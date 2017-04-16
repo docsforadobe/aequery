@@ -83,6 +83,7 @@ else
 
 
 gulp.task('default', ['debug']);
+gulp.task('build-aequery', ['debug', 'build:concat-ui']);
 
 
 gulp.task('watch', function () {
@@ -155,6 +156,15 @@ gulp.task('build:aeq-ui', function () {
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist'));
 });
+
+gulp.task('build:concat-ui', function() {
+	return gulp.src( [
+		'dist/aeq.js',
+		'dist/aeq-ui.js',
+	] )
+	.pipe(concat( 'aequery.js') )
+	.pipe(gulp.dest('./dist'));
+} );
 
 gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep', 'deploy:custom']);
 
