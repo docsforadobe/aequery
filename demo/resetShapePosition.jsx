@@ -33,7 +33,7 @@ function doIt() {
 function createUI() {
 
 	// Settings are saved as a string
-	if ( aeq.getSetting("aeq_resetShapeLayerPosition", "Do not ask again") === "true" ) {
+	if ( aeq.getSettingAsBool("aeq_resetShapeLayerPosition", "Do not ask again") ) {
 		return true;
 	}
 
