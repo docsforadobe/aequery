@@ -1,5 +1,7 @@
+*.sublime-project
+*.sublime-workspace
 .DS_Store
-node_modules
 build
-dist
 config.json
+dist
+node_modules
