@@ -9,6 +9,7 @@ aeq.undoGroup( testName, function() {
 
 	var tests = [
 		// Method, argument, result
+		["getItems", undefined, ['length', 4]],
 		["getCompositions", undefined, ['length', 1]],
 		["getActiveComposition", undefined, comp],
 		["getComposition", comp.name, comp],
