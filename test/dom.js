@@ -9,8 +9,9 @@ aeq.undoGroup( testName, function() {
 
 	var tests = [
 		// Method, argument, result
-		["getItems", undefined, ['length', 4]],
-		["getCompositions", undefined, ['length', 1]],
+		["getItems", undefined, ['length', app.project.rootFolder.numItems]],
+		["getItemLayers", comp, ['length', 2]],
+		["getCompositions", undefined, ['length', 2]],
 		["getActiveComposition", undefined, comp],
 		["getComposition", comp.name, comp],
 		["getComposition", "asdf1234", null],
@@ -75,6 +76,11 @@ aeq.undoGroup( testName, function() {
 function setup( name, duration ) {
 	app.project.close(CloseOptions.DO_NOT_SAVE_CHANGES);
 	var comp = aeq.comp.create( { name: name, duration: duration || 3 } );
+
+	var main = aeq.comp.create( { name: name + " main", duration: duration || 3 } );
+	main.layers.add(comp)
+	main.layers.add(comp)
+
 	var layer1 = comp.layers.addShape();
 	layer1.name = "shape";
 	layer1.property("Position").selected = true;
