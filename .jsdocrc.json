@@ -14,13 +14,8 @@
     "linenums": true,
 
     "templates": {
-        "applicationName": "AEQuery",
-        "googleAnalytics": "",
-        "meta": {
-            "title": "AEQuery Docs",
-            "description": "AEQuery documentation",
-            "keyword": "AEQuery, ExtendScript, After Effects, Scripting,"
-        }
+        "useLongnameInNav": false,
+        "showInheritedInNav": true
     }
 
 }
