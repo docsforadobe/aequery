@@ -14,6 +14,7 @@ var gulp = require('gulp'),
 	util = require('gulp-util'),
 	rseq = require('run-sequence'),
 	PEG = require('pegjs'),
+	exec = require('child_process').exec,
 	addsrc = require('gulp-add-src');
 
 var pkg = require('./package.json'),
@@ -94,7 +95,7 @@ gulp.task('watch', function () {
 
 
 gulp.task('clean:all', ['clean:extendscript', 'clean:cep'], function () {
-	return del(['build', 'dist'], {
+	return del(['build', 'dist', 'docs'], {
 		force: true
 	});
 });
@@ -247,9 +248,11 @@ gulp.task( 'deploy:custom', function() {
 } );
 
 gulp.task('build:docs', function () {
-	return gulp.src('README.md')
-		.pipe(pdf())
-		.pipe(gulp.dest('./dist'));
+	exec('./node_modules/.bin/jsdoc lib/ --configure ./.jsdocrc.json', err => {
+		if (err) {
+			console.error(err)
+		}
+	})
 });
 
 gulp.task('package:all', function () {

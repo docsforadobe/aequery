@@ -1,0 +1,26 @@
+{
+    "plugins": ["plugins/markdown"],
+    "opts": {
+        "template": "node_modules/jaguarjs-jsdoc",
+        "destination": "./docs",
+        "readme": "./README.md",
+        "encoding": "utf8",
+        "recurse": true
+    },
+
+    "source": {
+        "exclude": ["lib/intro.js", "lib/outro.js"]
+    },
+    "linenums": true,
+
+    "templates": {
+        "applicationName": "AEQuery",
+        "googleAnalytics": "",
+        "meta": {
+            "title": "AEQuery Docs",
+            "description": "AEQuery documentation",
+            "keyword": "AEQuery, ExtendScript, After Effects, Scripting,"
+        }
+    }
+
+}
