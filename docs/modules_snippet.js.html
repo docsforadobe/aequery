@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>modules/snippet.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.html">aeq</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.filter">.filter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEach">.forEach</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.snippet.html">snippet</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.activeComp">activeComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.forEachSelectedLayer">forEachSelectedLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.forEachSelectedLayerOrAll">forEachSelectedLayerOrAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.forEachSelectedProperty">forEachSelectedProperty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.selectedLayers">selectedLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.selectedLayersOrAll">selectedLayersOrAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.selectedProperties">selectedProperties</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#aeq1">aeq</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">modules/snippet.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var aeq = (function (aeq) {
+/**
+ * @namespace snippet
+ * @memberof aeq
+ */
+aeq.snippet = {
+	toString: function() {
+		return "[object aeq.snippet]";
+	},
+
+	// Function for extending the object using objects
+	extend: aeq.extend,
+
+	/**
+	 * Gets the active comp and alerts the user if no comp is open. It then
+	 * creates an undo group and executes a callback function with the comp as
+	 * the first argument.
+	 * @function activeComp
+	 * @memberof aeq.snippet
+	 * @param  {String}   undoGroup Name of the undo group
+	 * @param  {function} callback  Function to execute that gets the active comp
+	 *                              as the first argument
+	 * @return {Boolean|Any}        `false` if the function is not executed
+	 *         because no comp was selected. Else the value the `callback`
+	 *         function returns is returned.
+	 */
+	activeComp: function(undoGroup, callback) {
+		var comp = getCompWithAlert();
+		if (comp === null) return false;
+		return aeq.createUndoGroup(undoGroup, callback, [comp]);
+	},
+
+	/**
+	 * Gets the selected layers in the active comp and alerts the user if no comp
+	 * is open, or if no layer is selected. It then creates an undo group and
+	 * executes a callback function with the layers as the first argument
+	 * @memberof aeq.snippet
+	 * @param  {String}   undoGroup Name of the undo group
+	 * @param  {function} callback  Function to execute that gets the selected
+	 *                              layers as the first argument
+	 * @return {Boolean|Any}        `false` if the function is not executed
+	 *         because no comp or layer was selected. Else the value the
+	 *         `callback` function returns is returned.
+	 */
+	selectedLayers: function(undoGroup, callback) {
+		var comp = getCompWithAlert();
+		if (comp === null) return false;
+		var layers = getSelectedLayersWithAlert(comp)
+		if (layers === null) return false;
+
+		layers = aeq.arrayEx(layers);
+		return aeq.createUndoGroup(undoGroup, callback, [layers]);
+	},
+
+	/**
+	 * Gets the selected layers or all layers if no layers are selected, in the
+	 * active comp. Alerts the user if no comp is open. It then creates an undo group
+	 * and executes a callback function with the layers as the first argument.
+	 * @memberof aeq.snippet
+	 * @param  {String}   undoGroup Name of the undo group.
+	 * @param  {function} callback  Function to execute that gets the selected
+	 *                              layers in an ArrayEx as the first argument.
+	 * @return {Boolean|Any}        `false` if the function is not executed
+	 *         because no comp was open. Else the value the `callback` function
+	 *         is returned.
+	 */
+	selectedLayersOrAll: function(undoGroup, callback) {
+		var comp = getCompWithAlert();
+		if (comp === null) return false;
+		var layers = aeq.getSelectedLayersOrAll(comp);
+
+		layers = aeq.arrayEx(layers);
+		return aeq.createUndoGroup(undoGroup, callback, [layers]);
+	},
+
+	/**
+	 * Gets the selected properties in the active comp and alerts the user if no comp
+	 * is open, or if no property is selected. It then creates an undo group and
+	 * executes a callback function with the properties as the first argument.
+	 * @memberof aeq.snippet
+	 * @param  {String}   undoGroup Name of the undo group
+	 * @param  {function} callback  Function to execute that gets the selected
+	 *                              properties in an ArrayEx as the first argument.
+	 * @return {Boolean|Any}        `false` if the function is not executed.
+	 *         because no comp or property was selected. Else the value the
+	 *         `callback` function is returned.
+	 */
+	selectedProperties: function(undoGroup, callback) {
+		var comp = getCompWithAlert();
+		if (comp === null) return false;
+		var props = getSelectedPropertiesWithAlert(comp)
+		if (props === null) return false;
+
+		props = aeq.arrayEx(props);
+		return aeq.createUndoGroup(undoGroup, callback, [props]);
+	},
+
+	/**
+	 * Loops through the selected layers in the active comp. Alerts the user if no
+	 * comp is open, or no layer is selected. It then creates an undo group
+	 * and executes a callback function for each of the layers.
+	 * @memberof aeq.snippet
+	 * @param  {String}          undoGroup Name of the undo group.
+	 * @param  {forEachArrayCallback} callback  Function to execute for each layer.
+	 * @return {Boolean|ArrayEx} `false` if the function is not executed because
+	 *         no comp was open or no layer selected. Else the layers array is
+	 *         returned.
+	 */
+	forEachSelectedLayer: function(undoGroup, callback) {
+		return aeq.snippet.selectedLayers(undoGroup, function(layers) {
+			layers.forEach(callback);
+			return layers;
+		})
+	},
+
+	/**
+	 * Loops through the selected layers or all layers if no layers are selected, in the
+	 * active comp. Alerts the user if no comp is open. It then creates an undo group
+	 * and executes a callback function for each of the layers.
+	 * @memberof aeq.snippet
+	 * @param  {String}          undoGroup Name of the undo group
+	 * @param  {forEachArrayCallback} callback  Function to execute for each layer.
+	 * @return {Boolean|ArrayEx}           `false` if the function is not executed
+	 *                                     because no comp was open. Else
+	 *                                     the layers array are returned.
+	 */
+	forEachSelectedLayerOrAll: function(undoGroup, callback) {
+		return aeq.snippet.selectedLayersOrAll(undoGroup, function(layers) {
+			layers.forEach(callback);
+			return layers;
+		})
+	},
+
+	/**
+	 * Loops through the selected properties in the active comp. Alerts the user if no
+	 * comp is open, or no properties is selected. It then creates an undo group
+	 * and executes a callback function for each of the properties.
+	 * @memberof aeq.snippet
+	 * @param  {String}          undoGroup Name of the undo group
+	 * @param  {forEachArrayCallback} callback  Function to execute for each property.
+	 * @return {Boolean|ArrayEx}           `false` if the function is not executed
+	 *                                     because no comp was open or no layer
+	 *                                     selected. Else the property array
+	 *                                     is returned.
+	 */
+	forEachSelectedProperty: function(undoGroup, callback) {
+		return aeq.snippet.selectedProperties(undoGroup, function(props) {
+			props.forEach(callback);
+			return props;
+		})
+	},
+};
+
+function getCompWithAlert() {
+	var comp = aeq.getActiveComp();
+	if ( comp === null ) {
+		alert( "No Comp selected" );
+	}
+	return comp;
+}
+
+function getSelectedLayersWithAlert(comp) {
+	if ( comp.selectedLayers.length === 0 ) {
+		alert( "No layers selected" );
+		return null;
+	}
+	return comp.selectedLayers;
+}
+
+function getSelectedPropertiesWithAlert(comp) {
+	if ( comp.selectedProperties.length === 0 ) {
+		alert( "No properties selected" );
+		return null;
+	}
+	return comp.selectedProperties;
+}
+
+// Function aliases
+
+
+return aeq;
+}(aeq || {}));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu May 25 2017 23:33:17 GMT+0200 (CEST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
     "plugins": ["plugins/markdown"],
     "opts": {
-        "template": "node_modules/jaguarjs-jsdoc",
+        "template": "node_modules/minami",
         "destination": "./docs",
         "readme": "./README.md",
         "encoding": "utf8",
