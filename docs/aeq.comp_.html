@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>[comp description]</p></div>
+            <div class="description"><p>Module dealing with comp objects.</p></div>
         
 
         
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(folder, options)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(folder<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {CompItem}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Creates a comp with the given settings</p>
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line24">line 24</a>
+        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -201,7 +201,11 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -219,18 +223,39 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>FolderItem</code></span>
+|
+
+<span class="param-type"><code>object</code></span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    app.project
+                
+                </td>
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The folder to place the
+        comp inside in the project panel. If not provided, this argument
+        will be used as the <code>options</code> parameter.</p>
                 
             </td>
         </tr>
@@ -245,18 +270,313 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>object</code></span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>Comp settings:</p>
+                
+                    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    Comp
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>The name of the comp.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1920
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>Comp width, in pixels.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1080
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>Comp height, in pixels.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pixelAspect</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>Comp pixel aspect ratio.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>Comp duration, in seconds.</p>
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>frameRate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    24
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>Comp frame rate.</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
                 
             </td>
         </tr>
@@ -289,7 +609,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>CompItem</code></span>
 
 
     </dd>
@@ -297,13 +617,37 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The created comp item.</p>
 </div>
 
     
 </div>
 
 
+
+<div class="section-examples">
+<h5>Examples</h5>
+
+        <p class="code-caption">Create a comp in the project root, with name "Example",
+         and a duration of 10 seconds. And use default values for the
+         other options</p>
+    
+    <pre class="prettyprint"><code>var comp = aeq.comp.create({
+    name: 'Example',
+    duration: 10
+})</code></pre>
+
+        <p class="code-caption">Create comp in a folder, with name "Example"</p>
+    
+    <pre class="prettyprint"><code>var comp = aeq.comp.create(compFolder, {
+    name: "Example"
+})</code></pre>
+
+        <p class="code-caption">Create a comp with all default values</p>
+    
+    <pre class="prettyprint"><code>var comp = aeq.comp.create()</code></pre>
+
+</div>
 
 </div>
         
@@ -312,14 +656,14 @@
 
     
 
-    <h4 class="name" id=".getCompInQueue"><span class="type-signature">(static) </span>getCompInQueue<span class="signature">(comp, queuedOnly)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".getCompInQueue"><span class="type-signature">(static) </span>getCompInQueue<span class="signature">(comp, queuedOnly<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;RenderQueueItem>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Gets the <code>RenderQueueItem</code>s that references a given comp.</p>
 </div>
 
 
@@ -355,7 +699,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line60">line 60</a>
+        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -387,7 +731,11 @@
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -405,18 +753,30 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>CompItem</code></span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The comp to find in the Render Queue.</p>
                 
             </td>
         </tr>
@@ -431,18 +791,35 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>boolean</code></span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    true
+                
+                </td>
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>Only get <code>RenderQueueItem</code>s that
+                                      are queued.</p>
                 
             </td>
         </tr>
@@ -475,7 +852,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Array.&lt;RenderQueueItem></code></span>
 
 
     </dd>
@@ -483,13 +860,24 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The <code>RenderQueueItem</code>s that references
+                               the comp</p>
 </div>
 
     
 </div>
 
 
+
+<div class="section-examples">
+<h5>Example</h5>
+
+        <p class="code-caption">Get all `RenderQueueItem`s that references
+         the comp.</p>
+    
+    <pre class="prettyprint"><code>var RQItems = aeq.comp.getCompInQueue( comp, false )</code></pre>
+
+</div>
 
 </div>
         
@@ -498,14 +886,15 @@
 
     
 
-    <h4 class="name" id=".isInQueue"><span class="type-signature">(static) </span>isInQueue<span class="signature">(comp)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".isInQueue"><span class="type-signature">(static) </span>isInQueue<span class="signature">(comp)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Check if a comp is in the Render Queue, regardless of it being
+queued or not.</p>
 </div>
 
 
@@ -541,7 +930,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line81">line 81</a>
+        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line115">line 115</a>
     </li></ul></dd>
     
 
@@ -591,7 +980,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>CompItem</code></span>
 
 
             
@@ -602,7 +991,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The comp to find in the queue.</p>
                 
             </td>
         </tr>
@@ -635,7 +1024,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>boolean</code></span>
 
 
     </dd>
@@ -643,7 +1032,7 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>True if comp is in the queue.</p>
 </div>
 
     
@@ -658,14 +1047,14 @@
 
     
 
-    <h4 class="name" id=".isQueued"><span class="type-signature">(static) </span>isQueued<span class="signature">(comp)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".isQueued"><span class="type-signature">(static) </span>isQueued<span class="signature">(comp)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Check if a comp is in the Render Queue and queued.</p>
 </div>
 
 
@@ -701,7 +1090,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line99">line 99</a>
+        <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line133">line 133</a>
     </li></ul></dd>
     
 
@@ -751,7 +1140,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>CompItem</code></span>
 
 
             
@@ -762,7 +1151,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The comp to find the queue.</p>
                 
             </td>
         </tr>
@@ -795,7 +1184,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>boolean</code></span>
 
 
     </dd>
@@ -803,7 +1192,7 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>True if the comp is queued.</p>
 </div>
 
     
@@ -830,7 +1219,7 @@
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri May 26 2017 23:26:09 GMT+0200 (CEST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue May 30 2017 17:39:24 GMT+0200 (CEST) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>[layer description]</p></div>
+            <div class="description"><p>Module dealing with Layer objects.</p></div>
         
 
         
@@ -126,14 +126,15 @@
 
     
 
-    <h4 class="name" id=".allChildren"><span class="type-signature">(static) </span>allChildren<span class="signature">(parentLayer)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".allChildren"><span class="type-signature">(static) </span>allChildren<span class="signature">(parentLayer)</span><span class="type-signature"> &rarr; {Array.&lt;Layer>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Gets all layers that has the given layer as its parent, and all layers
+that has those layers, and so on.</p>
 </div>
 
 
@@ -169,7 +170,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line57">line 57</a>
+        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -219,7 +220,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Layer</code></span>
 
 
             
@@ -230,7 +231,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The layer to get decendants from.</p>
                 
             </td>
         </tr>
@@ -263,7 +264,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Array.&lt;Layer></code></span>
 
 
     </dd>
@@ -271,7 +272,7 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>Children and decendants of the given Layer.</p>
 </div>
 
     
@@ -286,14 +287,14 @@
 
     
 
-    <h4 class="name" id=".children"><span class="type-signature">(static) </span>children<span class="signature">(parentLayer)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".children"><span class="type-signature">(static) </span>children<span class="signature">(parentLayer)</span><span class="type-signature"> &rarr; {Array.&lt;Layer>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Gets all layers that has the given layer as its parent.</p>
 </div>
 
 
@@ -329,7 +330,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line43">line 43</a>
+        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -379,7 +380,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Layer</code></span>
 
 
             
@@ -390,7 +391,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The layer to get children from.</p>
                 
             </td>
         </tr>
@@ -423,7 +424,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Array.&lt;Layer></code></span>
 
 
     </dd>
@@ -431,7 +432,7 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The children Layers of the given Layer.</p>
 </div>
 
     
@@ -446,14 +447,14 @@
 
     
 
-    <h4 class="name" id=".parents"><span class="type-signature">(static) </span>parents<span class="signature">(childLayer)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".parents"><span class="type-signature">(static) </span>parents<span class="signature">(childLayer)</span><span class="type-signature"> &rarr; {Array.&lt;Layer>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Gets the layers parent chain. I.e This layer's parent's parent, and so on.</p>
 </div>
 
 
@@ -489,7 +490,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line74">line 74</a>
+        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -539,7 +540,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Layer</code></span>
 
 
             
@@ -550,7 +551,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The layer to get parents from.</p>
                 
             </td>
         </tr>
@@ -583,7 +584,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Array.&lt;Layer></code></span>
 
 
     </dd>
@@ -591,7 +592,7 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The Parents of the given layer.</p>
 </div>
 
     
@@ -606,14 +607,15 @@
 
     
 
-    <h4 class="name" id=".relatedLayers"><span class="type-signature">(static) </span>relatedLayers<span class="signature">(root)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".relatedLayers"><span class="type-signature">(static) </span>relatedLayers<span class="signature">(root)</span><span class="type-signature"> &rarr; {Array.&lt;Layer>}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Gets all <a href="aeq.layer_.html#.parents">parents</a> and
+<a href="aeq.layer_.html#.allChildren">all children</a> of the given layers.</p>
 </div>
 
 
@@ -649,7 +651,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line91">line 91</a>
+        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -699,7 +701,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Layer</code></span>
 
 
             
@@ -710,7 +712,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The Layer to get the parents and children from</p>
                 
             </td>
         </tr>
@@ -743,7 +745,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Array.&lt;Layer></code></span>
 
 
     </dd>
@@ -751,7 +753,7 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The layer's parents and children.</p>
 </div>
 
     
@@ -766,14 +768,18 @@
 
     
 
-    <h4 class="name" id=".setLayerToggles"><span class="type-signature">(static) </span>setLayerToggles<span class="signature">(sourceLayer, destLayer)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".setLayerToggles"><span class="type-signature">(static) </span>setLayerToggles<span class="signature">(sourceLayer, destLayer)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Copies the state of layer toggles from one layer to another.
+Layer toggles: enabled, solo, shy, quality, effectsActive, motionBlur
+adjustmentLayer, threeDLayer, blendingMode, preserveTransparency
+parent, inPoint, stretch, startTime, outPoint, label, guideLayer
+name, comment, autoOrient</p>
 </div>
 
 
@@ -809,7 +815,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line24">line 24</a>
+        <a href="modules_layer.js.html">modules/layer.js</a>, <a href="modules_layer.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -859,7 +865,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Layer</code></span>
 
 
             
@@ -870,7 +876,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The layer to copy from.</p>
                 
             </td>
         </tr>
@@ -885,7 +891,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Layer</code></span>
 
 
             
@@ -896,7 +902,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The layer to copy to.</p>
                 
             </td>
         </tr>
@@ -917,31 +923,6 @@
 
 
 
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>type</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    <p>[description]</p>
-</div>
-
-    
-</div>
 
 
 
@@ -964,7 +945,7 @@
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri May 26 2017 23:26:09 GMT+0200 (CEST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue May 30 2017 17:39:24 GMT+0200 (CEST) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
