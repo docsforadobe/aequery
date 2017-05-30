@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>objects/key.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.arrayEx.html">arrayEx</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.attr">attr</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.exists">exists</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.filter">filter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.find">find</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.first">first</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.forEach">forEach</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.indexOf">indexOf</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.insertAt">insertAt</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.isTrueForAll">isTrueForAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.map">map</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.arrayEx.html#.select">select</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.Comp.html">Comp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Comp.html#forEachLayer">forEachLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Comp.html#get">get</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.Key.html">Key</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#copyTo">copyTo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#getKeyinfo">getKeyinfo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#getTime">getTime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#interpolationType">interpolationType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#moveTo">moveTo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#remove">remove</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#spatialTangent">spatialTangent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#temporalEase">temporalEase</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#time">time</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Key.html#valueTypeIs">valueTypeIs</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.Layer.html">Layer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#addEffect">addEffect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#allChildren">allChildren</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#children">children</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#copyToComp">copyToComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#forEachEffect">forEachEffect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#parent">parent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#parents">parents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#relatedLayers">relatedLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Layer.html#removeParent">removeParent</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.Property_.html">Property</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#addKey">addKey</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#expression">expression</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#forEachKey">forEachKey</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#key">key</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#maxValue">maxValue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#minValue">minValue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#nearestKeyIndex">nearestKeyIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#removeKey">removeKey</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#selectedKeys">selectedKeys</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#separationDimension">separationDimension</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#separationFollower">separationFollower</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#separationLeader">separationLeader</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#value">value</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#valueAtTime">valueAtTime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.Property_.html#valuesAtTimes">valuesAtTimes</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.ui.Container.html">ui.Container</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addButton">addButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addCheckbox">addCheckbox</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addDropdownList">addDropdownList</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addEditText">addEditText</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addGroup">addGroup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addIconButton">addIconButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addImage">addImage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addListBox">addListBox</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addPanel">addPanel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addProgressbar">addProgressbar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addRadioButton">addRadioButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addScrollbar">addScrollbar</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addSlider">addSlider</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addStaticText">addStaticText</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addTab">addTab</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addTabbedPanel">addTabbedPanel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.addTreeView">addTreeView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.remove">remove</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.removeAll">removeAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.set">set</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Container.html#.update">update</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="aeq.ui.Window.html">ui.Window</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Window.html#.ui.Window#close">ui.Window#close</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Window.html#.ui.Window#hide">ui.Window#hide</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Window.html#.ui.Window#layout">ui.Window#layout</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.Window.html#.ui.Window#show">ui.Window#show</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.html">aeq</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.assertIsEmpty">assertIsEmpty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.assertIsFalse">assertIsFalse</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.assertIsNotEmpty">assertIsNotEmpty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.assertIsNotNull">assertIsNotNull</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.assertIsNull">assertIsNull</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.assertIsTrue">assertIsTrue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.attr">attr</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.createResourceFiles">createResourceFiles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.createUndoGroup">createUndoGroup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.error">error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.extend">extend</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.filter">filter</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEach">forEach</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachComp">forEachComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachComposition">forEachComposition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachEffect">forEachEffect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachItem">forEachItem</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachLayer">forEachLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachOM">forEachOM</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachOutputModule">forEachOutputModule</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachProp">forEachProp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachProperty">forEachProperty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachRenderQueueItem">forEachRenderQueueItem</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.forEachRQItem">forEachRQItem</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.framesToTime">framesToTime</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getActiveComp">getActiveComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getActiveComposition">getActiveComposition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getBinaryString">getBinaryString</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getComp">getComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getComposition">getComposition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getCompositions">getCompositions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getComps">getComps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getEffects">getEffects</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getFileObject">getFileObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getFolderObject">getFolderObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getItemInComps">getItemInComps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getItems">getItems</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getKeys">getKeys</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getLayers">getLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getMarkerGroup">getMarkerGroup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getModifiers">getModifiers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getProperties">getProperties</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getPropertyChildren">getPropertyChildren</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getSelectedLayers">getSelectedLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getSelectedLayersOrAll">getSelectedLayersOrAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getSelectedOrAllLayers">getSelectedOrAllLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getSelectedProperties">getSelectedProperties</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getSelectedProps">getSelectedProps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.getSystemInfo">getSystemInfo</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isAeq">isAeq</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isApp">isApp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isArr">isArr</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isArray">isArray</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isAVLayer">isAVLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isBool">isBool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isBoolean">isBoolean</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isCamera">isCamera</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isCameraLayer">isCameraLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isComp">isComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isComposition">isComposition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isDir">isDir</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isEmpty">isEmpty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isFile">isFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isFolder">isFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isFolderItem">isFolderItem</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isFootageItem">isFootageItem</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isFunc">isFunc</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isFunction">isFunction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isLayer">isLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isLight">isLight</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isLightLayer">isLightLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isNullOrUndefined">isNullOrUndefined</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isNum">isNum</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isNumber">isNumber</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isObj">isObj</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isObject">isObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isPanel">isPanel</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isPlainObject">isPlainObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isPrecomp">isPrecomp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isProp">isProp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isProperty">isProperty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isPropertyGroup">isPropertyGroup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isShapeLayer">isShapeLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isStr">isStr</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isString">isString</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isTextLayer">isTextLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.isWindow">isWindow</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.normalizeCollection">normalizeCollection</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.propertyType">propertyType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.readFile">readFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.reflect">reflect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.select">select</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.setDefault">setDefault</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.timeToFrames">timeToFrames</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.valueInObject">valueInObject</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.html#.writeFile">writeFile</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.app.html">app</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.ensureSecurityPrefEnabled">ensureSecurityPrefEnabled</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.getAEP">getAEP</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.getAEPDir">getAEPDir</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.getAEPName">getAEPName</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.getPresetsPaths">getPresetsPaths</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.getScriptFile">getScriptFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.getUserDataFolder">getUserDataFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.open">open</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.app.html#.securityPrefEnabled">securityPrefEnabled</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.command.html">command</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.command.html#.call">call</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.command.html#.copyToClipboard">copyToClipboard</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.command.html#.openURL">openURL</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.command.html#.revealFile">revealFile</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.comp_.html">comp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.comp_.html#.create">create</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.comp_.html#.getCompInQueue">getCompInQueue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.comp_.html#.isInQueue">isInQueue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.comp_.html#.isQueued">isQueued</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.file.html">file</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.ensureFolderExists">ensureFolderExists</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.getExtension">getExtension</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.getFile">getFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.getFiles">getFiles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.getFolder">getFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.joinPath">joinPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.normalizePath">normalizePath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.normalizePathArray">normalizePathArray</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.pathIsAbsolute">pathIsAbsolute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.file.html#.stripExtension">stripExtension</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.layer_.html">layer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.layer_.html#.allChildren">allChildren</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.layer_.html#.children">children</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.layer_.html#.parents">parents</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.layer_.html#.relatedLayers">relatedLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.layer_.html#.setLayerToggles">setLayerToggles</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.project.html">project</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.findFolder">findFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getFolder">getFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getFolderOrRoot">getFolderOrRoot</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getFolders">getFolders</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getFootage">getFootage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getOrCreateFolder">getOrCreateFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getSelectedComps">getSelectedComps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getSelectedFolders">getSelectedFolders</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.getSelectedFootage">getSelectedFootage</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.importFile">importFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.importFiles">importFiles</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.importSequence">importSequence</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.moveToFolder">moveToFolder</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.quickSave">quickSave</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.reduceToQueuedComps">reduceToQueuedComps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.project.html#.save">save</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.property.html">property</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.property.html#.type">type</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.property.html#.valueType">valueType</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.renderqueue.html">renderqueue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.clear">clear</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.ensureRenderPathExists">ensureRenderPathExists</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.getQueuedComps">getQueuedComps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.getQueuedItems">getQueuedItems</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.getRQComps">getRQComps</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.getRQItems">getRQItems</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.getSettings">getSettings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.isQueued">isQueued</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.omTemplateExists">omTemplateExists</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.queue">queue</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.rqTemplateExists">rqTemplateExists</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.renderqueue.html#.unqueue_all">unqueue_all</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.settings.html">settings</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.get">get</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.getAsArray">getAsArray</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.getAsBool">getAsBool</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.getAsFloat">getAsFloat</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.getAsInt">getAsInt</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.have">have</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.save">save</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.setting">setting</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.settings.html#.unpack">unpack</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.snippet.html">snippet</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.activeComp">activeComp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.forEachSelectedLayer">forEachSelectedLayer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.forEachSelectedLayerOrAll">forEachSelectedLayerOrAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.forEachSelectedProperty">forEachSelectedProperty</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.selectedLayers">selectedLayers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.selectedLayersOrAll">selectedLayersOrAll</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.snippet.html#.selectedProperties">selectedProperties</a></span></li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="aeq.ui.html">ui</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.html#.ui.createDialog">ui.createDialog</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.html#.ui.createMainWindow">ui.createMainWindow</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.html#.ui.createWindow">ui.createWindow</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.html#.ui.ready">ui.ready</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="aeq.ui.html#.ui.set">ui.set</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#aeq1">aeq</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">objects/key.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var aeq = (function (aeq) {
+/**
+ * [description]
+ * @memberof aeq
+ * @class
+ * @param  {Property} property [description]
+ * @param  {number} index The index of the key
+ */
+aeq.Key = function (property, index) {
+	if (this instanceof aeq.Key) {
+		if (property instanceof aeq.Property) {
+			property = property.get();
+		}
+		// Check if index is valid
+		if (index &lt;= 0 || index > property.numKeys) {
+			throw new Error("Index " + index + " out of range 1-" + property.numKeys);
+		}
+
+		this.property = property;
+		this.index = index;
+		this.originalTime = this.getTime();
+	} else {
+		return new aeq.Key(property, index);
+	}
+};
+
+aeq.Key.prototype = {
+	isAeq: true,
+
+	toString: function() {
+		return "[object aeq.Key]";
+	},
+
+	// Function for extending the prototype using objects
+	extend: aeq.extend,
+
+	// Used to check if the key index is the correct for refrensing
+	// TODO: consider not checking this in every function or find better way to do this
+	checkKey: function() {
+
+		// Check if index is in range and that key at that index is at correct time
+		if (this.index &lt;= this.property.numKeys &amp;&amp; this.getTime() === this.originalTime) {
+			return; // If it is, then the index is still correct
+		}
+
+		// Get the keyIndex nearest to the keyTime
+		var newIndex = this.property.nearestKeyIndex(this.originalTime);
+
+		// The time of the nearest keyIndex could be something else if the original key
+		// was deleted, so we need to check it
+		if (this.property.keyTime(newIndex) === this.originalTime) {
+			this.index = newIndex;
+		} else {
+			throw new Error("Original key has been deleted/moved");
+		}
+	},
+
+	// Need two time functions because `this.time` relies on checkKey
+	/**
+	 * [description]
+	 * @instance
+	 * @method
+	 * @return {type} [description]
+	 */
+	getTime: function() {
+		return this.property.keyTime(this.index);
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @param  {type} inType  [description]
+	 * @param  {type} outType [description]
+	 * @return {type}         [description]
+	 */
+	interpolationType: function(inType, outType) {
+		this.checkKey();
+
+		// Return current value if no arguments
+		if (arguments.length === 0) {
+			return {
+				inType: this.property.keyInInterpolationType(this.index),
+				outType: this.property.keyOutInterpolationType(this.index)
+			};
+		}
+
+		// If arguments, set new value
+
+		// Check if arguments is a value returned from this function
+		if ( outType === undefined &amp;&amp; inType.outType ) {
+			outType = inType.outType;
+		}
+		if ( inType.inType ) {
+			inType = inType.inType;
+		}
+
+		// Use strings as a shorthand for KeyframeInterpolationType.TYPE
+		if (aeq.isString(inType)) {
+			inType = KeyframeInterpolationType[inType];
+		}
+
+		if (outType &amp;&amp; aeq.isString(outType)) {
+			outType = KeyframeInterpolationType[outType];
+
+			// If outType is not defined the inType is used (standard behaviour)
+		} else if (outType === undefined) {
+			outType = inType;
+		}
+
+		// Check that the value is valid
+		// TODO: should this be skipped and just throw error?
+		if (!this.property.isInterpolationTypeValid(inType) ||
+			(outType &amp;&amp; !this.property.isInterpolationTypeValid(outType) )) {
+			return false;
+		}
+		this.property.setInterpolationTypeAtKey(this.index, inType, outType);
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @param  {type} inType  [description]
+	 * @param  {type} outType [description]
+	 * @return {type}         [description]
+	 */
+	spatialTangent: function(inType, outType) {
+		this.checkKey();
+
+		// Return current value if no arguments
+		if (arguments.length === 0) {
+			return {
+				inTangent: this.property.keyInSpatialTangent(this.index),
+				outTangent: this.property.keyOutSpatialTangent(this.index)
+			};
+		}
+
+		// Check if arguments is a value returned from this function
+		if ( outType === undefined &amp;&amp; inType.outTangent ) {
+			outType = inType.outTangent;
+		}
+		if ( inType.inTangent ) {
+			inType = inType.inTangent;
+		}
+
+		this.property.setSpatialTangentsAtKey(this.index, inType, outType);
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @param  {type} inType  [description]
+	 * @param  {type} outType [description]
+	 * @return {type}         [description]
+	 */
+	temporalEase: function(inType, outType) {
+		this.checkKey();
+
+		// Return current value if no arguments
+		if (arguments.length === 0) {
+			return {
+				inEase: this.property.keyInTemporalEase(this.index),
+				outEase: this.property.keyOutTemporalEase(this.index)
+			};
+		}
+
+		// Check if arguments is a value returned from this function
+		if ( outType === undefined &amp;&amp; inType.outEase ) {
+			outType = inType.outEase;
+		}
+		if ( inType.inEase ) {
+			inType = inType.inEase;
+		}
+
+		// TemporalEase have to be set using arrays of KeyframeEaseObjects with
+		// number of objects in the array matching the propertyValueType
+		if (!aeq.isArray(inType)) {
+			if (this.valueTypeIs("TwoD")) {
+				inType = [inType, inType];
+			} else if (this.valueTypeIs("ThreeD")) {
+				inType = [inType, inType, inType];
+			} else {
+				inType = [inType];
+			}
+		}
+		if (outType &amp;&amp; !aeq.isArray(outType)) {
+			if (this.valueTypeIs("TwoD")) {
+				outType = [outType, outType];
+			} else if (this.valueTypeIs("ThreeD")) {
+				outType = [outType, outType, outType];
+			} else {
+				outType = [outType];
+			}
+		}
+
+		this.property.setTemporalEaseAtKey(this.index, inType, outType);
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @return {type} [description]
+	 */
+	time: function() {
+		this.checkKey();
+		return this.originalTime;
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @return {type} [description]
+	 */
+	remove: function() {
+		this.checkKey();
+		return this.property.removeKey(this.index);
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @return {type} [description]
+	 */
+	getKeyinfo: function() {
+		this.checkKey();
+		var keyInfo = {
+			property: this.property,
+			interpolationType: this.interpolationType(),
+			value: this.value(),
+			time: this.time()
+		};
+
+		// These do not have any effect if interpolationType is not Bezier for in and out
+		if (keyInfo.interpolationType.inType === KeyframeInterpolationType.BEZIER &amp;&amp;
+				keyInfo.interpolationType.outType === KeyframeInterpolationType.BEZIER) {
+			keyInfo.temporalAutoBezier = this.temporalAutoBezier();
+			keyInfo.temporalContinuous = this.temporalContinuous();
+		}
+
+		// TODO: find out why this check is here, was like that in rd_scooter
+		if (keyInfo.interpolationType.outType !== KeyframeInterpolationType.HOLD) {
+			keyInfo.temporalEase = this.temporalEase();
+		}
+
+		// These attributes throws an error if valuetype is not spatial when setting
+		if (this.valueTypeIs("TwoD_SPATIAL" ) || this.valueTypeIs("ThreeD_SPATIAL")) {
+			keyInfo.spatialAutoBezier = this.spatialAutoBezier();
+			keyInfo.spatialContinuous = this.spatialContinuous();
+			keyInfo.spatialTangent = this.spatialTangent();
+			keyInfo.roving = this.roving();
+		}
+		return keyInfo;
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @param  {type} targetProp [description]
+	 * @param  {type} time       [description]
+	 * @return {type}            [description]
+	 */
+	copyTo: function(targetProp, time) {
+		var keyInfo = this.getKeyinfo();
+		keyInfo.time = time !== undefined ? time : keyInfo.time;
+
+		if ( targetProp.isAeq ) {
+			targetProp = targetProp.get();
+		}
+		keyInfo.property = targetProp;
+		return aeq.pasteKey(keyInfo);
+	},
+
+	/**
+	 * [description]
+	 * @method
+	 * @instance
+	 * @param  {type} time [description]
+	 * @return {type}      [description]
+	 */
+	moveTo: function(time) {
+		var thisTime = this.time();
+
+		// Keyframe should not be moved
+		if (time === thisTime) {
+			return;
+		}
+
+		var newKey = this.copyTo(this.property, time);
+		this.remove();
+
+		this.index = this.property.nearestKeyIndex(newKey.time());
+		this.originalTime = time;
+	},
+
+	/**
+	 * [valueTypeIs description]
+	 * @method
+	 * @instance
+	 * @param  {type}    type [description]
+	 * @return {type}         [description]
+	 */
+	valueTypeIs: function valueTypeIs(type) {
+		return this.property.propertyValueType === PropertyValueType[type];
+	}
+};
+
+// Create many methods that function the same way at the same time
+aeq.forEach([
+	"roving",
+	"selected",
+	"spatialAutoBezier",
+	"spatialContinuous",
+	"temporalAutoBezier",
+	"temporalContinuous",
+	"value"
+], function(type) {
+	var typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1);
+	var getter = "key" + typeCapitalized;
+	var setter = "set" + typeCapitalized + "AtKey";
+
+	aeq.Key.prototype[type] = function() {
+		this.checkKey();
+		if (arguments.length === 0) {
+			return this.property[getter](this.index);
+		}
+
+		// Add this.index to the beginning of the arguments array
+		[].unshift.call(arguments, this.index);
+		this.property[setter].apply(this.property, arguments);
+	};
+});
+
+aeq.pasteKey = function( keyInfo ) {
+	var keyIndex = keyInfo.property.addKey(keyInfo.time);
+	var key = new aeq.Key(keyInfo.property, keyIndex);
+
+	key.value(keyInfo.value);
+
+	// Copy over the keyframe settings
+	if (keyInfo.temporalEase !== undefined) {
+		key.temporalEase(keyInfo.temporalEase);
+	}
+
+	key.interpolationType(keyInfo.interpolationType);
+
+	if (keyInfo.temporalAutoBezier !== undefined &amp;&amp; keyInfo.temporalContinuous !== undefined) {
+
+		key.temporalAutoBezier(keyInfo.temporalAutoBezier);
+		key.temporalContinuous(keyInfo.temporalContinuous);
+	}
+
+	if (keyInfo.spatialAutoBezier !== undefined &amp;&amp; keyInfo.spatialContinuous !== undefined) {
+		key.spatialAutoBezier(keyInfo.spatialAutoBezier);
+		key.spatialContinuous(keyInfo.spatialContinuous);
+
+		key.spatialTangent(keyInfo.spatialTangent);
+		key.roving(keyInfo.roving);
+	}
+	return key;
+};
+
+return aeq;
+}(aeq || {}));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri May 26 2017 23:26:09 GMT+0200 (CEST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
