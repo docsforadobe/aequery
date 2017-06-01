@@ -54,7 +54,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>[property description]</p></div>
+            <div class="description"><p>Module for dealing with Property objects.</p></div>
         
 
         
@@ -126,14 +126,14 @@
 
     
 
-    <h4 class="name" id=".type"><span class="type-signature">(static) </span>type<span class="signature">(property)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".type"><span class="type-signature">(static) </span>type<span class="signature">(property)</span><span class="type-signature"> &rarr; {string}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Returns the property type as a string.</p>
 </div>
 
 
@@ -169,7 +169,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_property.js.html">modules/property.js</a>, <a href="modules_property.js.html#line34">line 34</a>
+        <a href="modules_property.js.html">modules/property.js</a>, <a href="modules_property.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -219,7 +219,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Property</code></span>
 
 
             
@@ -230,7 +230,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The property to get the type of</p>
                 
             </td>
         </tr>
@@ -263,7 +263,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>string</code></span>
 
 
     </dd>
@@ -271,7 +271,16 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The property type, on of:</p>
+<ul>
+<li><code>PROPERTY</code>: A single property such as position or zoom.</li>
+<li><code>INDEXED_GROUP</code>: A property group whose members have an editable name
+and an index. Effects and masks are indexed groups. For example,
+the masks property of a layer refers to a variable number of individual
+masks by index number.</li>
+<li><code>NAMED_GROUP</code>: A property group in which the member names are not
+ editable. Layers are named groups.</li>
+</ul>
 </div>
 
     
@@ -286,14 +295,14 @@
 
     
 
-    <h4 class="name" id=".valueType"><span class="type-signature">(static) </span>valueType<span class="signature">(property)</span><span class="type-signature"> &rarr; {type}</span></h4>
+    <h4 class="name" id=".valueType"><span class="type-signature">(static) </span>valueType<span class="signature">(property)</span><span class="type-signature"> &rarr; {string}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>[description]</p>
+    <p>Returns the property value type of a Property as a string.</p>
 </div>
 
 
@@ -329,7 +338,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_property.js.html">modules/property.js</a>, <a href="modules_property.js.html#line23">line 23</a>
+        <a href="modules_property.js.html">modules/property.js</a>, <a href="modules_property.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -379,7 +388,7 @@
             <td class="type">
             
                 
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>Property</code></span>
 
 
             
@@ -390,7 +399,7 @@
             
 
             <td class="description last">
-                <p>[description]</p>
+                <p>The property to get the value type of.</p>
                 
             </td>
         </tr>
@@ -423,7 +432,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>type</code></span>
+<span class="param-type"><code>string</code></span>
 
 
     </dd>
@@ -431,13 +440,43 @@
 
 
 <div class="param-desc">
-    <p>[description]</p>
+    <p>The property value type, on of:</p>
+<ul>
+<li><code>NO_VALUE</code>: Stores no data.</li>
+<li><code>ThreeD_SPATIAL</code>: Array of three floating-point positional values.
+ For example, an Anchor Point value might be <code>[10.0, 20.2, 0.0]</code></li>
+<li><code>ThreeD</code>: Array of three floating-point quantitative values.
+ For example, a Scale value might be <code>[100.0, 20.2, 0.0]</code></li>
+<li><code>TwoD_SPATIAL</code>: Array of 2 floating-point positional values.
+ For example, an Anchor Point value might be <code>[5.1, 10.0]</code></li>
+<li><code>TwoD</code>: Array of 2 floating-point quantitative values.
+ For example, a Scale value might be <code>[5.1, 100.0]</code></li>
+<li><code>OneD</code>: A floating-point value.</li>
+<li><code>COLOR</code>:Array of 4 floating-point values, in the range <code>[0.0..1.0]</code>.
+ For example, <code>[0.8, 0.3, 0.1, 1.0]</code></li>
+<li><code>CUSTOM_VALUE</code>: Custom property value, such as the Histogram
+ property for the Levels effect.</li>
+<li><code>MARKER</code>: MarkerValue object</li>
+<li><code>LAYER_INDEX</code>: Integer; a value of <code>0</code> means no layer.</li>
+<li><code>MASK_INDEX</code>: Integer; a value of <code>0</code> means no mask.</li>
+<li><code>SHAPE</code>: Shape object</li>
+<li><code>TEXT_DOCUMENT</code>: TextDocument object</li>
+</ul>
 </div>
 
     
 </div>
 
 
+
+<div class="section-examples">
+<h5>Example</h5>
+
+        <p class="code-caption">Returns "ThreeD_SPATIAL"</p>
+    
+    <pre class="prettyprint"><code>aeq.property.valueType( layer.Transform.Position )</code></pre>
+
+</div>
 
 </div>
         
@@ -458,7 +497,7 @@
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Tue May 30 2017 17:39:24 GMT+0200 (CEST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Jun 01 2017 14:52:27 GMT+0200 (CEST) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
