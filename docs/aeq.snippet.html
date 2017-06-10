@@ -363,7 +363,7 @@ and executes a callback function for each of the layers.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line110">line 110</a>
+        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line114">line 114</a>
     </li></ul></dd>
     
 
@@ -556,7 +556,7 @@ and executes a callback function for each of the layers.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line128">line 128</a>
+        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line132">line 132</a>
     </li></ul></dd>
     
 
@@ -749,7 +749,7 @@ and executes a callback function for each of the properties.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line147">line 147</a>
+        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line151">line 151</a>
     </li></ul></dd>
     
 
@@ -907,7 +907,8 @@ and executes a callback function for each of the properties.</p>
 <div class="description">
     <p>Gets the selected layers in the active comp and alerts the user if no comp
 is open, or if no layer is selected. It then creates an undo group and
-executes a callback function with the layers as the first argument</p>
+executes a callback function with the layers as the first argument, and the
+comp as the second argument.</p>
 </div>
 
 
@@ -943,7 +944,7 @@ executes a callback function with the layers as the first argument</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line46">line 46</a>
+        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -1031,7 +1032,7 @@ executes a callback function with the layers as the first argument</p>
 
             <td class="description last">
                 <p>Function to execute that gets the selected
-                             layers as the first argument</p>
+layers as the first argument, and the comp as the second argument.</p>
                 
             </td>
         </tr>
@@ -1075,9 +1076,9 @@ executes a callback function with the layers as the first argument</p>
 
 
 <div class="param-desc">
-    <p><code>false</code> if the function is not executed
-        because no comp or layer was selected. Else the value the
-        <code>callback</code> function returns is returned.</p>
+    <p><code>false</code> if the function is not executed because
+no comp or layer was selected. Else the value the <code>callback</code> function
+returns is returned.</p>
 </div>
 
     
@@ -1100,8 +1101,9 @@ executes a callback function with the layers as the first argument</p>
 
 <div class="description">
     <p>Gets the selected layers or all layers if no layers are selected, in the
-active comp. Alerts the user if no comp is open. It then creates an undo group
-and executes a callback function with the layers as the first argument.</p>
+active comp. Alerts the user if no comp is open. It then creates an undo
+group and executes a callback function with the layers as the first
+argument, and the comp as the second argument.</p>
 </div>
 
 
@@ -1137,7 +1139,7 @@ and executes a callback function with the layers as the first argument.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line68">line 68</a>
+        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -1225,7 +1227,8 @@ and executes a callback function with the layers as the first argument.</p>
 
             <td class="description last">
                 <p>Function to execute that gets the selected
-                             layers in an ArrayEx as the first argument.</p>
+layers in an ArrayEx as the first argument, and the comp as the second
+argument.</p>
                 
             </td>
         </tr>
@@ -1269,9 +1272,8 @@ and executes a callback function with the layers as the first argument.</p>
 
 
 <div class="param-desc">
-    <p><code>false</code> if the function is not executed
-        because no comp was open. Else the value the <code>callback</code> function
-        is returned.</p>
+    <p><code>false</code> if the function is not executed because
+no comp was open. Else the value the <code>callback</code> function is returned.</p>
 </div>
 
     
@@ -1293,9 +1295,10 @@ and executes a callback function with the layers as the first argument.</p>
 
 
 <div class="description">
-    <p>Gets the selected properties in the active comp and alerts the user if no comp
-is open, or if no property is selected. It then creates an undo group and
-executes a callback function with the properties as the first argument.</p>
+    <p>Gets the selected properties in the active comp and alerts the user if no
+comp is open, or if no property is selected. It then creates an undo group
+and executes a callback function with the properties as the first argument,
+and the comp as the second argument.</p>
 </div>
 
 
@@ -1331,7 +1334,7 @@ executes a callback function with the properties as the first argument.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line89">line 89</a>
+        <a href="modules_snippet.js.html">modules/snippet.js</a>, <a href="modules_snippet.js.html#line93">line 93</a>
     </li></ul></dd>
     
 
@@ -1419,7 +1422,8 @@ executes a callback function with the properties as the first argument.</p>
 
             <td class="description last">
                 <p>Function to execute that gets the selected
-                             properties in an ArrayEx as the first argument.</p>
+properties in an ArrayEx as the first argument, and the comp as the second
+argument.</p>
                 
             </td>
         </tr>
@@ -1464,8 +1468,8 @@ executes a callback function with the properties as the first argument.</p>
 
 <div class="param-desc">
     <p><code>false</code> if the function is not executed.
-        because no comp or property was selected. Else the value the
-        <code>callback</code> function is returned.</p>
+because no comp or property was selected. Else the value the <code>callback</code>
+function is returned.</p>
 </div>
 
     
@@ -1492,7 +1496,7 @@ executes a callback function with the properties as the first argument.</p>
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sat Jun 10 2017 01:14:26 GMT+0200 (CEST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Sat Jun 10 2017 20:50:02 GMT+0200 (CEST) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
