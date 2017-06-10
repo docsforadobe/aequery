@@ -13,4 +13,4 @@ pipelines:
              - git checkout docs # Gulp updates the docs dir, but git ftp does not like that
              - apt-get update
              - apt-get -qq install git-ftp
-             - git ftp push --syncroot docs/ --user $DOCS_FTP_USER --passwd DOCS_FTP_PASS DOCS_FTP_SERVER
+             - git ftp push --syncroot docs/ --user $DOCS_FTP_USER --passwd $DOCS_FTP_PASS $DOCS_FTP_SERVER
