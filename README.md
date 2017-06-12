@@ -15,7 +15,7 @@ Download
 
 Documentation
 -------------
-[For documentation, see the wiki section of this repository](https://bitbucket.org/motiondesign/aequery/wiki/Home)
+[For documentation, visit aequery.aenhancers.com](http://aequery.aenhancers.com)
 
 
 How to build it yourself
@@ -29,7 +29,7 @@ sudo npm install -g gulp
 ```
 
 Clone repository and enter the directory
-```bash    
+```bash
 git clone https://bitbucket.org/motiondesign/aequery.git
 cd aequery
 ```
@@ -41,8 +41,8 @@ npm install
 
 Gulp usage:
 ```bash
-gulp # Builds it to the relevant places in the ScriptUI Folder  
-gulp watch # Will monitor it and  rebuild it real quick if anything changes  
+gulp # Builds it to the relevant places in the ScriptUI Folder
+gulp watch # Will monitor it and  rebuild it real quick if anything changes
 ```
 
 Import into your script
