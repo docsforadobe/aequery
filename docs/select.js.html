@@ -286,12 +286,6 @@ function hasAllAttributes(obj, attributes, not) {
 		}
 
 		if (!obj.hasOwnProperty(attribute)) {
-
-			// Something weird is going on and this attribute is sometimes included
-			// incorrectly on objects.
-			if (attribute === 'nsSetTip') {
-				continue;
-			}
 			throw new Error('The attribute ' + attribute + ' does not exist on a ' + typeof(obj));
 		}
 
