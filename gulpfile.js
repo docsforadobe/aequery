@@ -83,19 +83,19 @@ else
 }
 
 
-gulp.task('default', ['debug']);
+gulp.task('default', ['debug', 'build:docs']);
 gulp.task('build-aequery', ['debug'], function() {
 	return gulp.start('build:concat-ui');
 });
 
 
 gulp.task('watch', function () {
-	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['default']);
+	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['debug']);
 });
 
 
 gulp.task('clean:all', ['clean:extendscript', 'clean:cep'], function () {
-	return del(['build', 'dist', 'docs'], {
+	return del(['build', 'dist'], {
 		force: true
 	});
 });
@@ -254,6 +254,12 @@ gulp.task('build:docs', function () {
 		}
 	})
 });
+
+gulp.task('clean:docs', function() {
+	return del(['docs'], {
+		force: true
+	});
+})
 
 gulp.task('package:all', function () {
 	return gulp.src(['./dist/aeq.js', './dist/aeq-ui.js', './dist/README.pdf'])

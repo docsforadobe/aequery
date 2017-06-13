@@ -14,8 +14,20 @@
     "linenums": true,
 
     "templates": {
-        "useLongnameInNav": false,
-        "showInheritedInNav": true
-    }
+        "useLongnameInNav": true,
+        "showInheritedInNav": true,
 
+        "applicationName": "AEQuery",
+
+        "default": {
+            "outputSourceFiles" : true,
+            "cssFiles": {
+                "include":[
+                    "custom.css"
+                ]
+            },
+            "theme":"github",
+            "paramsDisplay":"compact"
+        }
+    }
 }

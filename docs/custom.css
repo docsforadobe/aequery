@@ -1,0 +1,10 @@
+h1.project-name {
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+/*Link points to '/', which is not correct*/
+h1.project-name a {
+	pointer-events: none;
+	cursor: default;
+}
