@@ -15,8 +15,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:motiondesign/aequery.git"
+    "url": "bitbucket:motiondesign/aequery"
   },
+  "issues": "https://bitbucket.org/motiondesign/aequery/issues",
   "author": "motiondesign",
   "license": "MIT",
   "devDependencies": {
