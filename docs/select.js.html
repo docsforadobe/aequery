@@ -280,10 +280,10 @@ aeq.select = function (selector, context) {
 function hasAllAttributes(obj, attributes, not) {
 	var attributeValue;
 	for (var attribute in attributes) {
-		attributeValue = attributes[attribute];
 		if (!attributes.hasOwnProperty(attribute)) {
 			continue;
 		}
+		attributeValue = attributes[attribute];
 
 		if (!obj.hasOwnProperty(attribute)) {
 			throw new Error('The attribute ' + attribute + ' does not exist on a ' + typeof(obj));
