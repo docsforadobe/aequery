@@ -267,6 +267,14 @@ gulp.task('package:all', function () {
 		.pipe(gulp.dest('./dist'));
 });
 
+gulp.task('update-version', ['update-version:aeq', 'build:docs'] )
+
+gulp.task('update-version:aeq', function() {
+	return gulp.src(['lib/main.js'])
+		.pipe(replace( /^(aeq\.version = ")\d+\.\d+\.\d+(")/m, `$1${pkg.version}$2`))
+		.pipe(gulp.dest('lib/'))
+})
+
 
 function now() {
 	var div = "";
