@@ -173,7 +173,7 @@ gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep', 'deploy:custom']);
 
 gulp.task('deploy:bitbucket', function (cb) {
 	uglify = require('gulp-empty');
-	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', cb);
+	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', 'build:concat-ui', cb);
 });
 
 gulp.task('deploy:extendscript', [], function () {
