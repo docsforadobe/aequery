@@ -8,6 +8,11 @@
     "deploy-bitbucket": "gulp deploy:bitbucket",
     "prepublish": "gulp build-aequery"
   },
+  "files": [
+    "lib/*",
+    "grammar/*",
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git@bitbucket.org:motiondesign/aequery.git"
