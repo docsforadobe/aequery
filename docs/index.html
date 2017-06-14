@@ -35,7 +35,7 @@
 </h2>
 
 <h2 class="project-version">
-  0.0.1
+  0.1.1
 </h2>
 
   </header>
@@ -68,42 +68,34 @@
         <article><h1>AEQuery</h1><p>General purpose after effects scripting library.</p>
 <h2>Requirements</h2><p>Adobe After Effects
 ExtendScript Toolkit or other text editor</p>
-<h2>Download</h2><p><a href="https://bitbucket.org/motiondesign/aequery/downloads">The latest version of AEQuery can be found in the downloads section of this repository</a></p>
-<h2>Documentation</h2><p><a href="http://aequery.aenhancers.com">For documentation, visit aequery.aenhancers.com</a></p>
-<h2>How to build it yourself</h2><p>Make sure you have <a href="https://nodejs.org">node</a> and <a href="https://www.npmjs.com">npm</a> installed</p>
+<h2>Download/install</h2><pre class="prettyprint source lang-bash"><code>npm install aequery</code></pre><p>If you are not using npm, you can download the latest version <a href="https://bitbucket.org/motiondesign/aequery/downloads">here</a></p>
+<p>Then you can include it in your script</p>
+<p>Import into your script</p>
+<pre class="prettyprint source lang-javascript"><code>#include 'path/to/aequery.js'
+
+// Disable all Camera lens blur effects in active comp
+aeq( 'activecomp effect[MatchName=&quot;ADBE Camera Lens Blur&quot;]' ).attr( 'enabled', false )</code></pre><p>or, if you are using browserify/typescript or similar:</p>
+<pre class="prettyprint source lang-javascript"><code>var aeq = require( 'aequery' )
+
+var comp = aeq.getActiveComp()
+
+if (comp) {
+    aeq.forEachLayer( function ( layer ) {
+        // Do something with layer
+    })
+}</code></pre><h2>Documentation</h2><p><a href="http://aequery.aenhancers.com">For documentation, visit aequery.aenhancers.com</a></p>
+<h2>Development</h2><p>Make sure you have <a href="https://nodejs.org">node</a> and <a href="https://www.npmjs.com">npm</a> installed</p>
 <p>Install gulp</p>
-<pre class="prettyprint source lang-bash"><code>sudo npm install -g gulp</code></pre><p>Clone repository and enter the directory</p>
-<pre class="prettyprint source lang-bash"><code>git clone https://bitbucket.org/motiondesign/aequery.git
-cd aequery</code></pre><p>Install npm dependencies</p>
-<pre class="prettyprint source lang-bash"><code>npm install</code></pre><p>Gulp usage:</p>
+<pre class="prettyprint source lang-bash"><code>sudo npm install -g gulp
+
+# Clone the repository and enter the directory
+git clone https://bitbucket.org/motiondesign/aequery.git
+cd aequery
+
+# Install npm dependencies
+npm install</code></pre><p>Gulp usage:</p>
 <pre class="prettyprint source lang-bash"><code>gulp # Builds it to the relevant places in the ScriptUI Folder
-gulp watch # Will monitor it and  rebuild it real quick if anything changes</code></pre><p>Import into your script</p>
-<pre class="prettyprint source lang-javascript"><code>#include &quot;path/to/aeq.js&quot;</code></pre><h1>Contributing</h1><p>Want to add something in AEQuery?</p>
-<p>Look in the file tree to see if there is a place where it may fit.</p>
-<p>If necessary, create a new file. The basic file structure is:</p>
-<pre class="prettyprint source lang-javascript"><code>var aeq = (function (aeq) {
-aeq.extend({
-    yourCodeHere: function() {
-
-    }
-});
-return aeq;
-}(aeq || {}));</code></pre><p>If you want to create a submodule, the structure is:</p>
-<pre class="prettyprint source lang-javascript"><code>var aeq = (function (aeq) {
-aeq.yourModule = {
-    toString: function() {
-        return &quot;[object aeq.yourModule]&quot;;
-    },
-
-    // Function for extending the object using objects
-    extend: aeq.extend,
-
-    code: function() {
-
-    }
-}
-return aeq;
-}(aeq || {}));</code></pre></article>
+gulp watch # Will monitor it and  rebuild it real quick if anything changes</code></pre><h1>Contributing</h1><p>Pull requests, <a href="https://bitbucket.org/motiondesign/aequery/issues">bug reports and feature requests</a> are welcome!</p></article>
     </section>
 
 
