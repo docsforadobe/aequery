@@ -1,6 +1,6 @@
 {
   "name": "aequery",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "General purpose after effects scripting library",
   "main": "dist/aequery.js",
   "scripts": {
