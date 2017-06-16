@@ -248,7 +248,12 @@ gulp.task( 'deploy:custom', function() {
 } );
 
 gulp.task('build:docs', function () {
-	exec('./node_modules/.bin/jsdoc lib/ --configure ./.jsdocrc.json', err => {
+	var cmd = './node_modules/.bin/jsdoc lib/ --configure ./.jsdocrc.json';
+
+	if (os.platform() !== 'darwin')
+		cmd = cmd.replace(/\//g, '\\');
+
+	exec(cmd, err => {
 		if (err) {
 			console.error(err)
 		}
