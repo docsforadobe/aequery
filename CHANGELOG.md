@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - 2017/06/17:
+## 0.2.0 2017/06/17:
 - Adds `aeq.version` to track current version of aequery
 - Adds `aeq.settings.initSetting()` to initialize settings
 - Adds `aeq.ui.Container.removeChildren()` to remove container children
