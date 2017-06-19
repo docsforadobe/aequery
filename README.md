@@ -20,23 +20,21 @@ If you are not using npm, you can download the latest version [here](https://bit
 
 Then you can include it in your script
 
-Import into your script
+Import into your script:
 ```javascript
-#include 'path/to/aequery.js'
-
+#include 'path/to/aequery.js' // aequery is now available as aeq
 // Disable all Camera lens blur effects in active comp
-aeq( 'activecomp effect[MatchName="ADBE Camera Lens Blur"]' ).attr( 'enabled', false )
+aeq( 'activecomp effect[matchName="ADBE Camera Lens Blur"]' ).attr( 'enabled', false )
 ```
 
-or, if you are using browserify/typescript or similar:
-
+or, if you are using browserify, typescript or similar:
 ```javascript
 var aeq = require( 'aequery' )
 
 var comp = aeq.getActiveComp()
 
 if (comp) {
-	aeq.forEachLayer( function ( layer ) {
+	aeq.forEachLayer( comp, function ( layer ) {
 		// Do something with layer
 	})
 }
