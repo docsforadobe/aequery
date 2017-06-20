@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>objects/layer.js - Documentation</title>
+    <title>Tutorial: Add motion blur to animated layers - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,336 +27,86 @@
 
 <div id="main">
     
-    <h1 class="page-title">objects/layer.js</h1>
+    <h1 class="page-title">Tutorial: Add motion blur to animated layers</h1>
     
 
-    
-
-
-
-    
     <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>var aeq = (function (aeq) {
 
-/**
- * Converts a Layer into an aeq.Layer object
- * @memberof aeq
- * @class
- * @param  {Layer} layer Layer to turn into aeq.Layer object
- * @return {aeq.Layer} aeq.Layer object of Layer
- */
-aeq.Layer = function (layer) {
-	if (layer instanceof aeq.Layer) {
-		return layer;
-	}
+<header>
+    
 
-	// Check if function called with "new" keyword
-	if (this instanceof aeq.Layer) {
-		this.layer = layer;
+    <h2>Add motion blur to animated layers</h2>
+</header>
 
-	} else {
-		return new aeq.Layer(layer);
-	}
-};
+<article>
+    <h1>Add motion blur to animated layers</h1><p>The goal of this script is to turn on the motion blur switch on all layers that are animated in the currently open After Effects composition. This tutorial goes through the script line by line, explaining what each line does.</p>
+<p>Create a wrapping functions, so no variables or functions gets added to the global after effects scope. And include the aequery library</p>
+<pre class="prettyprint source lang-javascript"><code>( function () {
+    //@include path/to/aeq.js</code></pre><p>Get the currently open After Effects composition using <a href="aeq.html#.getActiveComposition"><code>aeq.getActiveComposition</code></a>.</p>
+<pre class="prettyprint source lang-javascript"><code>    var comp = aeq.getActiveComp();</code></pre><p><a href="aeq.html#.getActiveComposition"><code>aeq.getActiveComposition</code></a> returns null if there is no composition open. So stop the script if that is the case.</p>
+<pre class="prettyprint source lang-javascript"><code>    if ( comp === null ) {
+        return;
+    }</code></pre><p>To be able to undo the action of the script, by using <code>edit &gt; Undo</code> from the menu or the <code>ctrl/cmd + z</code> keyboard shortcut we use the <a href="aeq.html#.createUndoGroup"><code>aeq.createUndoGroup</code></a> function. The function takes three arguments:</p>
+<ul>
+<li>The name of the undo group. Visible in the <code>Edit</code> menu.</li>
+<li>A function to execute. In this case, we are passing in the <code>addMotionBlurToCompLayers</code> function.</li>
+<li>An array of arguments to pass to the function. In this case the function needs a comp as the first argument, so we create an array with the variable that contains the currently open comp.</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>    aeq.createUndoGroup( &quot;Add motionblur&quot;, addMotionBlurToCompLayers, [ comp ] );</code></pre><p>Now we need to create a function that looks for layers to apply motion blur to.</p>
+<pre class="prettyprint source lang-javascript"><code>    function addMotionBlurToCompLayers( comp ) {</code></pre><p>The first thing the function does is to loop through the layers of the comp for layers without any motion blur using <a href="global.html#aeq1"><code>aeq</code></a>. To search through only the comp passed to the function, we set <code>comp</code> as the <code>context</code> parameter in the <a href="global.html#aeq1"><code>aeq</code></a> function.</p>
+<p>Since the <a href="global.html#aeq1"><code>aeq</code></a> function returns an <a href="aeq.arrayEx.html"><code>aeq.arrayEx</code></a> object, we can use <a href="aeq.arrayEx.html#.forEach"><code>aeq.arrayEx.forEach</code></a> to loop through all the layers</p>
+<pre class="prettyprint source lang-javascript"><code>        aeq( &quot;layer:not(motionBlur)&quot;, comp ).forEach( function ( layer ) {</code></pre><p>We are now looking at a layer and need to find out if the motion blur switch should be on or not. For that we loop through all the properties, and look for one that is animated, using <a href="aeq.html#.forEachProperty"><code>aeq.forEachProperty</code></a>.</p>
+<pre class="prettyprint source lang-javascript"><code>            aeq.forEachProperty( layer, function ( property ) {
+                if ( property.isTimeVarying ) {</code></pre><p>Since the property and therefore the layer is animated, we want to enable motion blur on the layer and any layer that has this layer as it parent. To that we use a specialized <code>addMotionBlur</code> function.</p>
+<pre class="prettyprint source lang-javascript"><code>                    addMotionBlur( layer );</code></pre><p>Since we have added motion blur to the layer, we can stop looking through all the properties. To do this we <code>return false</code> which stops the <code>forEach</code> loop.</p>
+<pre class="prettyprint source lang-javascript"><code>                    return false;
+                }
+            } );
+        } );
+    }</code></pre><p>Now comes the function that actually applies the motion blur.</p>
+<pre class="prettyprint source lang-javascript"><code>    function addMotionBlur( layer ) {</code></pre><p>We want to apply motion blur to more than only the layer passed to the function. We want to apply it to all layers using the layer as a parent, because if the parent layer moves, the child layer also moves.</p>
+<p>So we need to get all the child layers, and to do this we use <a href="aeq.layer.html#.children"><code>aeq.layer.children</code></a>. Then we loop through them and do the <code>addMotionBlur</code> function recursively for all the children.</p>
+<pre class="prettyprint source lang-javascript"><code>        var children = aeq.layer.children( layer );
+        aeq.forEach( children, addMotionBlur );</code></pre><p>Now we actually set the motion blur attribute of the layer, but we only want to apply motion blur to layers that can have motion blur enabled. For example cameras and lights do not have motion blur attribute. And there is no use in having motion blur on null layers, so we check that first, before setting the attribute.</p>
+<pre class="prettyprint source lang-javascript"><code>        if ( layer.motionBlur !== undefined && !layer.nullLayer ) {
+            layer.motionBlur = true;
+        }
+    }</code></pre><p>Then, finally, we close the wrapping function</p>
+<pre class="prettyprint source lang-javascript"><code>}() );</code></pre><p>Here is the whole script we just created:</p>
+<pre class="prettyprint source lang-javascript"><code>( function () {
+    //@include ../dist/aeq.js
 
-aeq.Layer.prototype = {
-	isAeq: true,
+    var comp = aeq.getActiveComp();
 
-	toString: function() {
-		return "[object aeq.Layer]";
-	},
+    if ( comp === null ) {
+        return;
+    }
 
-	// Function for extending the prototype using objects
-	extend: aeq.extend,
+    aeq.createUndoGroup( &quot;Add motionblur&quot;, addMotionBlurToCompLayers, [ comp ] );
 
-	/**
-	 * Get the original object
-	 * @method
-	 * @instance
-	 * @return {Layer}
-	 */
-	get: function() {
-		return this.layer;
-	},
+    function addMotionBlurToCompLayers( comp ) {
+        aeq( &quot;layer:not(motionBlur)&quot;, comp ).forEach( function( layer ) {
+            aeq.forEachProperty( layer, function( property ) {
+                if ( property.isTimeVarying ) {
+                    addMotionBlur( layer );
+                    return false;
+                }
+            } );
+        } );
+    }
 
-	/**
-	 * Gets or sets layer parent
-	 * @method
-	 * @instance
-	 * @param  {aeq.SelectorString|null} [selector] Selector for new parent, or null to remove parent
-	 * @return {Layer|null} Parent layer, or null if none
-	 */
-	parent: function(selector) {
-		if (arguments.length === 0) {
-			return this.layer.parent;
-		}
+    function addMotionBlur( layer ) {
+        var children = aeq.layer.children( layer );
 
-		// Pass in null to remove the parent
-		if (selector === null) {
-			this.layer.parent = null;
-			return null;
-		}
+        aeq.forEach( children, addMotionBlur );
+        if ( layer.motionBlur !== undefined && !layer.nullLayer ) {
+            layer.motionBlur = true;
+        }
+    }
+}() );</code></pre>
+</article>
 
-		var layer = getLayer(this.layer, selector);
-
-		if (layer === null) {
-			return null;
-		}
-		this.layer.parent = layer;
-		return layer;
-	},
-
-	/**
-	 * Copies current layer to comp
-	 * @method
-	 * @instance
-	 * @param  {CompItem|aeq.Comp} comp Comp to copy layer to
-	 * @return {aeq.Layer}              Newly copied layer
-	 */
-	copyToComp: function(comp) {
-		if (!aeq.isComp(comp)) {
-			if (comp instanceof aeq.Comp) {
-				comp = comp.comp;
-			} else if (aeq.isString(comp)) {
-				comp = aeq.getComp(comp);
-			}
-		}
-		this.layer.copyToComp(comp);
-		return this;
-	},
-
-	/**
-	 * Removes this layer's parent
-	 * @method
-	 * @instance
-	 * @return {aeq.Layer} This layer
-	 */
-	removeParent: function() {
-		this.layer.parent = null;
-		return this;
-	},
-
-	/**
-	 * Executes a callback function on each effect on this layer
-	 * @method
-	 * @instance
-	 * @param  {Function} callback Function to run on each effect
-	 * @return {aeq.Layer}         This layer
-	 */
-	forEachEffect: function(callback) {
-		var effects = this.layer.property("ADBE Effect Parade"),
-			length = effects.numProperties, i = 1;
-
-		for ( ; i &lt;= length; i++ ) {
-			callback(effects.property(i), i, effects);
-		}
-		return this;
-	},
-
-	/**
-	 * Adds effect to layer by name or matchname
-	 * @method
-	 * @instance
-	 * @param  {string} effectName Effect name or matchname to add to layer
-	 */
-	addEffect: function(effectName) {
-		var effects = this.layer.property("ADBE Effect Parade");
-		if ( effects.canAddProperty( effectName ) ) {
-			effects.addProperty( effectName );
-		} else {
-			throw new Error( 'Can not add effect "' + effectName + '" to this layer' );
-		}
-	},
-
-	/**
-	 * Gets all layers that has the given layer as its parent.
-	 * @method
-	 * @instance
-	 * @return {Layer[]} Children of this layer
-	 */
-	children: function() {
-		return aeq.layer.children( this.layer );
-	},
-
-	/**
-	 * Gets all layers that has the given layer as its parent, and all layers
-	 * that has those layers, and so on.
-	 * @method
-	 * @instance
-	 * @return {Layer[]} Children and decendants of this layer
-	 */
-	allChildren: function() {
-		return aeq.layer.allChildren( this.layer );
-	},
-
-	/**
-	 * This layer's parent chain
-	 * @method
-	 * @instance
-	 * @return {Layer[]} Parents of this layer
-	 */
-	parents: function() {
-		return aeq.layer.parents( this.layer );
-	},
-
-	/**
-	 * All [parents]{@link aeq.layer.parents} and
-	 * [all children]{@link aeq.layer.allChildren} of the this layer.
-	 * @method
-	 * @instance
-	 * @return {Layer[]} The layer's parents and children.
-	 */
-	relatedLayers: function() {
-		return aeq.layer.relatedLayers( this.layer );
-	}
-};
-
-// Create methods that only returns the value for attributes that are read-
-// only and can change over time;
-aeq.forEach([
-	"active",
-	"index",
-	"isNameSet",
-	"selectedProperties",
-	"time",
-	"containingComp",
-	"hasVideo"
-], function(attribute) {
-	aeq.Layer.prototype[attribute] = function() {
-		return this.layer[attribute];
-	};
-});
-
-// Create methods for attributes that are basic read/write
-aeq.forEach([
-	"comment",
-	"enabled",
-	"inPoint",
-	"locked",
-	"name",
-	"outPoint",
-	"shy",
-	"solo",
-	"startTime",
-	"stretch"
-], function(attribute) {
-	aeq.Layer.prototype[attribute] = function(newValue) {
-		if (arguments.length === 0) {
-			return this.layer[attribute];
-		}
-		this.layer[attribute] = newValue;
-
-		// Return the aeq.Layer object for chaining methods
-		return this;
-	};
-});
-
-// Create Methods that just call the layer object methods
-aeq.forEach([
-	"activeAtTime",
-	"applyPreset",
-	"duplicate",
-	"remove",
-	"moveToBeginning",
-	"moveToEnd"
-], function(method) {
-	aeq.Layer.prototype[method] = function(newValue) {
-		this.layer[method](newValue);
-
-		// Return the aeq.Layer object for chaining methods
-		return this;
-	};
-});
-
-// Create methods that can take a Layer, aeq.Layer, number or string as input
-// and need to pass that to a method that takes a Layer object
-aeq.forEach([
-	"setParentWithJump",
-	"moveAfter",
-	"moveBefore"
-], function(method) {
-	aeq.Layer.prototype[method] = function(selector) {
-		var layer = getLayer(this.layer, selector);
-
-		if (layer === null) {
-			return null;
-		}
-		this.layer[method](layer);
-		return layer;
-	};
-});
-
-
-// Used in aeq.Layer.parent, setParentWithJump and move methods
-var regexRelativeIndex = /^(\+|-)=/;
-
-/* The selector argument can be one of the following:
- * An aeq.Layer object
- * A Layer object
- * An index for a layer in the comp
- * A string with a layer name
- * A string starting with "+=" or "-=" then a number to indicate an index
- * relative to the current layer
- */
-function getLayer(baseLayer, selector) {
-	var index, offset;
-
-	// Set the value
-	if (selector instanceof aeq.Layer) {
-		return selector.layer;
-	}
-	if (aeq.isLayer(selector)) {
-		return selector;
-	}
-	// Set parent to layer with index
-	if (aeq.isNumber(selector)) {
-		return baseLayer.containingComp.layer(selector);
-	}
-
-	// Set parent to layer with name or with a relative index
-	if (aeq.isString(selector)) {
-
-		// Check if string starts with "+=" or "-="
-		if (regexRelativeIndex.test(selector)) {
-			offset = getRelativeIndex(selector);
-			if (offset) {
-				// Set parent to layer with index relative to this layer
-				index = baseLayer.index + offset;
-
-				// Return null if index is out of range
-				if (index === 0 || index > baseLayer.containingComp.numLayers) {
-					return null;
-				}
-				return baseLayer.containingComp.layer(index);
-			}
-		}
-		// Use the string as a name if it does not start with += or -= or if the
-		// rest of the string is not a valid number
-		return baseLayer.containingComp.layer(selector);
-	}
-	// If none of the above is true it should return null
-	return null;
-}
-
-function getRelativeIndex(str) {
-	var offset = str.charAt(0) + str.substr(2);
-	offset = parseInt(offset, 10);
-	if (isNaN(offset)) {
-		return false;
-	}
-	return offset;
-}
-
-
-return aeq;
-}(aeq || {}));
-</code></pre>
-        </article>
-    </section>
-
-
-
+</section>
 
 </div>
 
