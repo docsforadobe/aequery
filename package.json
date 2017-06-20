@@ -23,6 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "del": "^2.2.0",
+    "docdash": "^0.4.0",
     "gulp": "^3.9.0",
     "gulp-add-src": "^0.2.0",
     "gulp-change": "^1.0.0",
@@ -36,7 +37,6 @@
     "gulp-zip": "^3.1.0",
     "jsdoc": "^3.4.3",
     "pegjs": "^0.9.0",
-    "run-sequence": "^1.1.5",
-    "kitsune-jsdoc-template": "^1.0.3"
+    "run-sequence": "^1.1.5"
   }
 }

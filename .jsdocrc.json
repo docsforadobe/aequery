@@ -1,7 +1,7 @@
 {
     "plugins": ["plugins/markdown"],
     "opts": {
-        "template": "node_modules/kitsune-jsdoc-template",
+        "template": "node_modules/docdash",
         "destination": "./docs",
         "readme": "./README.md",
         "encoding": "utf8",
@@ -16,18 +16,7 @@
     "templates": {
         "useLongnameInNav": true,
         "showInheritedInNav": true,
-
-        "applicationName": "AEQuery",
-
-        "default": {
-            "outputSourceFiles" : true,
-            "cssFiles": {
-                "include":[
-                    "custom.css"
-                ]
-            },
-            "theme":"github",
-            "paramsDisplay":"compact"
-        }
+        "cleverLinks": true,
+        "applicationName": "AEQuery"
     }
 }
