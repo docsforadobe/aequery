@@ -14,6 +14,7 @@ var gulp = require('gulp'),
 	util = require('gulp-util'),
 	rseq = require('run-sequence'),
 	PEG = require('pegjs'),
+	exec = require('child_process').exec,
 	addsrc = require('gulp-add-src');
 
 var pkg = require('./package.json'),
@@ -37,15 +38,41 @@ var build = {
 	deploy : null
 };
 
+var config = {
+	"build-locations": []
+};
+if (fs.existsSync('./config.json')) {
+	config = require('./config.json');
+	util.log( "config: " + config );
+}
+
 /*
  * Expects you have After Effects CC 2015 installed
  * in the default location
  */
-if (os.platform() == 'darwin')
+var platform = os.platform();
+
+if (platform == 'darwin')
 {
 //	console.log(getVersions('/Applications/', 'darwin'));
 	build.deploy = getVersions('/Applications/', 'darwin');
 	util.log('OS: Mac OS X (darwin)');
+	logVersions(build.deploy);
+}
+else if (platform === 'linux') // bitbucket uses linux
+{
+	var appdir = "./build/dummy";
+	try{
+		fs.mkdirSync(appdir);
+	}catch(e){}
+	var aeVersions = {};
+	aeVersions.dummy_install = {
+		esdir: appdir + '/dummy_scriptui/ScriptUI Panels/',
+		cepdir: appdir + "/dummy_cep"
+	};
+
+	build.deploy = aeVersions;
+	util.log('OS: Linux');
 	logVersions(build.deploy);
 }
 else
@@ -56,11 +83,14 @@ else
 }
 
 
-gulp.task('default', ['debug']);
+gulp.task('default', ['debug', 'build:docs']);
+gulp.task('build-aequery', ['debug'], function() {
+	return gulp.start('build:concat-ui');
+});
 
 
 gulp.task('watch', function () {
-	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['default']);
+	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['debug']);
 });
 
 
@@ -69,7 +99,6 @@ gulp.task('clean:all', ['clean:extendscript', 'clean:cep'], function () {
 		force: true
 	});
 });
-
 
 gulp.task('debug', function (cb) {
 	build.configuration = configuration.debug;
@@ -131,7 +160,21 @@ gulp.task('build:aeq-ui', function () {
 		.pipe(gulp.dest('./dist'));
 });
 
-gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep']);
+gulp.task('build:concat-ui', function() {
+	return gulp.src( [
+		'dist/aeq.js',
+		'dist/aeq-ui.js',
+	] )
+	.pipe(concat('aequery.js') )
+	.pipe(gulp.dest('./dist'));
+} );
+
+gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep', 'deploy:custom']);
+
+gulp.task('deploy:bitbucket', function (cb) {
+	uglify = require('gulp-empty');
+	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', 'build:concat-ui', cb);
+});
 
 gulp.task('deploy:extendscript', [], function () {
 	var stream = gulp.src([
@@ -176,17 +219,76 @@ gulp.task('clean:cep', function() {
 	return;
 });
 
+gulp.task( 'deploy:custom', function() {
+	var locations = config['build-locations'];
+	if ( !locations) {
+		return;
+	}
+	locations.forEach(function(location) {
+		var stream = gulp.src([
+			'./dist/aeq.js',
+			'./dist/aeq-ui.js'
+		]);
+		var useJsx = false;
+		if ( Array.isArray(location)) {
+			useJsx = location[1];
+			location = location[0];
+		}
+		if (useJsx) {
+			stream.pipe(rename(function(path) {
+				path.extname = ".jsx";
+			}));
+		} else {
+			stream.pipe(rename(function(path) {
+				path.extname = ".js";
+			}));
+		}
+		stream.pipe(gulp.dest(location));
+	});
+} );
+
 gulp.task('build:docs', function () {
-	return gulp.src('README.md')
-		.pipe(pdf())
-		.pipe(gulp.dest('./dist'));
+	var cmd = './node_modules/.bin/jsdoc lib/ --configure ./.jsdocrc.json';
+
+	if (os.platform() !== 'darwin')
+		cmd = cmd.replace(/\//g, '\\');
+
+	exec(cmd, err => {
+		if (err) {
+			console.error(err)
+			return
+		}
+		// Something is messing up the names of a couple of doc files.
+		// Rename to expected values
+		gulp.src('docs/aeq.layer_.html')
+			.pipe(rename('aeq.Layer_.html'))
+			.pipe(gulp.dest('docs/'))
+
+		gulp.src('docs/aeq.Layer.html')
+			.pipe(rename('aeq.layer.html'))
+			.pipe(gulp.dest('docs/'))
+	})
 });
+
+gulp.task('clean:docs', function() {
+	return del(['docs'], {
+		force: true
+	});
+})
 
 gulp.task('package:all', function () {
 	return gulp.src(['./dist/aeq.js', './dist/aeq-ui.js', './dist/README.pdf'])
 		.pipe(zip(pkg.name + '-' + pkg.version + '-' + now() + '.zip'))
 		.pipe(gulp.dest('./dist'));
 });
+
+gulp.task('update-version', ['update-version:aeq', 'build:docs'] )
+
+gulp.task('update-version:aeq', function() {
+	return gulp.src(['lib/main.js'])
+		.pipe(replace( /^(aeq\.version = ")\d+\.\d+\.\d+(")/m, `$1${pkg.version}$2`))
+		.pipe(gulp.dest('lib/'))
+})
 
 
 function now() {

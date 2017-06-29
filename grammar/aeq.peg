@@ -11,7 +11,9 @@
     for (var i = 0; i < array.length; i++) {
       var pair = array[i]
       for (var key in pair) {
-        merged[key] = pair[key]
+        if (pair.hasOwnProperty(key)) {
+            merged[key] = pair[key]
+        }
       }
     }
 
@@ -40,19 +42,21 @@ ValuePair
 
 Selector
   = type:[a-zA-Z]+ props:PropertiesBrackets? pseudo:Pseudo* _? {
-    return { type: type.join(''), props: props, pseudo: pseudo }
+    return { type: type.join('').toLowerCase(), props: props, pseudo: pseudo }
   }
 
 Selectors
   = Selector+
 
 Pseudo
-  = ":" type:[a-z]* props:PropertiesParentheses+ { return { type: type.join(''), props: props } }
+  = ":" type:[a-zA-Z]* props:PropertiesParentheses? { return { type: type.join('').toLowerCase(), props: props } }
 
 Value
   = BooleanLiteral
   / NumericLiteral
   / StringLiteral
+  / ArrayLiteral
+  / RegularExpressionLiteral
 
 NumericLiteral
   = literal:HexIntegerLiteral !(DecimalDigit) { return literal; }
@@ -154,8 +158,72 @@ LineTerminatorSequence "end of line"
   / "\u2028"
   / "\u2029"
 
+ArrayLiteral
+  = "[" _ head:ArrayValue* _ tail:Value _ "]" {
+    head.push(tail); return { type: "Array", value: head };
+  }
+
+ArrayValue
+  = value:Value _ "," _ { return value }
+
 TrueToken = "true" _?
 FalseToken = "false" _?
 
 _ "whitespace"
   = [ \t\n\r]*
+
+/* RegularExpressionLiteral */
+
+RegularExpressionLiteral "regular expression"
+= "/" body:RegularExpressionBody "/" flags:RegularExpressionFlags {
+    return {
+      type:  "RegExp",
+      body:  body,
+      flags: flags,
+      value: new RegExp(body, flags)
+    };
+  }
+
+RegularExpressionBody
+= char_:RegularExpressionFirstChar chars:RegularExpressionChars {
+    return char_ + chars;
+  }
+
+RegularExpressionChars
+= chars:RegularExpressionChar* { return chars.join(""); }
+
+RegularExpressionFirstChar
+= ![*\\/[] char_:RegularExpressionNonTerminator { return char_; }
+/ RegularExpressionBackslashSequence
+/ RegularExpressionClass
+
+RegularExpressionChar
+= ![\\/[] char_:RegularExpressionNonTerminator { return char_; }
+/ RegularExpressionBackslashSequence
+/ RegularExpressionClass
+
+/*
+* This rule contains an error in the specification: "NonTerminator" instead of
+* "RegularExpressionNonTerminator".
+*/
+RegularExpressionBackslashSequence
+= "\\" char_:RegularExpressionNonTerminator { return "\\" + char_; }
+
+RegularExpressionNonTerminator
+= !LineTerminator char_:SourceCharacter { return char_; }
+
+RegularExpressionClass
+= "[" chars:RegularExpressionClassChars "]" { return "[" + chars + "]"; }
+
+RegularExpressionClassChars
+= chars:RegularExpressionClassChar* { return chars.join(""); }
+
+RegularExpressionClassChar
+= ![\]\\] char_:RegularExpressionNonTerminator { return char_; }
+/ RegularExpressionBackslashSequence
+
+RegularExpressionFlags
+= parts:[gimuy]* { return parts.join(""); }
+
+SourceCharacter
+= .

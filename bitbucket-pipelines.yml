@@ -1,0 +1,15 @@
+
+image: node:6.9.1
+
+pipelines:
+  branches:
+     master:
+       - step:
+           script: # Modify the commands below to build your repository.
+             - npm install
+             - npm run-script deploy-bitbucket
+             - curl -X POST "https://${RUNEGAN_AUTH_STRING}@api.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aequery.js"
+             - git checkout docs # Gulp updates the docs dir, but git ftp does not like that
+             - apt-get update
+             - apt-get -qq install git-ftp
+             - git ftp push --syncroot docs/ --user $DOCS_FTP_USER --passwd $DOCS_FTP_PASS $DOCS_FTP_SERVER

@@ -1,19 +1,29 @@
 {
   "name": "aequery",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "description": "General purpose after effects scripting library",
-  "main": "main.js",
+  "main": "dist/aequery.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy-bitbucket": "gulp deploy:bitbucket",
+    "version": "gulp update-version && git add docs lib/main.js",
+    "prepublish": "gulp build-aequery"
   },
+  "files": [
+    "lib/*",
+    "grammar/*",
+    "dist/*"
+  ],
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:motiondesign/aequery.git"
+    "url": "bitbucket:motiondesign/aequery"
   },
+  "issues": "https://bitbucket.org/motiondesign/aequery/issues",
   "author": "motiondesign",
   "license": "MIT",
   "devDependencies": {
     "del": "^2.2.0",
+    "docdash": "^0.4.0",
     "gulp": "^3.9.0",
     "gulp-add-src": "^0.2.0",
     "gulp-change": "^1.0.0",
@@ -25,6 +35,7 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.1.0",
+    "jsdoc": "^3.4.3",
     "pegjs": "^0.9.0",
     "run-sequence": "^1.1.5"
   }
