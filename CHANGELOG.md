@@ -1,5 +1,17 @@
 # Changelog
 
+# 0.3.0 2017/08/27:
+- Updates some functions under `aeq.layer` to return `aeq.arrayEx` instead of an array.
+    - `aeq.layer.children`
+    - `aeq.layer.allChildren`
+    - `aeq.layer.parents`
+    - `aeq.layer.relatedLayers`
+- Fixes `aeq.writeFile` not checking encoding properly.
+- Updates `aeq.project.findFolder` to return `null` when no folder is found.
+- Updates `aeq.getItems` to accept a `deep` argument.
+- Adds `aeq.getItemsDeep`
+- Updates `aeq.getCompositions` to get CompItems from a given folder.
+
 ## 0.2.0 2017/06/17:
 - Adds `aeq.version` to track current version of aequery
 - Adds `aeq.settings.initSetting()` to initialize settings
