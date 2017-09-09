@@ -14,6 +14,7 @@ var gulp = require('gulp'),
 	util = require('gulp-util'),
 	rseq = require('run-sequence'),
 	PEG = require('pegjs'),
+	exec = require('child_process').exec,
 	addsrc = require('gulp-add-src'),
 	eslint = require('gulp-eslint');
 
@@ -83,14 +84,14 @@ else
 }
 
 
-gulp.task('default', ['debug']);
+gulp.task('default', ['debug', 'build:docs']);
 gulp.task('build-aequery', ['debug'], function() {
 	return gulp.start('build:concat-ui');
 });
 
 
 gulp.task('watch', function () {
-	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['default']);
+	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['debug']);
 });
 
 
@@ -173,7 +174,7 @@ gulp.task('deploy:all', ['deploy:extendscript', 'deploy:cep', 'deploy:custom']);
 
 gulp.task('deploy:bitbucket', function (cb) {
 	uglify = require('gulp-empty');
-	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', cb);
+	return rseq('clean:all', 'build:aeq', 'build:aeq-ui', 'build:concat-ui', cb);
 });
 
 gulp.task('deploy:extendscript', [], function () {
@@ -248,10 +249,33 @@ gulp.task( 'deploy:custom', function() {
 } );
 
 gulp.task('build:docs', function () {
-	return gulp.src('README.md')
-		.pipe(pdf())
-		.pipe(gulp.dest('./dist'));
+	var cmd = './node_modules/.bin/jsdoc lib/ --configure ./.jsdocrc.json';
+
+	if (os.platform() !== 'darwin')
+		cmd = cmd.replace(/\//g, '\\');
+
+	exec(cmd, err => {
+		if (err) {
+			console.error(err)
+			return
+		}
+		// Something is messing up the names of a couple of doc files.
+		// Rename to expected values
+		gulp.src('docs/aeq.layer_.html')
+			.pipe(rename('aeq.Layer_.html'))
+			.pipe(gulp.dest('docs/'))
+
+		gulp.src('docs/aeq.Layer.html')
+			.pipe(rename('aeq.layer.html'))
+			.pipe(gulp.dest('docs/'))
+	})
 });
+
+gulp.task('clean:docs', function() {
+	return del(['docs'], {
+		force: true
+	});
+})
 
 gulp.task('package:all', function () {
 	return gulp.src(['./dist/aeq.js', './dist/aeq-ui.js', './dist/README.pdf'])
@@ -269,6 +293,14 @@ gulp.task('lint', function() {
 	.pipe(eslint())
 	.pipe(eslint.format());
 } );
+
+gulp.task('update-version', ['update-version:aeq', 'build:docs'] )
+
+gulp.task('update-version:aeq', function() {
+	return gulp.src(['lib/main.js'])
+		.pipe(replace( /^(aeq\.version = ")\d+\.\d+\.\d+(")/m, `$1${pkg.version}$2`))
+		.pipe(gulp.dest('lib/'))
+})
 
 
 function now() {

@@ -2,11 +2,25 @@
 image: node:6.9.1
 
 pipelines:
+  default:
+    - step:
+        caches:
+          - node
   branches:
      master:
        - step:
-           script: # Modify the commands below to build your repository.
+           script:
              - npm install
              - npm run-script deploy-bitbucket
-             - curl -X POST "https://${RUNEGAN_AUTH_STRING}@api.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aeq.js"
-             - curl -X POST "https://${RUNEGAN_AUTH_STRING}@api.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aeq-ui.js"
+             - curl -X POST "https://${RUNEGAN_AUTH_STRING}@api.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aequery.js"
+             - git checkout docs # Gulp updates the docs dir, but git ftp does not like that
+             - apt-get update
+             - apt-get -qq install git-ftp
+             - git ftp push --syncroot docs/ --user $DOCS_FTP_USER --passwd $DOCS_FTP_PASS $DOCS_FTP_SERVER
+     develop:
+       - step:
+           script: # Updload an aequery-develop build to downloads section
+             - npm install
+             - npm run-script deploy-bitbucket
+             - mv dist/aequery.js dist/aequery-develop.js
+             - curl -X POST "https://${RUNEGAN_AUTH_STRING}@api.bitbucket.org/2.0/repositories/motiondesign/aequery/downloads" --form files=@"$(pwd)/dist/aequery-develop.js"

@@ -1,0 +1,23 @@
+{
+    "plugins": ["plugins/markdown"],
+    "opts": {
+        "template": "node_modules/docdash",
+        "tutorials": "./tutorials",
+        "destination": "./docs",
+        "readme": "./README.md",
+        "encoding": "utf8",
+        "recurse": true
+    },
+
+    "source": {
+        "exclude": ["lib/intro.js", "lib/outro.js"]
+    },
+    "linenums": true,
+
+    "templates": {
+        "useLongnameInNav": true,
+        "showInheritedInNav": true,
+        "cleverLinks": true,
+        "applicationName": "AEQuery"
+    }
+}

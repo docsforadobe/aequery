@@ -1,8 +1,9 @@
-// Resets the position of all groups inside selected shape layers or all shape
-// layers if no layers are selected
-
+/**
+ * Resets the position of all groups inside selected shape layers or all
+ * shape layers if no layers are selected
+ */
 ( function() {
-#include "../dist/aeq.js"; // jshint ignore:line
+//@include "../dist/aeq.js";
 
 var layers = aeq.getSelectedLayers();
 
@@ -38,7 +39,7 @@ function createUI() {
 	}
 
 // Only include aeq.ui if dialog is about to be shown
-#include "../dist/aeq-ui.js"; // jshint ignore:line
+//@include "../dist/aeq-ui.js"; // jshint ignore:line
 
 	var win = aeq.ui.createDialog( "Reset Shape Position" );
 
