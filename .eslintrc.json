@@ -1,0 +1,19 @@
+{
+    "root": true,
+    "env": {
+        "browser": true
+    },
+    "globals": {
+        "aeq": true,
+        "cssselector": true,
+        "setDefault": true
+    },
+    "extends": [
+        "aftereffects",
+        "runegan",
+        "runegan/no-es6"
+    ],
+    "rules": {
+        "semi": [ "error", "always" ]
+    }
+}
