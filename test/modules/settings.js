@@ -34,9 +34,11 @@ var tests = [
 	} ]
 ];
 
-for ( var i = 0; i < tests.length; i++ ) {
+var i, result;
+
+for ( i = 0; i < tests.length; i++ ) {
 	var test = tests[i];
-	var result = aeq.settings[test[0]].apply( null, test[1] );
+	result = aeq.settings[test[0]].apply( null, test[1] );
 	if ( test[2] instanceof Function && test[2]( result ) === true ) {
 		continue;
 	}
@@ -55,12 +57,12 @@ for ( i = 0; i < errors.length; i++ ) {
 		error.test[1].toString() :
 		'undefined';
 
-	result = error.result !== undefined ? result.toSource() : 'undefined';
+	result = error.result === undefined ? 'undefined' : result.toSource();
 	e += error.test[0] + ' failed when passed ' + obj +
 		' it returned ' + result + ' not ' + error.test[2].toSource();
 }
 
-if ( errors.length !== 0 ) {
+if ( errors.length > 0 ) {
 	alert( e );
 } else {
 	alert( testName + ': No errors!' );

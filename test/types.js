@@ -71,9 +71,11 @@ aeq.undoGroup( testName, function () {
 		[ 'isPropertyGroup', comp.layer( 1 ).property( 'Position' ), false ]
 	];
 
-	for ( var i = 0; i < tests.length; i++ ) {
+	var i, result;
+
+	for ( i = 0; i < tests.length; i++ ) {
 		var test = tests[i];
-		var result = aeq[test[0]]( test[1] );
+		result = aeq[test[0]]( test[1] );
 		if ( result !== test[2] ) {
 			errors.push({ test: test, result: result });
 		}
@@ -87,12 +89,12 @@ aeq.undoGroup( testName, function () {
 			error.test[1].toString() :
 			'undefined';
 
-		result = error.result !== undefined ? result.toSource() : 'undefined';
+		result = error.result === undefined ? 'undefined' : result.toSource() ;
 		e += error.test[0] + ' failed when passed ' + obj +
 			' it returned ' + result + ' not ' + error.test[2].toSource();
 	}
 
-	if ( errors.length !== 0 ) {
+	if ( errors.length > 0 ) {
 		alert( e );
 	} else {
 		alert( testName + ': No errors!' );

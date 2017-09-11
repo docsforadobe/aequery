@@ -34,29 +34,31 @@ var tests = [
 	[ 'parent', [], parent ],
 
 	[ 'copyToComp', [ comp2 ], function () {
-return comp2.numLayers === 1;
-} ],
+		return comp2.numLayers === 1;
+	} ],
 	[ 'copyToComp', [ comp2.name ], function () {
-return comp2.numLayers === 2;
-} ],
+		return comp2.numLayers === 2;
+	} ],
 
 	[ 'removeParent', [], function () {
-return orgLayer.parent === null;
-} ],
+		return orgLayer.parent === null;
+	} ],
 
 	[ 'forEachEffect', [ function () {
-count += 1;
-} ], function () {
-return count === orgLayer.property( 'ADBE Effect Parade' ).numProperties;
-} ],
+		count += 1;
+	} ], function () {
+		return count === orgLayer.property( 'ADBE Effect Parade' ).numProperties;
+	} ],
 	[ 'addEffect', [ 'ADBE Fill' ], function () {
-return orgLayer.property( 'ADBE Effect Parade' ).numProperties === count + 1;
-} ]
+		return orgLayer.property( 'ADBE Effect Parade' ).numProperties === count + 1;
+	} ]
 ];
 
-for ( var i = 0; i < tests.length; i++ ) {
+var i, result;
+
+for ( i = 0; i < tests.length; i++ ) {
 	var test = tests[i];
-	var result = layer[test[0]].apply( layer, test[1] );
+	result = layer[test[0]].apply( layer, test[1] );
 	if ( aeq.isFunc( test[2] ) ) {
 		if ( test[2]( result ) === true ) {
 			continue;
@@ -72,6 +74,7 @@ for ( var i = 0; i < tests.length; i++ ) {
 }
 
 var e = testName + ': Errors:\n';
+
 for ( i = 0; i < errors.length; i++ ) {
 	var error = errors[i];
 	e += '\n';
@@ -79,12 +82,12 @@ for ( i = 0; i < errors.length; i++ ) {
 		error.test[1].toString() :
 		'undefined';
 
-	var testResult = error.result !== undefined ? error.result.toSource() : 'undefined';
+	var testResult = error.result === undefined ? 'undefined' : error.result.toSource();
 	e += error.test[0] + ' failed when passed ' + obj +
 		' it returned ' + testResult + ' not ' + error.test[2].toSource();
 }
 
-if ( errors.length !== 0 ) {
+if ( errors.length > 0 ) {
 	alert( e );
 } else {
 	alert( testName + ': No errors!' );

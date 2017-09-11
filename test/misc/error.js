@@ -1,7 +1,6 @@
+// eslint-disable-next-line
 ( function ( a, b, c ) {
 // @include "../../dist/aeq.js"
-
-var testName = 'Test misc/error';
 
 try {
 	throw new Error( 'This is a test error' );

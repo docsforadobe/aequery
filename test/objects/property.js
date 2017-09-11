@@ -64,11 +64,11 @@ var tests = [
 	[[ opacity, 'minValue' ], [], opacity.property.minValue ],
 
 	[ 'value', [], function ( res ) {
-return prop.property.value[0] === res[0];
-} ],
+		return prop.property.value[0] === res[0];
+	} ],
 	[[ opacity, 'value' ], [ 50 ], function () {
-return opacity.property.value === 50;
-} ],
+		return opacity.property.value === 50;
+	} ],
 
 	// ["valueAtTime", [2], orgProp.valueAtTime(2, false)] // TODO: Throws Error
 	[[ opacity, 'valueAtTime' ], [ 2, 10 ], [ 'originalTime', 2 ]],
@@ -79,16 +79,16 @@ return opacity.property.value === 50;
 	} ],
 
 	[ 'forEachKey', [ function () {
-count++;
-} ], function () {
+		count++;
+	} ], function () {
 		return count === orgProp.numKeys;
 	} ],
 
 	[ 'expressionError', [], orgProp.expressionError ],
 	[ 'isTimeVarying', [], orgProp.isTimeVarying ],
 	[ 'numKeys', [], function ( res ) {
-return res === orgProp.numKeys;
-} ],
+		return res === orgProp.numKeys;
+	} ],
 	[ 'canSetExpression', [], orgProp.canSetExpression ],
 	[ 'canVaryOverTime', [], orgProp.canVaryOverTime ],
 	[ 'isSpatial', [], orgProp.isSpatial ],
@@ -99,7 +99,9 @@ return res === orgProp.numKeys;
 	[ 'unitsText', [], orgProp.unitsText ]
 ];
 
-for ( var i = 0; i < tests.length; i++ ) {
+var i;
+
+for ( i = 0; i < tests.length; i++ ) {
 	var test = tests[i];
 	var result;
 	if ( aeq.isArray( test[0] ) ) {
@@ -130,12 +132,12 @@ for ( i = 0; i < errors.length; i++ ) {
 		error.test[1].toSource() :
 		'undefined';
 
-	var testResult = error.result !== undefined ? error.result.toSource() : 'undefined';
+	var testResult = error.result === undefined ? 'undefined' : error.result.toSource();
 	e += error.test[0] + ' failed when passed ' + obj +
 		' it returned ' + testResult + ' not ' + error.test[2].toSource();
 }
 
-if ( errors.length !== 0 ) {
+if ( errors.length > 0 ) {
 	alert( e );
 } else {
 	alert( testName + ': No errors!' );

@@ -10,51 +10,52 @@ var tests = [
 
 	// Command, args, expected
 	[ 'exists', [ function ( i ) {
- return i === 3;
-} ], true ],
+		return i === 3;
+	} ], true ],
 	[ 'exists', [ function ( i ) {
- return i === 8;
-} ], false ],
+		return i === 8;
+	} ], false ],
 
 	[ 'isTrueForAll', [ function ( i ) {
- return i !== 8;
-} ], true ],
+		return i !== 8;
+	} ], true ],
 	[ 'isTrueForAll', [ function ( i ) {
- return i === 8;
-} ], false ],
+		return i === 8;
+	} ], false ],
 
 	[ 'first', [], arr[0] ],
 
 	[ 'find', [ function ( i ) {
- return i === 3;
-}, true ], 3 ],
+		return i === 3;
+	}, true ], 3 ],
 	[ 'find', [ function ( i ) {
- return i === 8;
-}, 'something' ], 'something' ],
+		return i === 8;
+	}, 'something' ], 'something' ],
 
 	[ 'filter', [ function ( i ) {
- return i <= 4;
-} ], [ 'length', 4 ]],
+		return i <= 4;
+	} ], [ 'length', 4 ]],
 
 	[ 'indexOf', [ 3 ], 2 ],
 	[ 'indexOf', [ 8 ], -1 ],
 
 	[ 'select', [ function ( i ) {
-return i * 10;
-} ], [ '0', 10 ]],
+		return i * 10;
+	} ], [ '0', 10 ]],
 	[ 'map', [ function ( i ) {
-return { key: i, value: i * 10 };
-} ], [ '7', 70 ]],
+		return { key: i, value: i * 10 };
+	} ], [ '7', 70 ]],
 
 	[ 'insertAt', [ 10, 3 ], function () {
- return arr[3] === 10;
-} ]
+		return arr[3] === 10;
+	} ]
 ];
 
+var i, result;
 
-for ( var i = 0; i < tests.length; i++ ) {
+for ( i = 0; i < tests.length; i++ ) {
 	var test = tests[i];
-	var result = arr[test[0]].apply( arr, test[1] );
+	result = arr[test[0]].apply( arr, test[1] );
 	if ( aeq.isFunc( test[2] ) ) {
 		if ( test[2]( result ) === true ) {
 			continue;
@@ -77,12 +78,12 @@ for ( i = 0; i < errors.length; i++ ) {
 		error.test[1].toString() :
 		'undefined';
 
-	result = error.result !== undefined ? error.toSource() : 'undefined';
+	result = error.result === undefined ? 'undefined' : error.toSource();
 	e += error.test[0] + ' failed when passed ' + obj +
 		' it returned ' + result + ' not ' + error.test[2].toSource();
 }
 
-if ( errors.length !== 0 ) {
+if ( errors.length > 0 ) {
 	alert( e );
 } else {
 	alert( testName + ': No errors!' );

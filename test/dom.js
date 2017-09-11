@@ -27,23 +27,28 @@ aeq.undoGroup( testName, function () {
 		[ 'getSelectedProperties', comp.layer( 1 ), [ 'length', comp.layer( 1 ).selectedProperties.length ]],
 		[ 'getSelectedProperties', undefined, [ 'length', 0 ]],
 
-		// ["getProperties", [comp.layer(1)], ['length', 2]], // TODO: How to test this function
-		// ["getPropertyChildren", [comp.layer(1)], ['length', 2]], // TODO: How to test this function
+		// TODO: How to test this function
+		// ["getProperties", [comp.layer(1)], ['length', 2]],
+		// TODO: How to test this function
+		// ["getPropertyChildren", [comp.layer(1)], ['length', 2]],
 
 		[ 'getEffects', [ comp.layer( 1 ) ], [ 'length', 1 ]],
 		[ 'getKeys', comp.layer( 1 ).property( 'Position' ), [ 'length', 1 ]],
 		[ 'getKeys', [ comp.layer( 1 ).property( 'Position' ) ], [ 'length', 1 ]],
 
-		// ["getChildren", [comp.layer(1).property("Position")], ['length', 1]], // TODO: How to test this function
+		// TODO: How to test this function
+		// ["getChildren", [comp.layer(1).property("Position")], ['length', 1]],
 
 		[ 'normalizeCollection', comp.layers, [ 'length', comp.numLayers ]]
 
 
 	];
 
-	for ( var i = 0; i < tests.length; i++ ) {
+	var i, result;
+
+	for ( i = 0; i < tests.length; i++ ) {
 		var test = tests[i];
-		var result = aeq[test[0]]( test[1] );
+		result = aeq[test[0]]( test[1] );
 		if ( aeq.isArray( test[2] ) ) {
 			if ( result !== undefined && result[test[2][0]] === test[2][1] ) {
 				continue;
@@ -62,12 +67,12 @@ aeq.undoGroup( testName, function () {
 			error.test[1].toString() :
 			'undefined';
 
-		result = error.result !== undefined ? result.toSource() : 'undefined';
+		result = error.result === undefined ? 'undefined' : result.toSource();
 		e += error.test[0] + ' failed when passed ' + obj +
 			' it returned ' + result + ' not ' + error.test[2].toSource();
 	}
 
-	if ( errors.length !== 0 ) {
+	if ( errors.length > 0 ) {
 		alert( e );
 	} else {
 		alert( testName + ': No errors!' );

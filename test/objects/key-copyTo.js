@@ -33,8 +33,16 @@ function setup( name, duration ) {
 		var easeOut = new KeyframeEase( 0.1, i * 10 );
 		prop.setTemporalEaseAtKey( i, [ easeIn ], [ easeOut ] );
 	}
-	prop.setInterpolationTypeAtKey( 1, KeyframeInterpolationType.BEZIER, KeyframeInterpolationType.HOLD );
-	prop.setInterpolationTypeAtKey( 2, KeyframeInterpolationType.HOLD, KeyframeInterpolationType.BEZIER );
+	prop.setInterpolationTypeAtKey(
+			1,
+			KeyframeInterpolationType.BEZIER,
+			KeyframeInterpolationType.HOLD
+	);
+	prop.setInterpolationTypeAtKey(
+			2,
+			KeyframeInterpolationType.HOLD,
+			KeyframeInterpolationType.BEZIER
+	);
 
 	// Create a referance layer
 	var ref = layer.duplicate();

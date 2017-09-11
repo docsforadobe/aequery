@@ -13,9 +13,12 @@ var resourceFiles = aeq.createResourceFiles( resourceStrings, folder, 'png' );
 alert( JSON.stringify( resourceFiles, function ( key, value ) {
 	if ( aeq.isFile( value ) ) {
 		return value.fsName;
-	} if ( value instanceof Error ) {
+	}
+
+	if ( value instanceof Error ) {
 		return value.message;
 	}
+
 	return value;
 }) );
 
