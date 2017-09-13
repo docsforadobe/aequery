@@ -27,7 +27,7 @@
     "docdash": "^0.4.0",
     "eslint": "^4.6.1",
     "eslint-config-aftereffects": "^1.1.0",
-    "eslint-config-runegan": "^1.1.1",
+    "eslint-config-runegan": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-add-src": "^0.2.0",
     "gulp-change": "^1.0.0",

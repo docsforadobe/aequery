@@ -34,14 +34,14 @@ function setup( name, duration ) {
 		prop.setTemporalEaseAtKey( i, [ easeIn ], [ easeOut ] );
 	}
 	prop.setInterpolationTypeAtKey(
-			1,
-			KeyframeInterpolationType.BEZIER,
-			KeyframeInterpolationType.HOLD
+		1,
+		KeyframeInterpolationType.BEZIER,
+		KeyframeInterpolationType.HOLD
 	);
 	prop.setInterpolationTypeAtKey(
-			2,
-			KeyframeInterpolationType.HOLD,
-			KeyframeInterpolationType.BEZIER
+		2,
+		KeyframeInterpolationType.HOLD,
+		KeyframeInterpolationType.BEZIER
 	);
 
 	// Create a referance layer
