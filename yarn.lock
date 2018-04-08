@@ -169,9 +169,9 @@ babel-code-frame@^6.16.0, babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babylon@~7.0.0-beta.19:
-  version "7.0.0-beta.22"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-7.0.0-beta.22.tgz#74f0ad82ed7c7c3cfeab74cf684f815104161b65"
+babylon@7.0.0-beta.19:
+  version "7.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/babylon/-/babylon-7.0.0-beta.19.tgz#e928c7e807e970e0536b078ab3e0c48f9e052503"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -1552,11 +1552,11 @@ jschardet@^1.4.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/jschardet/-/jschardet-1.5.1.tgz#c519f629f86b3a5bedba58a88d311309eec097f9"
 
-jsdoc@^3.4.3:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/jsdoc/-/jsdoc-3.5.4.tgz#ceeef7c4bac4335cb10ff41e3a0f58939a534428"
+jsdoc@^3.5.5:
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/jsdoc/-/jsdoc-3.5.5.tgz#484521b126e81904d632ff83ec9aaa096708fa4d"
   dependencies:
-    babylon "~7.0.0-beta.19"
+    babylon "7.0.0-beta.19"
     bluebird "~3.5.0"
     catharsis "~0.8.9"
     escape-string-regexp "~1.0.5"
