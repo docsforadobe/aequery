@@ -1,13 +1,24 @@
 # Changelog
 
-# 0.4.0 2017/08/04:
+## 0.5.0 2018/04/08
+- Added style- and code-linting to the project source code
+- Fixes `getEffects` returning an empty array if one of the passed layers could not have effects.
+- Renames `arrayEx` method names:
+	- `exists` -> `some`
+	- `select` -> `map`
+	- `map` -> `groupBy`
+- Adds `isMaskPropertyGroup` function
+- Adds `offset` parameter to `Key.copyTo` which Adds/subtracts an amount of offset in keyframe time.
+- Adds `parentFolder` parameter to `project.getFootage` that only get footage items from the given `FolderItem`
+
+## 0.4.0 2017/08/04:
 - Updates `aeq.file.joinPath` to accept `File` and `Folder` objects.
 - Updates `aeq.pasteKey` to convert 3 value arrays to 2 value array if needed.
 - Add `aeq.Property.prototype.getKeys` method to get an array of all `aeq.Key` objects on a property.
 - Updates `aeq.Property.forEachKey` to use `aeq.Property.prototype.getKeys`
 	- This has the benefit that doing `key.remove()` inside the loop does not cause any problems.
 
-# 0.3.0 2017/07/27:
+## 0.3.0 2017/07/27:
 - Updates some functions under `aeq.layer` to return `aeq.arrayEx` instead of an array.
     - `aeq.layer.children`
     - `aeq.layer.allChildren`
