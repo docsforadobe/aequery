@@ -1,12 +1,12 @@
 ( function () {
-//@include "../../dist/aeq.js"
+// @include "../../dist/aeq.js"
 
-var testName = "Test misc/system";
+var testName = 'Test misc/system';
 
-alert( testName + "\n" +
-	"OS is Windows = " + aeq.isWindows + "\n" +
-	"OS is mac = " + aeq.isMac + "\n" +
-	"OS is: " + $.os + "\n" +
-	"Info: " + aeq.getSystemInfo()
+alert( testName + '\n' +
+	'OS is Windows = ' + aeq.isWindows + '\n' +
+	'OS is mac = ' + aeq.isMac + '\n' +
+	'OS is: ' + $.os + '\n' +
+	'Info: ' + aeq.getSystemInfo()
 );
 }() );
