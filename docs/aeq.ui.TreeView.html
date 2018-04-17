@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui/listbox.js - Documentation</title>
+    <title>ui.TreeView - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,379 +27,2003 @@
 
 <div id="main">
     
-    <h1 class="page-title">ui/listbox.js</h1>
+    <h1 class="page-title">ui.TreeView</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>aeq.ui = ( function ( ui ) {
-/**
- * ListBox UI class
- * @class
- * @memberof aeq
- * @param  {type} obj [description]
- */
-ui.ListBox = function ( obj ) {
-	this.obj = obj;
-};
-
-ui.ListBox.prototype = {
-	toString: function () {
-		return '[object aeq.ui.ListBox]';
-	},
-
-	extend: aeq.extend,
-
-	/**
-	 * Adds a ListItem to this ListBox
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {String} text  - ListItem Text
-	 * @param  {Image} image  - ListItem Image
-	 * @param  {Number} index - Index to insert ListItem in ListBox
-	 * @return {ListItem}     - Created ListITem
-	 */
-	addItem: function ( text, image, index ) {
-		var item = this.obj.add( 'item', text, index );
-
-		if ( !aeq.isNullOrUndefined( image ) ) {
-			item.image = image;
-		}
-
-		return item;
-	},
-
-	/**
-	 * Removes a ListItem from this list
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {ListItem} item - ListItem to remove
-	 */
-	removeItem: function ( item ) {
-		item = aeq.setDefault( item, this.obj.selection );
-
-		if ( aeq.isNullOrUndefined( item ) ) {
-			return;
-		}
-
-		this.obj.remove( item );
-	},
-
-	/**
-	 * Removes all ListItems from this ListBox
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	removeAll: function ( ) {
-		while ( this.obj.items.length > 0 ) {
-			var item = this.obj.items[0];
-			this.removeItem( item );
-		}
-	},
-
-	/**
-	 * Gets ancestor of item
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {ListItem} item - Item to get ancestor of
-	 * @return {ListItem}      - Ancestor node
-	 */
-	getAncestor: function ( item ) {
-		while ( item.parent.constructor.name !== 'ListBox' ) {
-			item = item.parent;
-		}
-
-		return item;
-	},
-
-	/**
-	 * Adds a multi-dimensional row to a list
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {String[]} itemArray - String array for row columns
-	 * @return {ListItem}           - Created row
-	 */
-	addRow: function ( itemArray ) {
-		var root = this.getAncestor( this.obj ).parent;
-
-		if ( aeq.isNullOrUndefined( root.properties ) ) {
-			return;
-		}
-
-		var numColumns = root.properties.numberOfColumns;
-		var maxItems = itemArray.length > numColumns ? numColumns : itemArray.length;
-
-		var item = this.addItem( itemArray[0] );
-
-		for ( var i = 0, il = maxItems - 1; i &lt; il; i++ ) {
-			item.subItems[i].text = itemArray[i + 1];
-		}
-
-		return item;
-	},
-
-	/**
-	 * Checks whether a selection in a list is contiguous
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param {ListItem[]} sel - Selection in a list
-	 * @returns {Boolean}      - Whether the selection is contiguous
-	 */
-	contiguous: function ( sel ) {
-		if ( !aeq.isArray( sel ) ) {
-			return true;
-		}
-
-		var firstIndex = sel[0].index;
-		var lastIndex = sel[sel.length - 1].index;
-
-		return sel.length === ( lastIndex - firstIndex + 1 );
-	},
-
-	/**
-	 * Moves selected item(s) up in a list
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveUp: function () {
-		var items = this.obj.items;
-		var selection = this.obj.selection;
-		var i;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var first = selection.index;
-		var last = first + 1;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = first + selection.length;
-		}
-
-		if ( first === 0 ) {
-			return;
-		}
-
-		for ( i = first; i &lt; last; i++ ) {
-			var thisItem = items[i];
-			var lastItem = items[i - 1];
-
-			this.swap( thisItem, lastItem );
-		}
-
-		this.obj.selection = null;
-
-		for ( i = first - 1; i &lt; last - 1; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Moves selected item(s) down in a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveDown: function () {
-		var selection = this.obj.selection;
-		var items = this.obj.items;
-		var i;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var last = selection.index;
-		var first = last;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = selection[selection.length - 1].index;
-		}
-
-		if ( last === items.length - 1 ) {
-			return;
-		}
-
-		for ( i = last; i >= first; i-- ) {
-			var thisItem = items[i];
-			var nextItem = items[i + 1];
-
-			this.swap( thisItem, nextItem );
-		}
-
-		this.obj.selection = null;
-
-		for ( i = first + 1; i &lt;= last + 1; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Moves selected item(s) to the top of a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveToTop: function () {
-		var selection = this.obj.selection;
-		var items = this.obj.items;
-		var i;
-		var il;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var first = selection.index;
-		var last = first + 1;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = first + selection.length;
-		}
-
-		if ( first === 0 ) {
-			return;
-		}
-
-		for ( var j = 0, jl = first; j &lt; jl; j++ ) {
-			for ( i = first; i &lt; last; i++ ) {
-				var thisItem = items[i - j];
-				var lastItem = items[i - j - 1];
-
-				this.swap( thisItem, lastItem );
-			}
-		}
-
-		this.obj.selection = null;
-
-		for ( i = 0, il = last - first; i &lt; il; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Moves selected item(s) to the bottom of a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveToBottom: function () {
-		var selection = this.obj.selection;
-		var items = this.obj.items;
-		var i;
-		var il;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var last = selection.index;
-		var first = last;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = selection[selection.length - 1].index;
-		}
-
-		if ( last === items.length - 1 ) {
-			return;
-		}
-
-		var spanLength = items.length - last - 1;
-
-		for ( var j = 0, jl = spanLength; j &lt; jl; j++ ) {
-			for ( i = last; i >= first; i-- ) {
-				var thisItem = items[i + j];
-				var nextItem = items[i + j + 1];
-
-				this.swap( thisItem, nextItem );
-			}
-		}
-
-		this.obj.selection = null;
-
-		for ( i = spanLength + first, il = items.length; i &lt; il; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Swaps two listItems
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param {ListItem} a Item to swap from
-	 * @param {ListItem} b Item to swap to
-	 */
-	swap: function ( a, b ) {
-		var temp = a.text;
-		a.text = b.text;
-		b.text = temp;
-	},
-
-	/**
-	 * Gets the selection in a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
- 	 * @returns {ListItem[]} Array of selected items
-	 */
-	getSelection: function () {
-		var selection = this.obj.selection;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return aeq.arrayEx();
-		}
-
-		return aeq.arrayEx( selection );
-	}
-
-};
-
-// Aliases, backwards compatible
-ui.ListBox.prototype.add = ui.ListBox.prototype.addItem;
-
-return ui;
-}( aeq.ui || {}) );
-</code></pre>
-        </article>
-    </section>
+        <h2>
+            <span class="ancestors"><a href="aeq.html">aeq</a>.</span>
+        
+        ui.TreeView
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    <h4 class="name" id="ui.TreeView"><span class="type-signature"></span>new ui.TreeView<span class="signature">(obj)</span><span class="type-signature"> &rarr; {type}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>TreeView UI class</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">type</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>[description]</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>[description]</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">type</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="addNode"><span class="type-signature">(static) </span>ui.TreeView#addNode<span class="signature">(text, image<span class="signature-attributes">opt</span>, index<span class="signature-attributes">opt</span>, expanded<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="aeq.ui.TreeView.html">aeq.ui.TreeView</a>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Adds a node to a UITreeView</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Text to add to the node</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Image</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Image to set as icon for the node</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Index to add the node at</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>expanded</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Whether the node is expanded</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Node as TreeView item</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="aeq.ui.TreeView.html">aeq.ui.TreeView</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="collapseNodes"><span class="type-signature">(static) </span>ui.TreeView#collapseNodes<span class="signature">(node)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Collapses a node and all children</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Root node to collapse children of</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="copyBranch"><span class="type-signature">(static) </span>ui.TreeView#copyBranch<span class="signature">(node, nodeCopy)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line175">line 175</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Creates a new node or branch based on an existing one</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node to copy</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nodeCopy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>New node or branch</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="expandNodes"><span class="type-signature">(static) </span>ui.TreeView#expandNodes<span class="signature">(node)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Expands a node and all children</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Root node to expand children of</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="findItemByName"><span class="type-signature">(static) </span>ui.TreeView#findItemByName<span class="signature">(node, list, name)</span><span class="type-signature"> &rarr; {Array.&lt;_Node>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line148">line 148</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Finds items by name in a node</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Container node</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>list</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;_Node></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of found items</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name to search in</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Array of found items</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;_Node></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getAncestor"><span class="type-signature">(static) </span>ui.TreeView#getAncestor<span class="signature">(item)</span><span class="type-signature"> &rarr; {_Node}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line80">line 80</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Gets ancestor of item</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node to get ancestor of</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Ancestor item</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">_Node</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isItem"><span class="type-signature">(static) </span>ui.TreeView#isItem<span class="signature">(branch)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line218">line 218</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Checks whether a branch is an item</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>branch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Branch to check</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Whether branch is item</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="isNode"><span class="type-signature">(static) </span>ui.TreeView#isNode<span class="signature">(branch)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line202">line 202</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Checks whether an branch is a node</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>branch</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">_Node</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Branch to check</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Whether branch is node</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="moveDown"><span class="type-signature">(static) </span>ui.TreeView#moveDown<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line276">line 276</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Moves selected item(s) down in a treeview</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="moveUp"><span class="type-signature">(static) </span>ui.TreeView#moveUp<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line232">line 232</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Moves selected item(s) up in a treeview</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="removeAncestor"><span class="type-signature">(static) </span>ui.TreeView#removeAncestor<span class="signature">(item)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Removes ancestor of node</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ListItem</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Node to remove ancestor of</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="revealItem"><span class="type-signature">(static) </span>ui.TreeView#revealItem<span class="signature">(name)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ui_treeview.js.html">ui/treeview.js</a>, <a href="ui_treeview.js.html#line26">line 26</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Reveals (expands) an item in a treeview by name</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name of the node to reveal</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

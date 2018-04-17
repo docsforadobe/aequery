@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ui/listbox.js - Documentation</title>
+    <title>ui/treeview.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -27,7 +27,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">ui/listbox.js</h1>
+    <h1 class="page-title">ui/treeview.js</h1>
     
 
     
@@ -39,361 +39,316 @@
         <article>
             <pre class="prettyprint source linenums"><code>aeq.ui = ( function ( ui ) {
 /**
- * ListBox UI class
+ * TreeView UI class
  * @class
  * @memberof aeq
  * @param  {type} obj [description]
+ * @return {type}     [description]
  */
-ui.ListBox = function ( obj ) {
+ui.TreeView = function ( obj ) {
 	this.obj = obj;
 };
 
-ui.ListBox.prototype = {
-	toString: function () {
-		return '[object aeq.ui.ListBox]';
-	},
+ui.TreeView.prototype = ui.ListBox.prototype;
 
-	extend: aeq.extend,
-
-	/**
-	 * Adds a ListItem to this ListBox
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {String} text  - ListItem Text
-	 * @param  {Image} image  - ListItem Image
-	 * @param  {Number} index - Index to insert ListItem in ListBox
-	 * @return {ListItem}     - Created ListITem
-	 */
-	addItem: function ( text, image, index ) {
-		var item = this.obj.add( 'item', text, index );
-
-		if ( !aeq.isNullOrUndefined( image ) ) {
-			item.image = image;
-		}
-
-		return item;
-	},
-
-	/**
-	 * Removes a ListItem from this list
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {ListItem} item - ListItem to remove
-	 */
-	removeItem: function ( item ) {
-		item = aeq.setDefault( item, this.obj.selection );
-
-		if ( aeq.isNullOrUndefined( item ) ) {
-			return;
-		}
-
-		this.obj.remove( item );
-	},
-
-	/**
-	 * Removes all ListItems from this ListBox
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	removeAll: function ( ) {
-		while ( this.obj.items.length > 0 ) {
-			var item = this.obj.items[0];
-			this.removeItem( item );
-		}
-	},
-
-	/**
-	 * Gets ancestor of item
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {ListItem} item - Item to get ancestor of
-	 * @return {ListItem}      - Ancestor node
-	 */
-	getAncestor: function ( item ) {
-		while ( item.parent.constructor.name !== 'ListBox' ) {
-			item = item.parent;
-		}
-
-		return item;
-	},
-
-	/**
-	 * Adds a multi-dimensional row to a list
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param  {String[]} itemArray - String array for row columns
-	 * @return {ListItem}           - Created row
-	 */
-	addRow: function ( itemArray ) {
-		var root = this.getAncestor( this.obj ).parent;
-
-		if ( aeq.isNullOrUndefined( root.properties ) ) {
-			return;
-		}
-
-		var numColumns = root.properties.numberOfColumns;
-		var maxItems = itemArray.length > numColumns ? numColumns : itemArray.length;
-
-		var item = this.addItem( itemArray[0] );
-
-		for ( var i = 0, il = maxItems - 1; i &lt; il; i++ ) {
-			item.subItems[i].text = itemArray[i + 1];
-		}
-
-		return item;
-	},
-
-	/**
-	 * Checks whether a selection in a list is contiguous
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param {ListItem[]} sel - Selection in a list
-	 * @returns {Boolean}      - Whether the selection is contiguous
-	 */
-	contiguous: function ( sel ) {
-		if ( !aeq.isArray( sel ) ) {
-			return true;
-		}
-
-		var firstIndex = sel[0].index;
-		var lastIndex = sel[sel.length - 1].index;
-
-		return sel.length === ( lastIndex - firstIndex + 1 );
-	},
-
-	/**
-	 * Moves selected item(s) up in a list
-	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveUp: function () {
-		var items = this.obj.items;
-		var selection = this.obj.selection;
-		var i;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var first = selection.index;
-		var last = first + 1;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = first + selection.length;
-		}
-
-		if ( first === 0 ) {
-			return;
-		}
-
-		for ( i = first; i &lt; last; i++ ) {
-			var thisItem = items[i];
-			var lastItem = items[i - 1];
-
-			this.swap( thisItem, lastItem );
-		}
-
-		this.obj.selection = null;
-
-		for ( i = first - 1; i &lt; last - 1; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Moves selected item(s) down in a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveDown: function () {
-		var selection = this.obj.selection;
-		var items = this.obj.items;
-		var i;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var last = selection.index;
-		var first = last;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = selection[selection.length - 1].index;
-		}
-
-		if ( last === items.length - 1 ) {
-			return;
-		}
-
-		for ( i = last; i >= first; i-- ) {
-			var thisItem = items[i];
-			var nextItem = items[i + 1];
-
-			this.swap( thisItem, nextItem );
-		}
-
-		this.obj.selection = null;
-
-		for ( i = first + 1; i &lt;= last + 1; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Moves selected item(s) to the top of a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveToTop: function () {
-		var selection = this.obj.selection;
-		var items = this.obj.items;
-		var i;
-		var il;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var first = selection.index;
-		var last = first + 1;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = first + selection.length;
-		}
-
-		if ( first === 0 ) {
-			return;
-		}
-
-		for ( var j = 0, jl = first; j &lt; jl; j++ ) {
-			for ( i = first; i &lt; last; i++ ) {
-				var thisItem = items[i - j];
-				var lastItem = items[i - j - 1];
-
-				this.swap( thisItem, lastItem );
-			}
-		}
-
-		this.obj.selection = null;
-
-		for ( i = 0, il = last - first; i &lt; il; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Moves selected item(s) to the bottom of a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 */
-	moveToBottom: function () {
-		var selection = this.obj.selection;
-		var items = this.obj.items;
-		var i;
-		var il;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return;
-		}
-
-		var last = selection.index;
-		var first = last;
-
-		if ( !aeq.isNullOrUndefined( this.obj.properties ) &amp;&amp; this.obj.properties.multiselect ) {
-			selection = selection.sort( function ( a, b ) {
-				return a.index - b.index;
-			});
-
-			if ( !this.contiguous( selection ) ) {
-				return;
-			}
-
-			first = selection[0].index;
-			last = selection[selection.length - 1].index;
-		}
-
-		if ( last === items.length - 1 ) {
-			return;
-		}
-
-		var spanLength = items.length - last - 1;
-
-		for ( var j = 0, jl = spanLength; j &lt; jl; j++ ) {
-			for ( i = last; i >= first; i-- ) {
-				var thisItem = items[i + j];
-				var nextItem = items[i + j + 1];
-
-				this.swap( thisItem, nextItem );
-			}
-		}
-
-		this.obj.selection = null;
-
-		for ( i = spanLength + first, il = items.length; i &lt; il; i++ ) {
-			this.obj.selection = i;
-		}
-	},
-
-	/**
-	 * Swaps two listItems
- 	 * @method
-	 * @memberof aeq.ui.ListBox
-	 * @param {ListItem} a Item to swap from
-	 * @param {ListItem} b Item to swap to
-	 */
-	swap: function ( a, b ) {
-		var temp = a.text;
-		a.text = b.text;
-		b.text = temp;
-	},
-
-	/**
-	 * Gets the selection in a list
- 	 * @method
-	 * @memberof aeq.ui.ListBox
- 	 * @returns {ListItem[]} Array of selected items
-	 */
-	getSelection: function () {
-		var selection = this.obj.selection;
-
-		if ( aeq.isNullOrUndefined( selection ) ) {
-			return aeq.arrayEx();
-		}
-
-		return aeq.arrayEx( selection );
-	}
-
+ui.TreeView.prototype.toString = function () {
+	return '[object aeq.ui.TreeView]';
 };
 
-// Aliases, backwards compatible
-ui.ListBox.prototype.add = ui.ListBox.prototype.addItem;
+/**
+ * Reveals (expands) an item in a treeview by name
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {String} name - Name of the node to reveal
+ */
+ui.TreeView.prototype.revealItem = function ( name ) {
+	var tree = this.obj;
+	var items = this.findItemByName( tree, [], name );
+
+	if ( tree.items.length === 0 || items.length === 0 ) {
+		tree.selection = null;
+		return;
+	}
+
+	var item = items[0];
+	var temp = item;
+
+	while ( item.parent.constructor.name !== 'TreeView' ) {
+		item.parent.expanded = true;
+		item = item.parent;
+	}
+
+	tree.selection = temp;
+	tree.active = true;
+};
+
+/**
+ * Adds a node to a UITreeView
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {String} text        - Text to add to the node
+ * @param {Image} [image]      - Image to set as icon for the node
+ * @param {Number} [index]     - Index to add the node at
+ * @param {Boolean} [expanded] - Whether the node is expanded
+ * @returns {aeq.ui.TreeView}  - Node as TreeView item
+ */
+ui.TreeView.prototype.addNode = function ( text, image, index, expanded ) {
+	expanded = aeq.setDefault( expanded, true );
+
+	var node = this.obj.add( 'node', text, index );
+
+	if ( !aeq.isNullOrUndefined( image ) ) {
+		node.image = image;
+	}
+
+	node.expanded = expanded;
+
+	return new ui.TreeView( node );
+};
+
+/**
+ * Gets ancestor of item
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} item - Node to get ancestor of
+ * @returns {_Node}    - Ancestor item
+ */
+ui.TreeView.prototype.getAncestor = function ( item ) {
+	while ( item.parent.constructor.name !== 'TreeView' ) {
+		item = item.parent;
+	}
+
+	return item;
+};
+
+/**
+ * Removes ancestor of node
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {ListItem} item - Node to remove ancestor of
+ */
+ui.TreeView.prototype.removeAncestor = function ( item ) {
+	var ancestor = this.getAncestor( item );
+	this.removeItem( ancestor );
+};
+
+/**
+ * Expands a node and all children
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} node - Root node to expand children of
+ */
+ui.TreeView.prototype.expandNodes = function ( node ) {
+	node.expanded = true;
+
+	for ( var i = 0, il = node.items.length; i &lt; il; i++ ) {
+		var branch = node.items[i];
+		if ( this.isNode( branch ) ) {
+			this.expandNodes( branch );
+		}
+	}
+};
+
+/**
+ * Collapses a node and all children
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} node - Root node to collapse children of
+ */
+ui.TreeView.prototype.collapseNodes = function ( node ) {
+	node.expanded = false;
+
+	var branches = node.items;
+
+	for ( var i = 0, il = branches.length; i &lt; il; i++ ) {
+		var branch = branches[i];
+		if ( this.isNode( branch ) ) {
+			this.collapseNodes( branch );
+		}
+	}
+};
+
+
+/**
+ * Finds items by name in a node
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} node   - Container node
+ * @param {_Node[]} list - Array of found items
+ * @param {String} name  - Name to search in
+ * @returns {_Node[]}    - Array of found items
+ */
+ui.TreeView.prototype.findItemByName = function ( node, list, name ) {
+	var branches = node.items;
+
+	for ( var i = 0, il = branches.length; i &lt; il; i++ ) {
+		var branch = branches[i];
+		if ( branch.text !== name ) {
+			continue;
+		}
+
+		if ( this.isNode( branch ) ) {
+			this.findItemByName( branch, list, name );
+		}
+
+		list.push( branch );
+	};
+
+	return list;
+};
+
+/**
+ * Creates a new node or branch based on an existing one
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} node Node to copy
+ * @param {_Node} nodeCopy New node or branch
+ */
+ui.TreeView.prototype.copyBranch = function ( node, nodeCopy ) {
+	var newNode = nodeCopy.add( node.type, node.text );
+	var me = this;
+
+	if ( !this.isNode( node ) ) {
+		return;
+	}
+
+	var branches = node.items;
+
+	aeq.forEach( branches, function ( branch ) {
+		if ( me.isNode( branch ) ) {
+			me.copyBranch( branch, newNode );
+		} else {
+			newNode.add( 'item', node.text );
+		}
+	});
+};
+
+/**
+ * Checks whether an branch is a node
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} branch Branch to check
+ * @returns {Boolean} Whether branch is node
+ */
+ui.TreeView.prototype.isNode = function ( branch ) {
+	if ( aeq.isNullOrUndefined( branch ) ) {
+		return false;
+	}
+
+	return branch.type === 'node';
+};
+
+/**
+ * Checks whether a branch is an item
+
+ * @method
+ * @memberof aeq.ui.TreeView
+ * @param {_Node} branch Branch to check
+ * @returns {Boolean} Whether branch is item
+ */
+ui.TreeView.prototype.isItem = function ( branch ) {
+	if ( aeq.isNullOrUndefined( branch ) ) {
+		return false;
+	}
+
+	return branch.type === 'item';
+};
+
+/**
+ * Moves selected item(s) up in a treeview
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ */
+ui.TreeView.prototype.moveUp = function () {
+	var tree = this.obj;
+
+	if ( tree.selection === null ) return;
+
+	if ( tree.selection.index > 0 ) {
+		var sel = tree.selection;
+		var prev = sel.parent.items[sel.index - 1];
+
+		if ( this.isItem( sel ) &amp;&amp; this.isItem( prev ) ) {
+			this.swap( sel, prev );
+			tree.selection = prev;
+			return;
+		}
+
+		if ( this.isNode( sel ) &amp;&amp; this.isItem( prev ) ) {
+			sel.parent.add( 'item', prev.text, sel.index + 1 );
+			this.removeItem( sel );
+			return;
+		}
+
+		if ( this.isItem( sel ) &amp;&amp; this.isNode( prev ) ) {
+			tree.selection = sel.parent.add( 'item', sel.text, sel.index - 1 );
+			this.removeItem( sel );
+			return;
+		}
+
+		var target = sel.parent.add( 'node', sel.text, sel.index - 1 );
+
+		for ( var i = 0, il = target.length; i &lt; il; i++ ) {
+			this.copyBranch( sel.items[i], target );
+		}
+
+		tree.selection = target;
+		this.removeItem( sel );
+	}
+};
+
+/**
+ * Moves selected item(s) down in a treeview
+ *
+ * @method
+ * @memberof aeq.ui.TreeView
+ */
+ui.TreeView.prototype.moveDown = function () {
+	var tree = this.obj;
+
+	if ( tree.selection === null ) return;
+
+	if ( tree.selection.index &lt; tree.items.length - 1 ) {
+		var sel = tree.selection;
+		var next = sel.parent.items[sel.index + 1];
+
+		if ( this.isItem( sel ) &amp;&amp; this.isItem( next ) ) {
+			this.swap( sel, next );
+			tree.selection = next;
+			return;
+		}
+
+		if ( this.isNode( sel ) &amp;&amp; this.isItem( next ) ) {
+			sel.parent.add( 'item', next.text, sel.index - 1 );
+			this.removeItem( next );
+			return;
+		}
+
+		if ( this.isItem( sel ) &amp;&amp; this.isNode( next ) ) {
+			tree.selection = sel.parent.add( 'item', sel.text, sel.index + 1 );
+			this.removeItem( sel );
+			return;
+		}
+
+		var target = sel.parent.add( 'node', sel.text, sel.index + 2 );
+
+		for ( var i = 0, il = target.length; i &lt; il; i++ ) {
+			this.copyBranch( sel.items[i], target );
+		};
+
+		tree.selection = target;
+		this.removeItem( sel );
+	}
+};
 
 return ui;
 }( aeq.ui || {}) );
