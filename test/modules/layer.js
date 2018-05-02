@@ -30,7 +30,7 @@ sourceLayer.guideLayer = true;
 sourceLayer.comment = 'comment';
 sourceLayer.autoOrient = AutoOrientType.ALONG_PATH;
 
-aeq.layer.setLayerToggles( sourceLayer, layer );
+aeq.layer.copyLayerToggles( sourceLayer, layer );
 
 if ( aeq.layer.children( parent ).length !== 2 ) {
 	errors.push( 'layer.children failed' );
