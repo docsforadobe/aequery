@@ -6,6 +6,7 @@
 - Adds `ArrayEx.findIndex`
 - Adds `aeq.ui.ListBox`
 - Adds `aeq.ui.TreeView`
+- Adds `getChildren()` to `aeq.ui.Container`
 - Renames `aeq.Key.getKeyinfo` to `aeq.Key.getKeyInfo`
 - Renames `setLayerToggles` to `copyLayerToggles`
 - Removes docs from repo, adds to gitignore
