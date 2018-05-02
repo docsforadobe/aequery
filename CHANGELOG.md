@@ -8,6 +8,7 @@
 - Adds `aeq.ui.TreeView`
 - Adds `getChildren()` to `aeq.ui.Container`
 - Adds `selectFiles()` to `aeq.file`
+- Adds `getFilesRecursive()` to `aeq.file`
 - Renames `aeq.Key.getKeyinfo` to `aeq.Key.getKeyInfo`
 - Renames `setLayerToggles` to `copyLayerToggles`
 - Removes docs from repo, adds to gitignore
