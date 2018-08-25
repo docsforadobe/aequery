@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.6.0 - 2018/08/26
 
 - Adds `aeq.project.getSelectedCompsOrAll`
 - Adds `ArrayEx.findIndex`
@@ -13,7 +13,8 @@
 - Renames `setLayerToggles` to `copyLayerToggles`
 - Removes docs from repo, adds to gitignore
 - Changes `selectedKeys` to return arrayEx
-- Fxies `selectedKeys` returning wrong keys
+- Fixes `selectedKeys` returning wrong keys
+- Fixes `aeq.extend` not checking for `hasOwnProperty`
 
 ## 0.5.0 - 2018/04/08
 

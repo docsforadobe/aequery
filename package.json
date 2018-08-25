@@ -1,13 +1,13 @@
 {
   "name": "aequery",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "General purpose after effects scripting library",
   "main": "dist/aequery.js",
   "scripts": {
     "test": "eslint lib/ test/",
     "lint-fix": "eslint --fix lib test",
     "deploy-bitbucket": "gulp deploy:bitbucket",
-    "version": "gulp update-version && git add docs lib/main.js",
+    "version": "gulp update-version && git add -f docs lib/main.js",
     "prepublish": "gulp build-aequery"
   },
   "files": [
