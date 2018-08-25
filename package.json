@@ -7,7 +7,7 @@
     "test": "eslint lib/ test/",
     "lint-fix": "eslint --fix lib test",
     "deploy-bitbucket": "gulp deploy:bitbucket",
-    "version": "gulp update-version && git add docs lib/main.js",
+    "version": "gulp update-version && git add -f docs lib/main.js",
     "prepublish": "gulp build-aequery"
   },
   "files": [
