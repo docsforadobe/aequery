@@ -123,7 +123,7 @@ function setValue( source, target ) {
 function moveScaleKeys( effect, scaleProp ) {
 	var theProp = new aeq.Property( scaleProp )
 	theProp.forEachKey( function( key ) {
-		var keyInfo = key.getKeyinfo()
+		var keyInfo = key.getKeyInfo()
 		var value = keyInfo.value
 		var inEase = keyInfo.temporalEase.inEase
 		var outEase = keyInfo.temporalEase.outEase

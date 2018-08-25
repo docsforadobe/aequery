@@ -91,7 +91,7 @@ gulp.task('build-aequery', ['debug'], function() {
 
 
 gulp.task('watch', function () {
-	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['debug']);
+	gulp.watch(['./lib/**/*.js', './**/*.jsx'], ['build-aequery']);
 });
 
 
