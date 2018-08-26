@@ -21,16 +21,8 @@ namespace _aeq
     export type forEachMemberCallback = (member: any, value: any, obj: any) => boolean;
     export type forEachArrayCallback<T> = (item: T, idx: number, array: Array<T>) => void;
     
-    export interface ArrayLike
+    export interface ArrayEx<T> extends Array<T>, IAeqObject
     {
-        [key: number]: any
-        length: number
-    }
-    
-    export interface ArrayEx<T> extends Array<T>, ArrayLike
-    {
-        isAeq: boolean;
-        
         forEach(callback: forEachArrayCallback<T>): void
     }
 }

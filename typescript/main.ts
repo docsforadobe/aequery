@@ -12,7 +12,7 @@ namespace _aeq
         if (typeof selector === 'string') {
             return selectByCss(selector, context);
         }
-    
+
         if (isArray(selector)) {
             return arrayEx(selector as any);
         }
