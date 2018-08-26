@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "noLib": true,
+      "target": "es3",
+      "module": "amd",
+      "declaration": true,
+      "outFile": "../dist/aequery.js",
+      "strict": true,
+      "jsx": "preserve",
+      "experimentalDecorators": true,
+      "types": [
+        "types-for-adobe/AfterEffects/2018/"
+      ],
+    },
+    "include": [
+      "interfaces.ts",
+      "public.ts",
+      "main.ts",
+      "**/*.ts"
+    ]
+  }

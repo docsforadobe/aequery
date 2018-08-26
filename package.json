@@ -8,7 +8,8 @@
     "lint-fix": "eslint --fix lib test",
     "deploy-bitbucket": "gulp deploy:bitbucket",
     "version": "gulp update-version && git add -f docs lib/main.js",
-    "prepublish": "gulp build-aequery"
+    "prepublish": "gulp build-aequery",
+    "ts": "cd typescript; tsc -w"
   },
   "files": [
     "lib/*",
@@ -43,7 +44,9 @@
     "jsdoc": "^3.5.5",
     "pegjs": "^0.9.0",
     "pre-commit": "^1.2.2",
-    "run-sequence": "^1.1.5"
+    "run-sequence": "^1.1.5",
+    "types-for-adobe": "0.0.1",
+    "typescript": "^3.0.1"
   },
   "pre-commit": [
     "test"
