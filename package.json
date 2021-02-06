@@ -6,7 +6,6 @@
   "scripts": {
     "test": "eslint lib/ test/",
     "lint-fix": "eslint --fix lib test",
-    "deploy-bitbucket": "gulp deploy:bitbucket",
     "version": "gulp update-version && git add -f docs lib/main.js",
     "prepublish": "gulp build-aequery"
   },
@@ -17,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "bitbucket:motiondesign/aequery"
+    "url": "github:aenhancers/aequery"
   },
-  "issues": "https://bitbucket.org/motiondesign/aequery/issues",
-  "author": "motiondesign",
+  "issues": "https://github.com/aenhancers/aequery/issues",
+  "author": "Aenhancers",
   "license": "MIT",
   "devDependencies": {
     "del": "^2.2.0",
