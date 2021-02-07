@@ -24,7 +24,7 @@
   "devDependencies": {
     "del": "^2.2.0",
     "docdash": "^0.4.0",
-    "eslint": "^4.6.1",
+    "eslint": "^7.19.0",
     "eslint-config-aftereffects": "^1.1.0",
     "eslint-config-runegan": "^1.2.0",
     "gulp": "^3.9.0",
