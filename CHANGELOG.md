@@ -14,6 +14,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 
+-
+
+### Fixed
+
+-
+
+---
+
+## [v0.7.0] - 2022/01/11
+
+### Changed
+
 - Changes `aeq.filter` to return arrayEx
 - `AEQKey TemporalEase` and `AEQKey InterpolationType` defs to match types-for-adobe
 
@@ -162,6 +174,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - Initial npm version
 
 [Unreleased]: https://github.com/aenhancers/aequery/compare/master...develop
+[v0.7.0]: https://github.com/aenhancers/aequery/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/aenhancers/aequery/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/aenhancers/aequery/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/aenhancers/aequery/compare/v0.3.0...v0.4.0
