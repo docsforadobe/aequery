@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [Unreleased]
+
+### Added
+
+-
+
+### Changed
+
+- Changes `aeq.filter` to return arrayEx
+- `AEQKey TemporalEase` and `AEQKey InterpolationType` defs to match types-for-adobe
+
+### Fixed
+
+- `getFilesRecursive()` breaking on empty folders
+- Return type for `getFootage()`
+- `aeq.Key.spatialTangent` erroring when processing non-spatial properties
+- `Property.nearestKeyIndex` no longer returns a key, instead returning index as expected
+
+---
+
 ## [v0.6.0] - 2018/08/26
 
 ### Added
