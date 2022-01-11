@@ -7,7 +7,7 @@
     "test": "eslint lib/ test/",
     "lint-fix": "eslint --fix lib test",
     "version": "gulp update-version && git add -f docs lib/main.js",
-    "prepublish": "gulp build-aequery"
+    "prepublish": "gulp"
   },
   "files": [
     "lib/*",
