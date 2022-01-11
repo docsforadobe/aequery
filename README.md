@@ -16,7 +16,7 @@ Download/install
 npm install aequery
 ```
 
-If you are not using npm, you can download the latest version [here](https://bitbucket.org/motiondesign/aequery/downloads)
+If you are not using npm, you can download the latest version [here](https://github.com/aenhancers/aequery/releases)
 
 Then you can include it in your script
 
@@ -42,7 +42,7 @@ if (comp) {
 
 Documentation
 -------------
-[For documentation, visit aequery.aenhancers.com](http://aequery.aenhancers.com)
+[For documentation, visit aenhancers.github.io/aequery](https://aenhancers.github.io/aequery/)
 
 
 Development
@@ -55,7 +55,7 @@ Install gulp
 sudo npm install -g gulp
 
 # Clone the repository and enter the directory
-git clone https://bitbucket.org/motiondesign/aequery.git
+git clone https://github.com/aenhancers/aequery.git
 cd aequery
 
 # Install npm dependencies
@@ -65,8 +65,8 @@ npm install
 Gulp usage:
 ```bash
 gulp # Builds it to the relevant places in the ScriptUI Folder
-gulp watch # Will monitor it and  rebuild it real quick if anything changes
+gulp watch # Will monitor it and rebuild it real quick if anything changes
 ```
 
 # Contributing
-Pull requests, [bug reports and feature requests](https://bitbucket.org/motiondesign/aequery/issues) are welcome!
+Pull requests, [bug reports and feature requests](https://github.com/aenhancers/aequery/issues) are welcome!
