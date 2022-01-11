@@ -42,7 +42,7 @@ if (comp) {
 
 Documentation
 -------------
-[For documentation, visit aequery.aenhancers.com](http://aequery.aenhancers.com)
+[For documentation, visit aenhancers.github.io/aequery](https://aenhancers.github.io/aequery/)
 
 
 Development
@@ -65,7 +65,7 @@ npm install
 Gulp usage:
 ```bash
 gulp # Builds it to the relevant places in the ScriptUI Folder
-gulp watch # Will monitor it and  rebuild it real quick if anything changes
+gulp watch # Will monitor it and rebuild it real quick if anything changes
 ```
 
 # Contributing
