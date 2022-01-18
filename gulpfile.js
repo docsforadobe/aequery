@@ -39,9 +39,9 @@ gulp.task( 'build:aeq-core', function () {
 	return gulp.src( [
 		'lib/intro.js',
 		'lib/main.js',
+		'lib/**/*.js',
 		'!lib/ui/**/*.js',
-		'!lib/outro.js',
-		'lib/**/*.js'
+		'!lib/outro.js'
 	] )
 		.pipe( replace( /(\/\*.*?\*\/\n+)?(var )?aeq = \(function ?\(aeq\) \{/g, '' ) )
 		.pipe( replace( /'use strict';/g, '' ) )
@@ -142,10 +142,10 @@ gulp.task( 'update-version', gulp.series( 'update-version:aeq', 'build:docs' ) )
 
 gulp.task( 'lint', function () {
 	return gulp.src( [
-		'!lib/intro.js',
 		'lib/main.js',
-		'!lib/outro.js',
-		'lib/**/*.js'
+		'lib/**/*.js',
+		'!lib/intro.js',
+		'!lib/outro.js'
 	] )
 		.pipe( eslint() )
 		.pipe( eslint.format() );
