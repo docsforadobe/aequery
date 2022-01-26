@@ -10,7 +10,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Added
 
--
+- New types
+  - `isSolidLayer`
+  - `isAdjustmentLayer`
+  - `isGuideLayer`
+  - `isNullLayer`
 
 ### Changed
 
@@ -18,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Fixed
 
+- Documentation for `isAeq`
 - Gulp not concatenating files properly
 
 ---
