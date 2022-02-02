@@ -38,13 +38,33 @@ aeq.undoGroup( testName, function () {
 });
 
 function setup( name, duration ) {
+	var items = aeq.importFiles( [
+		'./assets/aeq.jpg', // TODO: Fix paths
+		'./assets/aeq.psd',
+		'./assets/cine.c4d',
+		'./assets/aeq.jpg'
+	] );
+	var ph = items[3];
+	ph.replaceWithPlaceholder( 'placeholder', 100, 100, 24.0, 1.0 );
 	var comp = aeq.comp.create({ name: name, duration: duration || 3 });
+	comp.renderer = 'ADBE Ernst'; // Cinema4D renderer
 	var adj = comp.layers.addShape();
 	adj.name = 'adjustment';
 	adj.adjustmentLayer = true;
 	var guide = comp.layers.addShape();
 	guide.name = 'guide';
 	guide.guideLayer = true;
+	var env = comp.layers.add( items[0] );
+	env.name = 'env';
+	env.environmentLayer = true;
+	var tm = comp.layers.addNull();
+	tm.name = 'hasTrackMatte';
+	tm.trackMatteType = TrackMatteType.ALPHA;
+	comp.layers.addNull().name = 'isTrackMatte';
+	comp.layers.add( items[0] ).name = 'jpg';
+	comp.layers.add( items[1] ).name = 'psd';
+	comp.layers.add( items[2] ).name = 'c4d';
+	comp.layers.add( ph );
 	comp.layers.addShape().name = 'shape';
 	comp.layers.addLight( 'light', [ 0, 0 ] );
 	comp.layers.addCamera( 'camera', [ 0, 0 ] );
@@ -89,6 +109,8 @@ function getTests( comp ) {
 		{ method: 'isFunc', value: function () {}, expect: true },
 		{ method: 'isFunc', value: 1, expect: false },
 
+		// TODO: isEmpty
+
 		// TODO: Fails
 		// [ 'isAeq', aeq( 'comp' ), true ],
 		// [ 'isAeq', new aeq.Comp(), true ],
@@ -100,10 +122,62 @@ function getTests( comp ) {
 		{ method: 'isApp', value: app, expect: true },
 		{ method: 'isApp', value: app.project, expect: false },
 
+		// TODO: isFolder
+		// TODO: isFile
+		// TODO: isFolderItem
+		// TODO: isFootageItem
+
 		// TODO: Fails
 		// { method: 'isComp', value: comp, expect: true },
 		// { method: 'isComp', value: comp.layer( 1 ), expect: false },
 		// { method: 'isComp', value: {}, expect: false },
+
+		{ method: 'isSolidLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isSolidLayer', value: comp.layer( 'solid' ), expect: true },
+		{ method: 'isSolidLayer', value: comp.layer( 'shape' ), expect: false },
+		{ method: 'isSolidLayer', value: null, expect: false },
+
+		{ method: 'isAdjustmentLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isAdjustmentLayer', value: comp.layer( 'adjustment' ), expect: true },
+		{ method: 'isAdjustmentLayer', value: null, expect: false },
+
+		{ method: 'isEnvironmentLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isEnvironmentLayer', value: comp.layer( 'env' ), expect: true },
+		{ method: 'isEnvironmentLayer', value: null, expect: false },
+
+		{ method: 'isGuideLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isGuideLayer', value: comp.layer( 'guide' ), expect: true },
+		{ method: 'isGuideLayer', value: null, expect: false },
+
+		{ method: 'isNullLayer', value: comp.layer( 'null' ), expect: true },
+		{ method: 'isNullLayer', value: comp.layer( 'solid' ), expect: false },
+		{ method: 'isNullLayer', value: comp.layer( 'shape' ), expect: false },
+		{ method: 'isNullLayer', value: null, expect: false },
+
+		{ method: 'isPhotoshopLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isPhotoshopLayer', value: comp.layer( 'psd' ), expect: true },
+		{ method: 'isPhotoshopLayer', value: null, expect: false },
+
+		{ method: 'isCinema4DLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isCinema4DLayer', value: comp.layer( 'jpg' ), expect: false },
+		{ method: 'isCinema4DLayer', value: comp.layer( 'c4d' ), expect: true },
+		{ method: 'isCinema4DLayer', value: null, expect: false },
+
+		{ method: 'isFileLayer', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isFileLayer', value: comp.layer( 'jpg' ), expect: true },
+		{ method: 'isFileLayer', value: comp.layer( 'psd' ), expect: true },
+		{ method: 'isFileLayer', value: comp.layer( 'c4d' ), expect: true },
+		{ method: 'isFileLayer', value: null, expect: false },
+
+		{ method: 'isPlaceholder', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isPlaceholder', value: comp.layer( 'jpg' ), expect: false },
+		{ method: 'isPlaceholder', value: comp.layer( 'placholder' ), expect: true },
+		{ method: 'isPlaceholder', value: null, expect: false }, // TODO: Fails
+
+		{ method: 'isTrackMatte', value: comp.layer( 'null' ), expect: false },
+		{ method: 'isTrackMatte', value: comp.layer( 'jpg' ), expect: false },
+		{ method: 'isTrackMatte', value: comp.layer( 'isTrackMatte' ), expect: true },
+		{ method: 'isTrackMatte', value: null, expect: false },
 
 		{ method: 'isAVLayer', value: comp.layer( 'av' ), expect: true },
 		{ method: 'isAVLayer', value: comp.layer( 'null' ), expect: true },
@@ -115,37 +189,21 @@ function getTests( comp ) {
 		{ method: 'isLayer', value: comp.layer( 'shape' ), expect: true },
 		{ method: 'isLayer', value: null, expect: false },
 
-		{ method: 'isSolidLayer', value: comp.layer( 'null' ), expect: false },
-		{ method: 'isSolidLayer', value: comp.layer( 'solid' ), expect: true },
-		{ method: 'isSolidLayer', value: comp.layer( 'shape' ), expect: false },
-		{ method: 'isSolidLayer', value: null, expect: false },
-
-		{ method: 'isNullLayer', value: comp.layer( 'null' ), expect: true },
-		{ method: 'isNullLayer', value: comp.layer( 'solid' ), expect: false },
-		{ method: 'isNullLayer', value: comp.layer( 'shape' ), expect: false },
-		{ method: 'isNullLayer', value: null, expect: false },
-
-		{ method: 'isAdjustmentLayer', value: comp.layer( 'null' ), expect: false },
-		{ method: 'isAdjustmentLayer', value: comp.layer( 'adjustment' ), expect: true },
-		{ method: 'isAdjustmentLayer', value: null, expect: false },
-
-		{ method: 'isGuideLayer', value: comp.layer( 'null' ), expect: false },
-		{ method: 'isGuideLayer', value: comp.layer( 'guide' ), expect: true },
-		{ method: 'isGuideLayer', value: null, expect: false },
-
-		// TODO:
-		// 'isPhotoshopLayer'
-		// 'isCinema4DLayer'
-		// 'isFileLayer'
-		// 'isPlaceholder'
-		// 'isTrackMatte'
-		// 'isEnvironmentLayer'
+		// TODO: isShapeLayer
+		// TODO: isTextLayer
+		// TODO: isCameraLayer
+		// TODO: isLightLayer
+		// TODO: isPrecomp
+		// TODO: isLayer
 
 		{ method: 'isProperty', value: comp.layer( 1 ).property( 'Position' ), expect: true },
 		{ method: 'isProperty', value: comp.layer( 1 ).property( 'ADBE Transform Group' ), expect: false },
 
 		{ method: 'isPropertyGroup', value: comp.layer( 1 ).property( 'Position' ), expect: false },
-		{ method: 'isPropertyGroup', value: comp.layer( 1 ).property( 'ADBE Transform Group' ), expect: true }
+		{ method: 'isPropertyGroup', value: comp.layer( 1 ).property( 'ADBE Transform Group' ), expect: true },
+
+		{ method: 'isMaskPropertyGroup', value: comp.layer( 1 ).property( 'Position' ), expect: true },
+		{ method: 'isMaskPropertyGroup', value: comp.layer( 1 ).property( 'ADBE Transform Group' ), expect: false }
 	];
 }
 }() );

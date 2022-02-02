@@ -13,8 +13,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 - New types
   - `isSolidLayer`
   - `isAdjustmentLayer`
+  - `isEnvironmentLayer`
   - `isGuideLayer`
   - `isNullLayer`
+  - `isPhotoshopLayer`
+  - `isCinema4DLayer`
+  - `isFileLayer`
+  - `isPlaceholder`
+  - `isTrackMatte`
 
 ### Changed
 
