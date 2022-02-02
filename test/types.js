@@ -38,11 +38,12 @@ aeq.undoGroup( testName, function () {
 });
 
 function setup( name, duration ) {
+	var basePath = new File( $.fileName ).parent.toString();
 	var items = aeq.importFiles( [
-		'./assets/aeq.jpg', // TODO: Fix paths
-		'./assets/aeq.psd',
-		'./assets/cine.c4d',
-		'./assets/aeq.jpg'
+		basePath + '/assets/aeq.jpg',
+		basePath + '/assets/aeq.psd',
+		basePath + '/assets/cine.c4d',
+		basePath + '/assets/aeq.jpg'
 	] );
 	var ph = items[3];
 	ph.replaceWithPlaceholder( 'placeholder', 100, 100, 24.0, 1.0 );
