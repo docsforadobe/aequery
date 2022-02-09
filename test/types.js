@@ -206,10 +206,10 @@ function getTests( comp ) {
 		{ method: 'isFileLayer', value: comp.layer( 'c4d' ), expect: true },
 		{ method: 'isFileLayer', value: null, expect: false },
 
-		{ method: 'isPlaceholder', value: comp.layer( 'placholder' ), expect: true },
+		{ method: 'isPlaceholder', value: comp.layer( 'placeholder' ), expect: true },
 		{ method: 'isPlaceholder', value: comp.layer( 'null' ), expect: false },
 		{ method: 'isPlaceholder', value: comp.layer( 'jpg' ), expect: false },
-		{ method: 'isPlaceholder', value: null, expect: false }, // TODO: Fails
+		{ method: 'isPlaceholder', value: null, expect: false },
 
 		{ method: 'isTrackMatte', value: comp.layer( 'null' ), expect: false },
 		{ method: 'isTrackMatte', value: comp.layer( 'jpg' ), expect: false },
