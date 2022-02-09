@@ -147,6 +147,10 @@ function getTests( comp ) {
 		{ method: 'isApp', value: app.project, expect: false },
 		{ method: 'isApp', value: {}, expect: false },
 
+		{ method: 'isProject', value: app.project, expect: true },
+		{ method: 'isProject', value: app, expect: false },
+		{ method: 'isProject', value: {}, expect: false },
+
 		{ method: 'isFolder', value: new Folder(), expect: true },
 		{ method: 'isFolder', value: getItem( 'Solids' ), expect: false },
 		{ method: 'isFolder', value: getItem( 'aeq.jpg' ), expect: false },
