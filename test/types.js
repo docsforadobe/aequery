@@ -131,7 +131,10 @@ function getTests( comp ) {
 		{ method: 'isFunc', value: function () {}, expect: true },
 		{ method: 'isFunc', value: 1, expect: false },
 
-		// TODO: isEmpty
+		{ method: 'isEmpty', value: [], expect: true },
+		{ method: 'isEmpty', value: new aeq.arrayEx(), expect: true },
+		{ method: 'isEmpty', value: {}, expect: false },
+		{ method: 'isEmpty', value: 1, expect: false },
 
 		{ method: 'isAeq', value: aeq( 'comp' ), expect: true },
 		{ method: 'isAeq', value: new aeq.Comp(), expect: true },
