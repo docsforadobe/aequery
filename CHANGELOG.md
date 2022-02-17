@@ -22,10 +22,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
   - `isFileLayer`
   - `isPlaceholder`
   - `isTrackMatte`
+- Separate builds for aequery variations:
+  - `aeq-slim`, for just the core functionality
+  - `aeq-parser`, for core & css parser
+  - `aeq-ui`, for core & aeq.ui
 
 ### Changed
 
--
+- Simplified resulting built file (to just `aeq.js`)
 
 ### Fixed
 

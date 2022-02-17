@@ -22,7 +22,7 @@ Then you can include it in your script
 
 Import into your script:
 ```javascript
-#include 'path/to/aequery.js' // aequery is now available as aeq
+#include 'path/to/aeq.js' // aequery is now available as aeq
 // Disable all Camera lens blur effects in active comp
 aeq( 'activecomp effect[matchName="ADBE Camera Lens Blur"]' ).attr( 'enabled', false )
 ```
