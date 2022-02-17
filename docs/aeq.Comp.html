@@ -26,11 +26,11 @@
 </nav>
 
 <div id="main">
-    
-    <h1 class="page-title">comp</h1>
-    
 
-    
+    <h1 class="page-title">comp</h1>
+
+
+
 
 
 
@@ -38,137 +38,137 @@
 <section>
 
 <header>
-    
+
         <h2>
             <span class="ancestors"><a href="aeq.html">aeq</a>.</span>
-        
+
         comp
         </h2>
-        
-    
+
+
 </header>
 
 <article>
     <div class="container-overview">
-    
-        
+
+
 
 <dl class="details">
 
-    
+
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line2">line 2</a>
     </li></ul></dd>
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </dl>
 
 
 
 
-        
-            <div class="description"><p>Module dealing with comp objects.</p></div>
-        
 
-        
-    
+            <div class="description"><p>Module dealing with comp objects.</p></div>
+
+
+
+
     </div>
 
-    
 
-    
 
-    
 
-     
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
         <h3 class="subsection-title">Methods</h3>
 
-        
-            
 
-    
+
+
+
 
     <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(folder<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {CompItem}</span></h4>
 
-    
+
 
 
 
 
 <dl class="details">
 
-    
+
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line48">line 48</a>
     </li></ul></dd>
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </dl>
 
 
@@ -188,400 +188,400 @@
 
 
     <h5>Examples</h5>
-    
+
         <p class="code-caption">Create a comp in the project root, with name "Example",
          and a duration of 10 seconds. And use default values for the
          other options</p>
-    
+
     <pre class="prettyprint"><code>var comp = aeq.comp.create({
     name: 'Example',
     duration: 10
 })</code></pre>
 
         <p class="code-caption">Create comp in a folder, with name "Example"</p>
-    
+
     <pre class="prettyprint"><code>var comp = aeq.comp.create(compFolder, {
     name: "Example"
 })</code></pre>
 
         <p class="code-caption">Create a comp with all default values</p>
-    
+
     <pre class="prettyprint"><code>var comp = aeq.comp.create()</code></pre>
 
 
 
 
     <h5>Parameters:</h5>
-    
+
 
 <table class="params">
     <thead>
     <tr>
-        
+
         <th>Name</th>
-        
+
 
         <th>Type</th>
 
-        
-        <th>Attributes</th>
-        
 
-        
+        <th>Attributes</th>
+
+
+
         <th>Default</th>
-        
+
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>folder</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">FolderItem</span>
 |
 
 <span class="param-type">object</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>app.project</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>The folder to place the
 comp inside in the project panel. If not provided, this argument
 will be used as the <code>options</code> parameter.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>options</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">object</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Comp settings:</p>
                 <h6>Properties</h6>
-                
+
 
 <table class="params">
     <thead>
     <tr>
-        
+
         <th>Name</th>
-        
+
 
         <th>Type</th>
 
-        
-        <th>Attributes</th>
-        
 
-        
+        <th>Attributes</th>
+
+
+
         <th>Default</th>
-        
+
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>name</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">string</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>Comp</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>The name of the comp.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>width</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">number</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>1920</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Comp width, in pixels.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>height</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">number</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>1080</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Comp height, in pixels.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>pixelAspect</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">number</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>1</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Comp pixel aspect ratio.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>duration</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">number</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>1</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Comp duration, in seconds.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>frameRate</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">number</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>24</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Comp frame rate.</p></td>
         </tr>
 
-    
+
     </tbody>
 </table>
 
             </td>
         </tr>
 
-    
+
     </tbody>
 </table>
 
@@ -600,7 +600,7 @@ will be used as the <code>options</code> parameter.</p></td>
 
 <h5>Returns:</h5>
 
-        
+
 <div class="param-desc">
     <p>The created comp item.</p>
 </div>
@@ -612,66 +612,66 @@ will be used as the <code>options</code> parameter.</p></td>
         Type
     </dt>
     <dd>
-        
+
 <span class="param-type">CompItem</span>
 
 
     </dd>
 </dl>
 
-    
 
 
-        
-            
 
-    
+
+
+
+
 
     <h4 class="name" id=".getCompInQueue"><span class="type-signature">(static) </span>getCompInQueue<span class="signature">(comp, queuedOnly<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;RenderQueueItem>}</span></h4>
 
-    
+
 
 
 
 
 <dl class="details">
 
-    
+
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line90">line 90</a>
     </li></ul></dd>
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </dl>
 
 
@@ -691,116 +691,116 @@ will be used as the <code>options</code> parameter.</p></td>
 
 
     <h5>Example</h5>
-    
+
         <p class="code-caption">Get all `RenderQueueItem`s that references
          the comp.</p>
-    
+
     <pre class="prettyprint"><code>var RQItems = aeq.comp.getCompInQueue( comp, false )</code></pre>
 
 
 
 
     <h5>Parameters:</h5>
-    
+
 
 <table class="params">
     <thead>
     <tr>
-        
+
         <th>Name</th>
-        
+
 
         <th>Type</th>
 
-        
-        <th>Attributes</th>
-        
 
-        
+        <th>Attributes</th>
+
+
+
         <th>Default</th>
-        
+
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>comp</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">CompItem</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>The comp to find in the Render Queue.</p></td>
         </tr>
 
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>queuedOnly</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">boolean</span>
 
 
-            
+
             </td>
 
-            
+
                 <td class="attributes">
-                
+
                     &lt;optional><br>
-                
 
-                
 
-                
+
+
+
                 </td>
-            
 
-            
+
+
                 <td class="default">
-                
+
                     <code>true</code>
-                
+
                 </td>
-            
+
 
             <td class="description last"><p>Only get <code>RenderQueueItem</code>s that
 are queued.</p></td>
         </tr>
 
-    
+
     </tbody>
 </table>
 
@@ -819,7 +819,7 @@ are queued.</p></td>
 
 <h5>Returns:</h5>
 
-        
+
 <div class="param-desc">
     <p>The <code>RenderQueueItem</code>s that references
 the comp</p>
@@ -832,66 +832,66 @@ the comp</p>
         Type
     </dt>
     <dd>
-        
+
 <span class="param-type">Array.&lt;RenderQueueItem></span>
 
 
     </dd>
 </dl>
 
-    
 
 
-        
-            
 
-    
+
+
+
+
 
     <h4 class="name" id=".isInQueue"><span class="type-signature">(static) </span>isInQueue<span class="signature">(comp)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
-    
+
 
 
 
 
 <dl class="details">
 
-    
+
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line114">line 114</a>
     </li></ul></dd>
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </dl>
 
 
@@ -914,50 +914,50 @@ queued or not.</p>
 
 
     <h5>Parameters:</h5>
-    
+
 
 <table class="params">
     <thead>
     <tr>
-        
+
         <th>Name</th>
-        
+
 
         <th>Type</th>
 
-        
 
-        
+
+
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>comp</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">CompItem</span>
 
 
-            
+
             </td>
 
-            
 
-            
+
+
 
             <td class="description last"><p>The comp to find in the queue.</p></td>
         </tr>
 
-    
+
     </tbody>
 </table>
 
@@ -976,7 +976,7 @@ queued or not.</p>
 
 <h5>Returns:</h5>
 
-        
+
 <div class="param-desc">
     <p>True if comp is in the queue.</p>
 </div>
@@ -988,66 +988,66 @@ queued or not.</p>
         Type
     </dt>
     <dd>
-        
+
 <span class="param-type">boolean</span>
 
 
     </dd>
 </dl>
 
-    
 
 
-        
-            
 
-    
+
+
+
+
 
     <h4 class="name" id=".isQueued"><span class="type-signature">(static) </span>isQueued<span class="signature">(comp)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
-    
+
 
 
 
 
 <dl class="details">
 
-    
+
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_comp.js.html">modules/comp.js</a>, <a href="modules_comp.js.html#line131">line 131</a>
     </li></ul></dd>
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </dl>
 
 
@@ -1069,50 +1069,50 @@ queued or not.</p>
 
 
     <h5>Parameters:</h5>
-    
+
 
 <table class="params">
     <thead>
     <tr>
-        
+
         <th>Name</th>
-        
+
 
         <th>Type</th>
 
-        
 
-        
+
+
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-    
+
 
         <tr>
-            
+
                 <td class="name"><code>comp</code></td>
-            
+
 
             <td class="type">
-            
-                
+
+
 <span class="param-type">CompItem</span>
 
 
-            
+
             </td>
 
-            
 
-            
+
+
 
             <td class="description last"><p>The comp to find the queue.</p></td>
         </tr>
 
-    
+
     </tbody>
 </table>
 
@@ -1131,7 +1131,7 @@ queued or not.</p>
 
 <h5>Returns:</h5>
 
-        
+
 <div class="param-desc">
     <p>True if the comp is queued.</p>
 </div>
@@ -1143,22 +1143,22 @@ queued or not.</p>
         Type
     </dt>
     <dd>
-        
+
 <span class="param-type">boolean</span>
 
 
     </dd>
 </dl>
 
-    
 
 
-        
-    
 
-    
 
-    
+
+
+
+
+
 </article>
 
 </section>
