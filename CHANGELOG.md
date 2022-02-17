@@ -10,7 +10,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Added
 
--
+- New types
+  - `isProject`
+  - `isSolidLayer`
+  - `isAdjustmentLayer`
+  - `isEnvironmentLayer`
+  - `isGuideLayer`
+  - `isNullLayer`
+  - `isPhotoshopLayer`
+  - `isCinema4DLayer`
+  - `isFileLayer`
+  - `isPlaceholder`
+  - `isTrackMatte`
 
 ### Changed
 
@@ -18,7 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Fixed
 
--
+- Documentation for `isAeq`
 
 ---
 
