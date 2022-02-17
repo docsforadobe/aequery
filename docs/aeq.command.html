@@ -26,11 +26,11 @@
 </nav>
 
 <div id="main">
-
+    
     <h1 class="page-title">command</h1>
+    
 
-
-
+    
 
 
 
@@ -38,137 +38,137 @@
 <section>
 
 <header>
-
+    
         <h2>
             <span class="ancestors"><a href="aeq.html">aeq</a>.</span>
-
+        
         command
         </h2>
-
-
+        
+    
 </header>
 
 <article>
     <div class="container-overview">
-
-
+    
+        
 
 <dl class="details">
 
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_command.js.html">modules/command.js</a>, <a href="modules_command.js.html#line2">line 2</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 </dl>
 
 
 
 
-
+        
             <div class="description"><p>Module for interacting with the command line / system</p></div>
+        
 
-
-
-
+        
+    
     </div>
 
+    
 
+    
 
+    
 
+     
 
+    
 
+    
 
-
-
-
-
-
-
-
+    
         <h3 class="subsection-title">Methods</h3>
 
+        
+            
 
-
-
-
+    
 
     <h4 class="name" id=".call"><span class="type-signature">(static) </span>call<span class="signature">(windows, mac<span class="signature-attributes">opt</span>, arg<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
 
-
+    
 
 
 
 
 <dl class="details">
 
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_command.js.html">modules/command.js</a>, <a href="modules_command.js.html#line39">line 39</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 </dl>
 
 
@@ -188,304 +188,299 @@
 
 
     <h5>Example</h5>
-
+    
         <p class="code-caption">Open file in Finder/Explorer. (<a href="aeq.command.html#.revealFile"><code>aeq.command.revealFile</code></a>)</p>
-
-    <pre class="prettyprint"><code>aeq.command.call('Explorer /select,', 'open -R', '"' + file.fsName + '"' )
-aeq.command.call({
-    windows: 'Explorer /select,',
-    mac: 'open -R',
-    arg: '"' + file.fsName + '"'
-})</code></pre>
+    
+    <pre class="prettyprint"><code>aeq.command.call('Explorer /select,', 'open -R', '"' + file.fsName + '"' )aeq.command.call({    windows: 'Explorer /select,',    mac: 'open -R',    arg: '"' + file.fsName + '"'})</code></pre>
 
 
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
-
+        
         <th>Attributes</th>
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>windows</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 |
 
 <span class="param-type">object</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Command to call if OS is windows,
 or an object with options.</p>
                 <h6>Properties</h6>
-
+                
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
-
+        
         <th>Attributes</th>
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>win</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
-
+                
                     &lt;optional><br>
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Command to call if OS is windows.</p></td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>windows</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
-
+                
                     &lt;optional><br>
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Command to call if OS is windows.</p></td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>mac</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
-
+                
                     &lt;optional><br>
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Argument to give the command.</p></td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>arg</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
-
+                
                     &lt;optional><br>
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Command to call if OS is MacOS.</p></td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
             </td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>mac</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
-
+                
                     &lt;optional><br>
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Command to call if OS is MacOS.</p></td>
         </tr>
 
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>arg</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
-
+            
                 <td class="attributes">
-
+                
                     &lt;optional><br>
+                
 
+                
 
-
-
-
+                
                 </td>
+            
 
-
-
+            
 
             <td class="description last"><p>Argument to give the command.</p></td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -504,7 +499,7 @@ or an object with options.</p>
 
 <h5>Returns:</h5>
 
-
+        
 <div class="param-desc">
     <p>The value returned from the command.</p>
 </div>
@@ -516,66 +511,66 @@ or an object with options.</p>
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">string</span>
 
 
     </dd>
 </dl>
 
+    
 
 
+        
+            
 
-
-
-
-
+    
 
     <h4 class="name" id=".copyToClipboard"><span class="type-signature">(static) </span>copyToClipboard<span class="signature">(text)</span><span class="type-signature"></span></h4>
 
-
+    
 
 
 
 
 <dl class="details">
 
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_command.js.html">modules/command.js</a>, <a href="modules_command.js.html#line108">line 108</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 </dl>
 
 
@@ -595,57 +590,57 @@ or an object with options.</p>
 
 
     <h5>Example</h5>
-
+    
     <pre class="prettyprint"><code>aeq.command.copyToClipboard( 'Hello World!' )</code></pre>
 
 
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>text</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last"><p>The string to copy.</p></td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -664,56 +659,56 @@ or an object with options.</p>
 
 
 
+        
+            
 
-
-
-
+    
 
     <h4 class="name" id=".openURL"><span class="type-signature">(static) </span>openURL<span class="signature">(URL)</span><span class="type-signature"></span></h4>
 
-
+    
 
 
 
 
 <dl class="details">
 
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_command.js.html">modules/command.js</a>, <a href="modules_command.js.html#line64">line 64</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 </dl>
 
 
@@ -733,59 +728,59 @@ or an object with options.</p>
 
 
     <h5>Example</h5>
-
+    
         <p class="code-caption">Opens AEQuery bitbucket project.</p>
-
+    
     <pre class="prettyprint"><code>aeq.command.openURL('https://bitbucket.org/motiondesign/aequery')</code></pre>
 
 
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>URL</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last"><p>The URL to open.</p></td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -804,56 +799,56 @@ or an object with options.</p>
 
 
 
+        
+            
 
-
-
-
+    
 
     <h4 class="name" id=".revealFile"><span class="type-signature">(static) </span>revealFile<span class="signature">(filePath)</span><span class="type-signature"> &rarr; {string}</span></h4>
 
-
+    
 
 
 
 
 <dl class="details">
 
-
+    
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="modules_command.js.html">modules/command.js</a>, <a href="modules_command.js.html#line92">line 92</a>
     </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 </dl>
 
 
@@ -873,63 +868,63 @@ or an object with options.</p>
 
 
     <h5>Example</h5>
-
+    
         <p class="code-caption">Reveals the rurnning script in Finder/Explorer</p>
-
+    
     <pre class="prettyprint"><code>aeq.command.revealFile( $.fileName )</code></pre>
 
 
 
 
     <h5>Parameters:</h5>
-
+    
 
 <table class="params">
     <thead>
     <tr>
-
+        
         <th>Name</th>
-
+        
 
         <th>Type</th>
 
+        
 
-
-
+        
 
         <th class="last">Description</th>
     </tr>
     </thead>
 
     <tbody>
-
+    
 
         <tr>
-
+            
                 <td class="name"><code>filePath</code></td>
-
+            
 
             <td class="type">
-
-
+            
+                
 <span class="param-type">string</span>
 |
 
 <span class="param-type">File</span>
 
 
-
+            
             </td>
 
+            
 
-
-
+            
 
             <td class="description last"><p>The path to the file that should be
 revealed, or a file object to reveal.</p></td>
         </tr>
 
-
+    
     </tbody>
 </table>
 
@@ -948,7 +943,7 @@ revealed, or a file object to reveal.</p></td>
 
 <h5>Returns:</h5>
 
-
+        
 <div class="param-desc">
     <p>The value returned when calling the reveal command
 in the command line. Mostly empty, holds error info
@@ -962,22 +957,22 @@ if not empty.</p>
         Type
     </dt>
     <dd>
-
+        
 <span class="param-type">string</span>
 
 
     </dd>
 </dl>
 
+    
 
 
+        
+    
 
+    
 
-
-
-
-
-
+    
 </article>
 
 </section>
@@ -990,7 +985,7 @@ if not empty.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Feb 09 2022 12:13:49 GMT+0100 (Central European Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

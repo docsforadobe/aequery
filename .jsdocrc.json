@@ -18,6 +18,9 @@
         "useLongnameInNav": true,
         "showInheritedInNav": true,
         "cleverLinks": true,
-        "applicationName": "AEQuery"
+        "applicationName": "AEQuery",
+        "default": {
+          "includeDate": false
+      }
     }
 }
