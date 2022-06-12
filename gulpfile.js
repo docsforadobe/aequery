@@ -116,9 +116,7 @@ gulp.task( 'build:aeq-slim', function () {
 		.pipe( gulp.dest( './dist' ) );
 });
 
-gulp.task( 'build:aeq-variations', gulp.series( 'build:aeq-parser', 'build:aeq-ui', 'build:aeq-slim', function ( cb ) {
-	return cb;
-}) );
+gulp.task( 'build:aeq-variations', gulp.series( 'build:aeq-parser', 'build:aeq-ui', 'build:aeq-slim' ) );
 
 // ===========================================================================
 // UI
