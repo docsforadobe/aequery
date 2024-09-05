@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 ### Changed
 
 - Simplified resulting built file (to just `aeq.js`)
+- Removed unwanted throw in `hasAllAttributes`
 
 ### Fixed
 
