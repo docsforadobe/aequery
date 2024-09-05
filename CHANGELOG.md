@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
   - `aeq-parser`, for core & css parser
   - `aeq-ui`, for core & aeq.ui
 - ArrayEx.reduce
+- Check for AE version when launching security pref panel (#67)
 
 ### Changed
 
