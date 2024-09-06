@@ -2,7 +2,7 @@
   "name": "aequery",
   "version": "0.7.1",
   "description": "General purpose after effects scripting library",
-  "main": "dist/aequery.js",
+  "main": "dist/aeq.js",
   "scripts": {
     "test": "eslint lib/ test/",
     "lint-fix": "eslint --fix lib test",
@@ -34,7 +34,7 @@
     "gulp-eslint": "^6.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.0.0",
-    "jsdoc": "^3.6.6",
+    "jsdoc": "^3.6.10",
     "pegjs": "^0.10.0",
     "pre-commit": "^1.2.2"
   },

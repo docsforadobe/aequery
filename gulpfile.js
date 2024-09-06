@@ -22,50 +22,13 @@ const exec = require( 'child_process' ).exec;
 
 
 gulp.task( 'watch', function () {
-	gulp.watch( [ './lib/**/*.js', './**/*.jsx' ], [ 'build-aequery' ] );
+	return gulp.watch( [ './lib/**/*.js', './**/*.jsx' ], gulp.series( 'build:aeq' ) );
 });
 
 gulp.task( 'clean:all', function () {
 	return del( [ 'build', 'dist' ], {
 		force: true
 	});
-});
-
-// ===========================================================================
-// Build aequery
-// ===========================================================================
-
-gulp.task( 'build:aeq-core', function () {
-	return gulp.src( [
-		'lib/intro.js',
-		'lib/main.js',
-		'lib/**/*.js',
-		'!lib/ui/**/*.js',
-		'!lib/outro.js'
-	] )
-		.pipe( replace( /(\/\*.*?\*\/\n+)?(var )?aeq = \(function ?\(aeq\) \{/g, '' ) )
-		.pipe( replace( /'use strict';/g, '' ) )
-		.pipe( replace( /return aeq;\n+\}\(aeq \|\| \{\}\)\);/g, '' ) )
-		.pipe( addsrc.append( 'lib/outro.js' ) )
-		.pipe( concat( 'core.js' ) )
-		.pipe( gulp.dest( './build' ) );
-});
-
-gulp.task( 'build:aeq-ui', function () {
-	return gulp.src( [
-		'lib/ui/**/*.js'
-	] )
-		.pipe( concat( 'aeq-ui.js' ) )
-		.pipe( gulp.dest( './dist' ) );
-});
-
-gulp.task( 'build-aequery', function () {
-	return gulp.src( [
-		'dist/aeq.js',
-		'dist/aeq-ui.js'
-	] )
-		.pipe( concat( 'aequery.js' ) )
-		.pipe( gulp.dest( './dist' ) );
 });
 
 // ===========================================================================
@@ -90,6 +53,70 @@ gulp.task( 'build:docs', function () {
 			console.error( err );
 		}
 	});
+});
+
+// ===========================================================================
+// Build aequery
+// ===========================================================================
+
+gulp.task( 'build:aeq-core', function () {
+	return gulp.src( [
+		'lib/intro.js',
+		'lib/main.js',
+		'lib/**/*.js',
+		'!lib/ui/**/*.js',
+		'!lib/outro.js'
+	] )
+		.pipe( replace( /(\/\*.*?\*\/\n+)?(var )?aeq = \(function ?\(aeq\) \{/g, '' ) )
+		.pipe( replace( /'use strict';/g, '' ) )
+		.pipe( replace( /return aeq;\n+\}\(aeq \|\| \{\}\)\);/g, '' ) )
+		.pipe( addsrc.append( 'lib/outro.js' ) )
+		.pipe( concat( 'core.js' ) )
+		.pipe( gulp.dest( './build' ) );
+});
+
+// ===========================================================================
+// Variations
+// ===========================================================================
+
+gulp.task( 'build:aeq-parser', function () {
+	return gulp.src( [
+		'build/core.js',
+		'build/parser.js'
+	] )
+		.pipe( concat( 'aeq-parser.js' ) )
+		.pipe( gulp.dest( './dist' ) );
+});
+
+gulp.task( 'build:aeq-ui', function () {
+	return gulp.src( [
+		'build/core.js',
+		'build/ui.js'
+	] )
+		.pipe( concat( 'aeq-ui.js' ) )
+		.pipe( gulp.dest( './dist' ) );
+});
+
+gulp.task( 'build:aeq-slim', function () {
+	return gulp.src( [
+		'build/core.js'
+	] )
+		.pipe( concat( 'aeq-slim.js' ) )
+		.pipe( gulp.dest( './dist' ) );
+});
+
+gulp.task( 'build:aeq-variations', gulp.series( 'build:aeq-parser', 'build:aeq-ui', 'build:aeq-slim' ) );
+
+// ===========================================================================
+// UI
+// ===========================================================================
+
+gulp.task( 'build:aeq-ui', function () {
+	return gulp.src( [
+		'lib/ui/**/*.js'
+	] )
+		.pipe( concat( 'ui.js' ) )
+		.pipe( gulp.dest( './build' ) );
 });
 
 // ===========================================================================
@@ -144,10 +171,10 @@ gulp.task( 'lint', function () {
 // Define main tasks
 // ===========================================================================
 
-gulp.task( 'build:aeq', gulp.series( 'build:aeq-core', 'build:aeq-parser', function () {
+gulp.task( 'build:aeq', gulp.series( 'build:aeq-core', 'build:aeq-parser', 'build:aeq-ui', function () {
 	return gulp.src( './build/*.js' )
 		.pipe( concat( 'aeq.js' ) )
 		.pipe( gulp.dest( './dist' ) );
 }) );
 
-gulp.task( 'default', gulp.series( 'clean:all', 'build:aeq', 'build:aeq-ui', 'build-aequery', 'build:docs' ) );
+gulp.task( 'default', gulp.series( 'clean:all', 'build:aeq', 'build:aeq-variations', 'build:docs' ) );

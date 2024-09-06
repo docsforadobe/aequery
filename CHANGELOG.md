@@ -10,15 +10,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Added
 
--
+- New types
+  - `isProject`
+  - `isSolidLayer`
+  - `isAdjustmentLayer`
+  - `isEnvironmentLayer`
+  - `isGuideLayer`
+  - `isNullLayer`
+  - `isPhotoshopLayer`
+  - `isCinema4DLayer`
+  - `isFileLayer`
+  - `isPlaceholder`
+  - `isTrackMatte`
+- Separate builds for aequery variations:
+  - `aeq-slim`, for just the core functionality
+  - `aeq-parser`, for core & css parser
+  - `aeq-ui`, for core & aeq.ui
+- ArrayEx.reduce
+- Check for AE version when launching security pref panel (#67)
 
 ### Changed
 
--
+- Simplified resulting built file (to just `aeq.js`)
+- Removed unwanted throw in `hasAllAttributes`
 
 ### Fixed
 
--
+- Documentation for `isAeq`
 
 ---
 

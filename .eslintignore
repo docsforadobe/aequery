@@ -1,2 +1,4 @@
 lib/intro.js
 lib/outro.js
+dist/*.js
+build/*.js
