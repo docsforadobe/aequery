@@ -191,7 +191,12 @@
     
         <p class="code-caption">Open file in Finder/Explorer. (<a href="aeq.command.html#.revealFile"><code>aeq.command.revealFile</code></a>)</p>
     
-    <pre class="prettyprint"><code>aeq.command.call('Explorer /select,', 'open -R', '"' + file.fsName + '"' )aeq.command.call({    windows: 'Explorer /select,',    mac: 'open -R',    arg: '"' + file.fsName + '"'})</code></pre>
+    <pre class="prettyprint"><code>aeq.command.call('Explorer /select,', 'open -R', '"' + file.fsName + '"' )
+aeq.command.call({
+    windows: 'Explorer /select,',
+    mac: 'open -R',
+    arg: '"' + file.fsName + '"'
+})</code></pre>
 
 
 
