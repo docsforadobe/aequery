@@ -165,11 +165,20 @@ aeq.app = aeq.extend({}, {
 	 * @memberof aeq.app
 	 */
 	ensureSecurityPrefEnabled: function () {
+		var appVersion = aeq.app.version;
+		var tabName = 'Scripting &amp; Expressions';
+		var commandID = 3131; // "Scripting &amp; Expressions..."
+
+		if ( parseFloat( appVersion ) &lt; 16.1 ) {
+			tabName = 'General';
+			commandID = 2359; // "General..."
+		}
+
 		if ( !aeq.app.securityPrefEnabled() ) {
 			if ( confirm( 'This script requires access to write files.\n' +
-				'Go to the "General" panel of the application preferences and ensure\n' +
+				'Go to the "' + tabName + '" panel of the application preferences and ensure\n' +
 				'"Allow Scripts to Write Files and Access Network" is checked.\n\nOpen prefs now?' ) ) {
-				app.executeCommand( 2359 ); // Launch prefs
+				app.executeCommand( commandID ); // Launch prefs
 			}
 
 			if ( !aeq.app.securityPrefEnabled() ) {

@@ -270,7 +270,7 @@ function hasAllAttributes( obj, attributes, not ) {
 		attributeValue = attributes[attribute];
 
 		if ( !obj.hasOwnProperty( attribute ) ) {
-			throw new Error( 'The attribute ' + attribute + ' does not exist on a ' + typeof ( obj ) );
+			return false;
 		}
 
 		var isSame = compare( attributeValue, obj[attribute] );

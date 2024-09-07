@@ -51,18 +51,7 @@ gulp.task( 'build:docs', function () {
 	return exec( cmd, err => {
 		if ( err ) {
 			console.error( err );
-			return;
 		}
-
-		// Something is messing up the names of a couple of doc files.
-		// Rename to expected values
-		gulp.src( 'docs/aeq.layer_.html' )
-			.pipe( rename( 'aeq.Layer_.html' ) )
-			.pipe( gulp.dest( 'docs/' ) );
-
-		gulp.src( 'docs/aeq.Layer.html' )
-			.pipe( rename( 'aeq.layer.html' ) )
-			.pipe( gulp.dest( 'docs/' ) );
 	});
 });
 

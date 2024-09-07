@@ -42,7 +42,7 @@ if (comp) {
 
 Documentation
 -------------
-[For documentation, visit aenhancers.github.io/aequery](https://aenhancers.github.io/aequery/)
+[For documentation, visit docsforadobe.github.io/aequery](https://docsforadobe.github.io/aequery/)
 
 
 Development
